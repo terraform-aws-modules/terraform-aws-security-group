@@ -1,0 +1,1 @@
+Code in this directory is used as a template for other modules. Change carefully, test thoughtfully! :)
