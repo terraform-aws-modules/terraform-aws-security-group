@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["ssh-tcp"]
+  default     = ["nomad-http-tcp", "nomad-rpc-tcp", "nomad-serf-tcp", "nomad-serf-udp"]
 }
 
 variable "auto_ingress_with_self" {

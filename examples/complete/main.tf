@@ -39,16 +39,16 @@ module "complete_sg" {
   # ingress_prefix_list_ids = ["pl-123456"]
 
   # Open for all CIDRs defined in ingress_cidr_blocks
-  ingress_rules = ["http"]
+  ingress_rules = ["https-443-tcp"]
   # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
   ingress_with_cidr_blocks = [
     {
-      rule             = "postgres"
+      rule             = "postgresql-tcp"
       cidr_blocks      = "0.0.0.0/0,2.2.2.2/32"
       ipv6_cidr_blocks = "2001:db8::/60"
     },
     {
-      rule        = "postgres"
+      rule        = "postgresql-tcp"
       cidr_blocks = "30.30.30.30/32"
     },
     {
@@ -62,7 +62,7 @@ module "complete_sg" {
   # Open for security group id (rule or from_port+to_port+protocol+description)
   ingress_with_source_security_group_id = [
     {
-      rule                     = "mysql"
+      rule                     = "mysql-tcp"
       source_security_group_id = "${data.aws_security_group.default.id}"
     },
     {
@@ -101,16 +101,16 @@ module "complete_sg" {
   # egress_prefix_list_ids = ["pl-123456"]
 
   # Open for all CIDRs defined in egress_cidr_blocks
-  egress_rules = ["http"]
+  egress_rules = ["http-80-tcp"]
   # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
   egress_with_cidr_blocks = [
     {
-      rule             = "postgres"
+      rule             = "postgresql-tcp"
       cidr_blocks      = "0.0.0.0/0,2.2.2.2/32"
       ipv6_cidr_blocks = "2001:db8::/60"
     },
     {
-      rule        = "postgres"
+      rule        = "postgresql-tcp"
       cidr_blocks = "30.30.30.30/32"
     },
     {
@@ -124,7 +124,7 @@ module "complete_sg" {
   # Open for security group id (rule or from_port+to_port+protocol+description)
   egress_with_source_security_group_id = [
     {
-      rule                     = "mysql"
+      rule                     = "mysql-tcp"
       source_security_group_id = "${data.aws_security_group.default.id}"
     },
     {
@@ -143,7 +143,7 @@ module "complete_sg" {
     {
       from_port   = 30
       to_port     = 40
-      protocol    = 6
+      protocol    = "tcp"
       description = "Service name"
       self        = true
     },

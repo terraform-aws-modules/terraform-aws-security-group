@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["ssh-tcp"]
+  default     = ["docker-swarm-mngmt-tcp", "docker-swarm-node-tcp", "docker-swarm-node-udp", "docker-swarm-overlay-udp"]
 }
 
 variable "auto_ingress_with_self" {

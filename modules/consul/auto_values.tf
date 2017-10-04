@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["ssh-tcp"]
+  default     = ["consul-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
 }
 
 variable "auto_ingress_with_self" {

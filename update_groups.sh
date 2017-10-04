@@ -1,19 +1,13 @@
 #!/usr/bin/env bash
 
-# @todo: generate content of each public module (eg, "http") from the json list.
+# This script generates each public module (eg, "http-80", "ssh") and specify rules required for each group.
+# This script should be run after rules.tf is changed to refresh all related modules.
 # outputs.tf and variables.tf for all group modules are the same for all
 
 set -e
 
 # Change location to the directory where this script it located
 cd "$(dirname "${BASH_SOURCE[0]}")"
-
-
-# Assert that a given binary is installed
-function assert_is_installed {
-  local readonly name="$1"
-
-}
 
 check_dependencies() {
   if [[ ! $(command -v json2hcl) ]]; then
@@ -34,17 +28,17 @@ auto_groups_data() {
 }
 
 auto_groups_keys() {
-  local readonly data=$1
+  local data=$1
 
-  echo $data | jq -r ".|keys|@sh" | tr -d "'"
+  echo "$data" | jq -r ".|keys|@sh" | tr -d "'"
 }
 
 get_auto_value() {
-  local readonly data=$1
-  local readonly group=$2
-  local readonly var=$3
+  local data=$1
+  local group=$2
+  local var=$3
 
-  echo $data | jq -rc '.[$group][0][$var]' --arg group "$group" --arg var "$var"
+  echo "$data" | jq -rc '.[$group][0][$var]' --arg group "$group" --arg var "$var"
 }
 
 set_list_if_null() {
@@ -128,9 +122,9 @@ variable "auto_egress_with_self" {
 }
 EOF
 
-    local list_of_modules=$(echo "$list_of_modules"; echo "* [$group]($group)")
+    list_of_modules=$(echo "$list_of_modules"; echo "* [$group]($group)")
 
-#    terraform fmt -diff=true "modules/$group"
+    terraform fmt "modules/$group"
   done
 
 

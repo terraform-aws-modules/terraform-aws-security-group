@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["http"]
+  default     = ["cassandra-clients-tcp", "cassandra-thrift-clients-tcp", "cassandra-jmx-tcp"]
 }
 
 variable "auto_ingress_with_self" {

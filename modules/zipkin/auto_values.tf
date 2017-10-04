@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["ssh-tcp"]
+  default     = ["zipkin-admin-tcp", "zipkin-admin-query-tcp", "zipkin-admin-web-tcp", "zipkin-query-tcp", "zipkin-web-tcp"]
 }
 
 variable "auto_ingress_with_self" {

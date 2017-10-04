@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["ssh-tcp"]
+  default     = ["storm-nimbus-tcp", "storm-ui-tcp", "storm-supervisor-tcp"]
 }
 
 variable "auto_ingress_with_self" {

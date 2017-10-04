@@ -22,7 +22,7 @@ data "aws_security_group" "default" {
 # HTTP
 #######
 module "http_sg" {
-  source = "../../modules/http"
+  source = "../../modules/http-80"
 
   name        = "http-sg"
   description = "Security group with HTTP ports open for everybody, egress ports are all world open"
@@ -33,28 +33,28 @@ module "http_sg" {
 # HTTP with MySQL #1
 #####################
 module "http_mysql_1_sg" {
-  source = "../../modules/http"
+  source = "../../modules/http-80"
 
   name        = "http-mysql-1"
   description = "Security group with HTTP and MySQL ports open for everybody globally"
   vpc_id      = "${data.aws_vpc.default.id}"
 
   # Add MySQL rules
-  ingress_rules = ["mysql"]
+  ingress_rules = ["mysql-tcp"]
 }
 
 #####################
 # HTTP with MySQL #2
 #####################
 module "http_mysql_2_sg" {
-  source = "../../modules/http"
+  source = "../../modules/http-80"
 
   name        = "http-mysql-2"
   description = "Security group with HTTP and MySQL ports open within current VPC"
   vpc_id      = "${data.aws_vpc.default.id}"
 
   # Add mysql rules
-  ingress_rules = ["mysql"]
+  ingress_rules = ["mysql-tcp"]
 
   # Allow ingress rules to be accessed only within current VPC
   ingress_cidr_blocks      = ["${data.aws_vpc.default.cidr_block}"]
@@ -65,7 +65,7 @@ module "http_mysql_2_sg" {
 # HTTP with egress minimal
 ###########################
 module "http_with_egress_minimal_sg" {
-  source = "../../modules/http"
+  source = "../../modules/http-80"
 
   name        = "http-with-egress-minimal"
   description = "Security group with HTTP ports open within current VPC, and allow egress access to HTTP ports to the whole world"
@@ -75,21 +75,21 @@ module "http_with_egress_minimal_sg" {
   ingress_cidr_blocks = ["${data.aws_vpc.default.cidr_block}"]
 
   # Allow all rules for all protocols
-  egress_rules = ["http"]
+  egress_rules = ["http-80-tcp"]
 }
 
 ###########################
 # HTTP with egress limited
 ###########################
 module "http_with_egress_sg" {
-  source = "../../modules/http"
+  source = "../../modules/http-80"
 
   name        = "http-with-egress"
   description = "Security group with HTTP ports open within current VPC, and allow egress access just to small subnet"
   vpc_id      = "${data.aws_vpc.default.id}"
 
   # Add mysql rules
-  ingress_rules = ["mysql"]
+  ingress_rules = ["mysql-tcp"]
 
   # Allow ingress rules to be accessed only within current VPC
   ingress_cidr_blocks      = ["${data.aws_vpc.default.cidr_block}"]
