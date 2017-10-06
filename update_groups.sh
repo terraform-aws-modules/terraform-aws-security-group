@@ -104,7 +104,7 @@ variable "auto_ingress_rules" {
 }
 
 variable "auto_ingress_with_self" {
-  description = "List of ingress rules with self to add automatically"
+  description = "List of maps defining ingress rules with self to add automatically"
   type        = "list"
   default     = $ingress_with_self
 }
@@ -116,7 +116,7 @@ variable "auto_egress_rules" {
 }
 
 variable "auto_egress_with_self" {
-  description = "List of egress rules with self to add automatically"
+  description = "List of maps defining egress rules with self to add automatically"
   type        = "list"
   default     = $egress_with_self
 }

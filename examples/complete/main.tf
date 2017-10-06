@@ -30,7 +30,7 @@ module "complete_sg" {
   }
 
   # Default CIDR blocks, which will be used for all ingress rules in this module. Typically these are CIDR blocks of the VPC.
-  # If this is not specified then world-open CIDR blocks are used.
+  # If this is not specified then no CIDR blocks will be used.
   ingress_cidr_blocks = ["10.10.0.0/16"]
 
   ingress_ipv6_cidr_blocks = ["2001:db8::/64"]
@@ -93,7 +93,7 @@ module "complete_sg" {
     },
   ]
   # Default CIDR blocks, which will be used for all egress rules in this module. Typically these are CIDR blocks of the VPC.
-  # If this is not specified then world-open CIDR blocks are used.
+  # If this is not specified then no CIDR blocks will be used.
   egress_cidr_blocks = ["10.10.0.0/16"]
   egress_ipv6_cidr_blocks = ["2001:db8::/64"]
 

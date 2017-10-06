@@ -25,8 +25,10 @@ module "http_sg" {
   source = "../../modules/http-80"
 
   name        = "http-sg"
-  description = "Security group with HTTP ports open for everybody, egress ports are all world open"
+  description = "Security group with HTTP ports open for everybody (IPv4 CIDR), egress ports are all world open"
   vpc_id      = "${data.aws_vpc.default.id}"
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
 }
 
 #####################
@@ -36,8 +38,10 @@ module "http_mysql_1_sg" {
   source = "../../modules/http-80"
 
   name        = "http-mysql-1"
-  description = "Security group with HTTP and MySQL ports open for everybody globally"
+  description = "Security group with HTTP and MySQL ports open for everybody (IPv4 CIDR)"
   vpc_id      = "${data.aws_vpc.default.id}"
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
 
   # Add MySQL rules
   ingress_rules = ["mysql-tcp"]
