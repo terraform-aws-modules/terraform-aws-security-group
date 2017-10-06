@@ -44,12 +44,12 @@ variable "ingress_with_source_security_group_id" {
 
 variable "ingress_cidr_blocks" {
   description = "List of IPv4 CIDR ranges to use on all ingress rules"
-  default     = ["0.0.0.0/0"]
+  default     = []
 }
 
 variable "ingress_ipv6_cidr_blocks" {
   description = "List of IPv6 CIDR ranges to use on all ingress rules"
-  default     = ["::/0"]
+  default     = []
 }
 
 variable "ingress_prefix_list_ids" {
