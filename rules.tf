@@ -34,6 +34,10 @@ variable "rules" {
     docker-swarm-node-udp    = [7946, 7946, "udp", "Docker Swarm node"]
     docker-swarm-overlay-udp = [4789, 4789, "udp", "Docker Swarm Overlay Network Traffic"]
 
+    # DNS
+    dns-udp = [53, 53, "udp", "DNS"]
+    dns-tcp = [53, 53, "tcp", "DNS"]
+
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
