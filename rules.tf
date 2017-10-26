@@ -78,6 +78,9 @@ variable "rules" {
     # PostgreSQL
     postgresql-tcp = [5432, 5432, "tcp", "PostgreSQL"]
 
+    # Puppet
+    puppet-tcp = [8140, 8140, "tcp", "Puppet"]
+
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
 
