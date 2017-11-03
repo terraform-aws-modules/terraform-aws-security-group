@@ -47,20 +47,34 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
   protocol  = "${lookup(var.ingress_with_source_security_group_id[count.index], "protocol", element(var.rules[lookup(var.ingress_with_source_security_group_id[count.index], "rule", "_")], 2))}"
 }
 
-# Security group rules with "cidr_blocks", but without "source_security_group_id" and "self"
+# Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   count = "${length(var.ingress_with_cidr_blocks)}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
 
-  cidr_blocks      = ["${split(",", lookup(var.ingress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.ingress_cidr_blocks)))}"]
-  ipv6_cidr_blocks = ["${split(",", lookup(var.ingress_with_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.ingress_ipv6_cidr_blocks)))}"]
-  prefix_list_ids  = ["${var.ingress_prefix_list_ids}"]
+  cidr_blocks     = ["${split(",", lookup(var.ingress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.ingress_cidr_blocks)))}"]
+  prefix_list_ids = ["${var.ingress_prefix_list_ids}"]
 
   from_port = "${lookup(var.ingress_with_cidr_blocks[count.index], "from_port", element(var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")], 0))}"
   to_port   = "${lookup(var.ingress_with_cidr_blocks[count.index], "to_port", element(var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")], 1))}"
   protocol  = "${lookup(var.ingress_with_cidr_blocks[count.index], "protocol", element(var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")], 2))}"
+}
+
+# Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
+resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
+  count = "${length(var.ingress_with_ipv6_cidr_blocks)}"
+
+  security_group_id = "${aws_security_group.this.id}"
+  type              = "ingress"
+
+  ipv6_cidr_blocks = ["${split(",", lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.ingress_ipv6_cidr_blocks)))}"]
+  prefix_list_ids  = ["${var.ingress_prefix_list_ids}"]
+
+  from_port = "${lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "from_port", element(var.rules[lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 0))}"
+  to_port   = "${lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "to_port", element(var.rules[lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 1))}"
+  protocol  = "${lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "protocol", element(var.rules[lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 2))}"
 }
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
@@ -121,20 +135,34 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
   protocol  = "${lookup(var.egress_with_source_security_group_id[count.index], "protocol", element(var.rules[lookup(var.egress_with_source_security_group_id[count.index], "rule", "_")], 2))}"
 }
 
-# Security group rules with "cidr_blocks", but without "source_security_group_id" and "self"
+# Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "egress_with_cidr_blocks" {
   count = "${length(var.egress_with_cidr_blocks)}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
 
-  cidr_blocks      = ["${split(",", lookup(var.egress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.egress_cidr_blocks)))}"]
-  ipv6_cidr_blocks = ["${split(",", lookup(var.egress_with_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.egress_ipv6_cidr_blocks)))}"]
-  prefix_list_ids  = ["${var.egress_prefix_list_ids}"]
+  cidr_blocks     = ["${split(",", lookup(var.egress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.egress_cidr_blocks)))}"]
+  prefix_list_ids = ["${var.egress_prefix_list_ids}"]
 
   from_port = "${lookup(var.egress_with_cidr_blocks[count.index], "from_port", element(var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")], 0))}"
   to_port   = "${lookup(var.egress_with_cidr_blocks[count.index], "to_port", element(var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")], 1))}"
   protocol  = "${lookup(var.egress_with_cidr_blocks[count.index], "protocol", element(var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")], 2))}"
+}
+
+# Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
+resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
+  count = "${length(var.egress_with_ipv6_cidr_blocks)}"
+
+  security_group_id = "${aws_security_group.this.id}"
+  type              = "egress"
+
+  ipv6_cidr_blocks = ["${split(",", lookup(var.egress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.egress_ipv6_cidr_blocks)))}"]
+  prefix_list_ids  = ["${var.egress_prefix_list_ids}"]
+
+  from_port = "${lookup(var.egress_with_ipv6_cidr_blocks[count.index], "from_port", element(var.rules[lookup(var.egress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 0))}"
+  to_port   = "${lookup(var.egress_with_ipv6_cidr_blocks[count.index], "to_port", element(var.rules[lookup(var.egress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 1))}"
+  protocol  = "${lookup(var.egress_with_ipv6_cidr_blocks[count.index], "protocol", element(var.rules[lookup(var.egress_with_ipv6_cidr_blocks[count.index], "rule", "_")], 2))}"
 }
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
