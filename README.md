@@ -55,6 +55,8 @@ module "vote_service_sg" {
 }
 ```
 
+**Note:** it is not possible to use variable outputs from this module or other modules that contain calculated values when defining the security group resources. This is typically an issue when specifying either `ingress_with_source_security_group_id` or `egress_with_source_security_group_id` parameters and attempting to use the security group id of a resource which has not yet been created. However referencing variables that are already "hard-coded" in the .tf file (i.e. not calculated values dependent on the infrastructure being created) are fine. E.g. the VPC cidr block `"10.10.0.0/16"`. Also using data sources allows the use of external data/variables that are known at plan time and not regarded as calculated. More details [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/16).
+
 ##### 2. Security group with pre-defined rules (NOTE: This is not working with any available version of Terraform, but should be possible in 0.11)
 
 ```hcl
