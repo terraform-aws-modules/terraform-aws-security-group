@@ -16,7 +16,8 @@ This module aims to implement **ALL** combinations of arguments supported by AWS
 * Access from source security groups
 * Access from self
 * Named rules ([see the rules here](rules.tf))
-* Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](modules/ssh), [http-80](modules/http-80), [mysql](modules/mysql), see the whole list [here](modules/README.md)).
+* Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](modules/ssh), [http-80](modules/http-80), [mysql](modules/mysql), see the whole list [here](modules/README.md))
+* Conditionally create security group and all required security group rules ("single boolean switch").
 
 Ingress and egress rules can be configured in a variety of ways as listed on [the registry documentation](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/?tab=inputs).
 
@@ -71,11 +72,27 @@ module "web_server_sg" {
 }
 ```
 
+Conditional creation
+--------------------
+
+Sometimes you need to have a way to create security group conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `create`.
+
+```hcl
+# This security group will not be created
+module "vote_service_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
+  create = false
+  # ... omitted
+}
+```
+
 Examples
 --------
 
 * [Complete Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) shows all available parameters to configure security group.
 * [HTTP Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
+* [Disable creation of Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
 
 How to add/update rules/groups?
 -------------------------------

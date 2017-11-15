@@ -1,8 +1,13 @@
 #################
 # Security group
 #################
+variable "create" {
+  description = "Whether to create security group and all rules"
+  default     = true
+}
+
 variable "vpc_id" {
-  description = "ID of VPC to create security group into"
+  description = "ID of the VPC where to create security group"
 }
 
 variable "name" {
