@@ -1,6 +1,7 @@
 module "sg" {
   source = "../../"
 
+  create      = "${var.create}"
   name        = "${var.name}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
