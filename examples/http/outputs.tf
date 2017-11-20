@@ -22,13 +22,3 @@ output "this_security_group_description" {
   description = "The description of the security group"
   value       = "${module.http_sg.this_security_group_description}"
 }
-
-output "this_security_group_ingress" {
-  description = "The ingress rules"
-  value       = "${module.http_sg.this_security_group_ingress}"
-}
-
-output "this_security_group_egress" {
-  description = "The egress rules"
-  value       = "${module.http_sg.this_security_group_egress}"
-}
