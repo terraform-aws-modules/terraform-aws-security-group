@@ -172,6 +172,18 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    ipsec-500 = {
+      ingress_rules     = ["ipsec-500-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    ipsec-4500 = {
+      ingress_rules     = ["ipsec-4500-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
     kafka = {
       ingress_rules     = ["kafka-broker-tcp"]
       ingress_with_self = ["all-all"]
