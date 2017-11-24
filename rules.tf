@@ -48,6 +48,10 @@ variable "rules" {
 
     # HTTPS
     https-443-tcp = [443, 443, "tcp", "HTTPS"]
+    
+    # IPSEC
+    ipsec-500-udp   = [500, 500, "udp", "IPSEC ISAKMP"]
+    ipsec-4500-udp  = [4500, 4500, "udp", "IPSEC NAT-T"]
 
     # Kafka
     kafka-broker-tcp = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
