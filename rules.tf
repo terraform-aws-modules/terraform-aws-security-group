@@ -225,6 +225,12 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    redshift = {
+      ingress_rules     = ["redshift-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
     ssh = {
       ingress_rules     = ["ssh-tcp"]
       ingress_with_self = ["all-all"]
