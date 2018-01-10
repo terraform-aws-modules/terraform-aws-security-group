@@ -1,6 +1,7 @@
 module "sg" {
   source = "../../"
 
+  create      = "${var.create}"
   name        = "${var.name}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
@@ -15,8 +16,11 @@ module "sg" {
   # Open for self
   ingress_with_self = ["${concat(var.auto_ingress_with_self, var.ingress_with_self)}"]
 
-  # Open to cidr_blocks
+  # Open to IPv4 cidr blocks
   ingress_with_cidr_blocks = ["${var.ingress_with_cidr_blocks}"]
+
+  # Open to IPv6 cidr blocks
+  ingress_with_ipv6_cidr_blocks = ["${var.ingress_with_ipv6_cidr_blocks}"]
 
   # Open for security group id
   ingress_with_source_security_group_id = ["${var.ingress_with_source_security_group_id}"]
@@ -37,8 +41,11 @@ module "sg" {
   # Open for self
   egress_with_self = ["${concat(var.auto_egress_with_self, var.egress_with_self)}"]
 
-  # Open to cidr_blocks
+  # Open to IPv4 cidr blocks
   egress_with_cidr_blocks = ["${var.egress_with_cidr_blocks}"]
+
+  # Open to IPv6 cidr blocks
+  egress_with_ipv6_cidr_blocks = ["${var.egress_with_ipv6_cidr_blocks}"]
 
   # Open for security group id
   egress_with_source_security_group_id = ["${var.egress_with_source_security_group_id}"]

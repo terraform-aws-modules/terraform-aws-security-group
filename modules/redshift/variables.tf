@@ -1,8 +1,13 @@
 #################
 # Security group
 #################
+variable "create" {
+  description = "Whether to create security group and all rules"
+  default     = true
+}
+
 variable "vpc_id" {
-  description = "ID of VPC to create security group into"
+  description = "ID of the VPC where to create security group"
 }
 
 variable "name" {
@@ -34,6 +39,11 @@ variable "ingress_with_self" {
 
 variable "ingress_with_cidr_blocks" {
   description = "List of ingress rules to create where 'cidr_blocks' is used"
+  default     = []
+}
+
+variable "ingress_with_ipv6_cidr_blocks" {
+  description = "List of ingress rules to create where 'ipv6_cidr_blocks' is used"
   default     = []
 }
 
@@ -72,6 +82,11 @@ variable "egress_with_self" {
 
 variable "egress_with_cidr_blocks" {
   description = "List of egress rules to create where 'cidr_blocks' is used"
+  default     = []
+}
+
+variable "egress_with_ipv6_cidr_blocks" {
+  description = "List of egress rules to create where 'ipv6_cidr_blocks' is used"
   default     = []
 }
 

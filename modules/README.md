@@ -9,6 +9,8 @@ List of Security Groups implemented as Terraform modules
 * [elasticsearch](elasticsearch)
 * [http-80](http-80)
 * [https-443](https-443)
+* [ipsec-4500](ipsec-4500)
+* [ipsec-500](ipsec-500)
 * [kafka](kafka)
 * [ldaps](ldaps)
 * [memcached](memcached)
