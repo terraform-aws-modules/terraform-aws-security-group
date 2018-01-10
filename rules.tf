@@ -68,6 +68,9 @@ variable "rules" {
     # MSSQL Server
     mssql-tcp = [1433, 1433, "tcp", "MSSQL Server"]
 
+    # NFS/EFS
+    nfs-tcp = [2049, 2049, "tcp", "NFS/EFS"]
+
     # Nomad
     nomad-http-tcp = [4646, 4646, "tcp", "Nomad HTTP"]
     nomad-rpc-tcp  = [4647, 4647, "tcp", "Nomad RPC"]
@@ -210,6 +213,12 @@ variable "auto_groups" {
 
     mssql = {
       ingress_rules     = ["mssql-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    nfs = {
+      ingress_rules     = ["nfs-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
