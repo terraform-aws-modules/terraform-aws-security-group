@@ -14,6 +14,7 @@ List of Security Groups implemented as Terraform modules
 * [memcached](memcached)
 * [mssql](mssql)
 * [mysql](mysql)
+* [nfs](nfs)
 * [nomad](nomad)
 * [openvpn](openvpn)
 * [postgresql](postgresql)
