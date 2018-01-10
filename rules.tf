@@ -91,6 +91,9 @@ variable "rules" {
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
 
+    # Redshift
+    redshift-tcp = [5439, 5439, "tcp", "Redshift"]
+
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
 
@@ -243,6 +246,12 @@ variable "auto_groups" {
 
     redis = {
       ingress_rules     = ["redis-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    redshift = {
+      ingress_rules     = ["redshift-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
