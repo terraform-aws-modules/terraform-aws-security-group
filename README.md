@@ -102,6 +102,11 @@ How to add/update rules/groups?
 
 Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` when content of that file has changed to recreate content of all automatic modules.
 
+Known issues
+------------
+
+* Due to [Bug 1920](https://github.com/terraform-providers/terraform-provider-aws/issues/1920) in provider, updates to the description of egress rules are ignored.
+
 Authors
 -------
 
