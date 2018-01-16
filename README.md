@@ -102,6 +102,11 @@ How to add/update rules/groups?
 
 Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` when content of that file has changed to recreate content of all automatic modules.
 
+Known issues
+------------
+
+* Due to an [issue #1920](https://github.com/terraform-providers/terraform-provider-aws/issues/1920) in AWS provider, updates to the `description` of security group rules are ignored by this module. If you need to update `description` after the security group has been created you need to recreate security group rule.
+
 Authors
 -------
 
