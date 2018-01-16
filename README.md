@@ -105,7 +105,7 @@ Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` whe
 Known issues
 ------------
 
-* Due to [Bug 1920](https://github.com/terraform-providers/terraform-provider-aws/issues/1920) in aws provider, updates to the description of security group rules are ignored.
+* Due to an [issue #1920](https://github.com/terraform-providers/terraform-provider-aws/issues/1920) in AWS provider, updates to the `description` of security group rules are ignored by this module. If you need to update `description` after the security group has been created you need to recreate security group rule.
 
 Authors
 -------
