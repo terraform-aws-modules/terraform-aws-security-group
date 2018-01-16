@@ -18,6 +18,10 @@ resource "aws_security_group" "this" {
 resource "aws_security_group_rule" "ingress_rules" {
   count = "${var.create ? length(var.ingress_rules) : 0}"
 
+  lifecycle {
+    ignore_changes = ["description"]
+  }
+
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
 
@@ -55,6 +59,10 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   count = "${var.create ? length(var.ingress_with_cidr_blocks) : 0}"
 
+  lifecycle {
+    ignore_changes = ["description"]
+  }
+
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
 
@@ -70,6 +78,10 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
   count = "${var.create ? length(var.ingress_with_ipv6_cidr_blocks) : 0}"
+
+  lifecycle {
+    ignore_changes = ["description"]
+  }
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -112,7 +124,7 @@ resource "aws_security_group_rule" "egress_rules" {
   count = "${var.create ? length(var.egress_rules) : 0}"
 
   lifecycle {
-    ignore_changes =  ["description"]
+    ignore_changes = ["description"]
   }
 
   security_group_id = "${aws_security_group.this.id}"
@@ -153,7 +165,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
   count = "${var.create ? length(var.egress_with_cidr_blocks) : 0}"
 
   lifecycle {
-    ignore_changes =  ["description"]
+    ignore_changes = ["description"]
   }
 
   security_group_id = "${aws_security_group.this.id}"
@@ -173,7 +185,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
   count = "${var.create ? length(var.egress_with_ipv6_cidr_blocks) : 0}"
 
   lifecycle {
-    ignore_changes =  ["description"]
+    ignore_changes = ["description"]
   }
 
   security_group_id = "${aws_security_group.this.id}"
