@@ -118,7 +118,6 @@ resource "aws_security_group_rule" "egress_rules" {
   ipv6_cidr_blocks = ["${var.egress_ipv6_cidr_blocks}"]
   prefix_list_ids  = ["${var.egress_prefix_list_ids}"]
   description      = "${element(var.rules[var.egress_rules[count.index]], 3)}"
-  
 
   from_port = "${element(var.rules[var.egress_rules[count.index]], 0)}"
   to_port   = "${element(var.rules[var.egress_rules[count.index]], 1)}"
