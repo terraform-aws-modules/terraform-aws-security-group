@@ -66,7 +66,10 @@ variable "rules" {
     mysql-tcp = [3306, 3306, "tcp", "MySQL/Aurora"]
 
     # MSSQL Server
-    mssql-tcp = [1433, 1433, "tcp", "MSSQL Server"]
+    mssql-tcp           = [1433, 1433, "tcp", "MSSQL Server"]
+    mssql-udp           = [1434, 1434, "udp", "MSSQL Browser"]
+    mssql-analytics-tcp = [2383, 2383, "tcp", "MSSQL Analytics"]
+    mssql-broker-tcp.   = [4022, 4022, "tcp", "MSSQL Broker"]
 
     # NFS/EFS
     nfs-tcp = [2049, 2049, "tcp", "NFS/EFS"]
@@ -87,6 +90,9 @@ variable "rules" {
 
     # Puppet
     puppet-tcp = [8140, 8140, "tcp", "Puppet"]
+
+    # RDP
+    rdp-tcp = [3389, 3389, "tcp", "Remote Desktop"]
 
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
@@ -215,7 +221,7 @@ variable "auto_groups" {
     }
 
     mssql = {
-      ingress_rules     = ["mssql-tcp"]
+      ingress_rules     = ["mssql-tcp", "mssql-udp", "mssql-analytics-tcp", "mssql-broker-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -240,6 +246,12 @@ variable "auto_groups" {
 
     postgresql = {
       ingress_rules     = ["postgresql-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    rdp = {
+      ingress_rules     = ["rdp-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
