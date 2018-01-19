@@ -20,6 +20,7 @@ List of Security Groups implemented as Terraform modules
 * [nomad](nomad)
 * [openvpn](openvpn)
 * [postgresql](postgresql)
+* [rdp](rdp)
 * [redis](redis)
 * [redshift](redshift)
 * [ssh](ssh)
