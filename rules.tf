@@ -69,7 +69,7 @@ variable "rules" {
     mssql-tcp           = [1433, 1433, "tcp", "MSSQL Server"]
     mssql-udp           = [1434, 1434, "udp", "MSSQL Browser"]
     mssql-analytics-tcp = [2383, 2383, "tcp", "MSSQL Analytics"]
-    mssql-broker-tcp.   = [4022, 4022, "tcp", "MSSQL Broker"]
+    mssql-broker-tcp    = [4022, 4022, "tcp", "MSSQL Broker"]
 
     # NFS/EFS
     nfs-tcp = [2049, 2049, "tcp", "NFS/EFS"]
@@ -93,6 +93,7 @@ variable "rules" {
 
     # RDP
     rdp-tcp = [3389, 3389, "tcp", "Remote Desktop"]
+    rdp-udp = [3389, 3389, "udp", "Remote Desktop"]
 
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
