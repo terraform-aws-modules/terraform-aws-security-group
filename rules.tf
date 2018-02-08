@@ -252,7 +252,7 @@ variable "auto_groups" {
     }
 
     rdp = {
-      ingress_rules     = ["rdp-tcp"]
+      ingress_rules     = ["rdp-tcp", "rdp-udp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
