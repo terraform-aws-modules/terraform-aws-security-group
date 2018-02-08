@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["rdp-tcp"]
+  default     = ["rdp-tcp", "rdp-udp"]
 }
 
 variable "auto_ingress_with_self" {
