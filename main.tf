@@ -40,7 +40,7 @@ resource "aws_security_group_rule" "ingress_rules" {
 ##########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
 resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
-  count = "${var.create ? length(var.ingress_with_source_security_group_id) : 0}"
+  count = "${var.create ? var.ingress_rules_count}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
