@@ -59,6 +59,51 @@ module "vote_service_sg" {
 }
 ```
 
+##### 2. Security Group ingress with source security group previously created
+```hcl
+module "bastion-ec2-security-group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "1.15.0"
+  name    = "TestEC2SG"
+  vpc_id  = "vpc-12345678"
+
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "-1"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+}
+
+module "bastion-security-group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "1.15.0"
+  name    = "TestSG"
+  vpc_id  = "vpc-12345678"
+
+  ingress_with_source_security_group_id = [
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "SSH"
+      source_security_group_id = "${module.bastion-ec2-security-group.this_security_group_id}"
+    },
+  ]
+  ingress_rules_count = 1
+  egress_with_cidr_blocks = [
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "-1"
+      cidr_blocks = "0.0.0.0/0"
+    },
+  ]
+}
+```
+
 **Note:** it is not possible to use variable outputs from this module or other modules that contain calculated values when defining the security group resources. This is typically an issue when specifying either `ingress_with_source_security_group_id` or `egress_with_source_security_group_id` parameters and attempting to use the security group id of a resource which has not yet been created. However referencing variables that are already "hard-coded" in the .tf file (i.e. not calculated values dependent on the infrastructure being created) are fine. E.g. the VPC cidr block `"10.10.0.0/16"`. Also using data sources allows the use of external data/variables that are known at plan time and not regarded as calculated. More details [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/16).
 
 ##### 2. Security group with pre-defined rules (NOTE: Terraform should be version 0.11 or newer)
