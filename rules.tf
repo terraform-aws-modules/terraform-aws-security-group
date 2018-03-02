@@ -240,7 +240,7 @@ variable "auto_groups" {
     }
 
     openvpn = {
-      ingress_rules     = ["openvpn-udp", "openvpn-tcp", "openvpn-443-tcp"]
+      ingress_rules     = ["openvpn-udp", "openvpn-tcp", "openvpn-https-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }

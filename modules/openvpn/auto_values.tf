@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["openvpn-udp", "openvpn-tcp", "openvpn-443-tcp"]
+  default     = ["openvpn-udp", "openvpn-tcp", "openvpn-https-tcp"]
 }
 
 variable "auto_ingress_with_self" {
