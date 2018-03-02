@@ -23,6 +23,7 @@ List of Security Groups implemented as Terraform modules
 * [rdp](rdp)
 * [redis](redis)
 * [redshift](redshift)
+* [splunk](splunk)
 * [ssh](ssh)
 * [storm](storm)
 * [web](web)

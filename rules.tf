@@ -101,6 +101,11 @@ variable "rules" {
     # Redshift
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
 
+    # Splunk
+    splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
+    splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
+    splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
+
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
 
@@ -265,6 +270,12 @@ variable "auto_groups" {
 
     redshift = {
       ingress_rules     = ["redshift-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    splunk = {
+      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
