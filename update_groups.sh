@@ -122,6 +122,22 @@ variable "auto_egress_with_self" {
 }
 EOF
 
+    cat <<EOF > "modules/$group/README.md"
+# $group - AWS EC2-VPC Security Group Terraform module
+
+## Usage
+
+\`\`\`hcl
+module "${group/-/_}_security_group" {
+  source = "terraform-aws-modules/security-group/aws//modules/${group}"
+
+  # omitted...
+}
+\`\`\`
+
+All automatic values **${group} module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/${group}/auto_values.tf).
+EOF
+
     list_of_modules=$(echo "$list_of_modules"; echo "* [$group]($group)")
 
     terraform fmt "modules/$group"
@@ -135,6 +151,8 @@ List of Security Groups implemented as Terraform modules
 ========================================================
 
 $list_of_modules
+* [_templates](_templates) - Source templates for all other modules. Change carefully, test thoughtfully!
+
 EOF
 
   echo "Done!"
