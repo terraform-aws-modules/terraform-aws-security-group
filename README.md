@@ -18,8 +18,8 @@ This module aims to implement **ALL** combinations of arguments supported by AWS
 * [VPC endpoint prefix lists](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html) (use data source [aws_prefix_list](https://www.terraform.io/docs/providers/aws/d/prefix_list.html))
 * Access from source security groups
 * Access from self
-* Named rules ([see the rules here](rules.tf))
-* Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](modules/ssh), [http-80](modules/http-80), [mysql](modules/mysql), see the whole list [here](modules/README.md))
+* Named rules ([see the rules here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/rules.tf))
+* Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ssh), [http-80](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/http-80), [mysql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mysql), see the whole list [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/README.md))
 * Conditionally create security group and all required security group rules ("single boolean switch").
 
 Ingress and egress rules can be configured in a variety of ways as listed on [the registry documentation](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/?tab=inputs).
@@ -100,7 +100,7 @@ Examples
 How to add/update rules/groups?
 -------------------------------
 
-Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` when content of that file has changed to recreate content of all automatic modules.
+Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/rules.tf). Run `update_groups.sh` when content of that file has changed to recreate content of all automatic modules.
 
 Known issues
 ------------
