@@ -88,6 +88,9 @@ variable "rules" {
     # PostgreSQL
     postgresql-tcp = [5432, 5432, "tcp", "PostgreSQL"]
 
+    # Oracle Database
+    oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
+
     # Puppet
     puppet-tcp = [8140, 8140, "tcp", "Puppet"]
 
@@ -252,6 +255,12 @@ variable "auto_groups" {
 
     postgresql = {
       ingress_rules     = ["postgresql-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    oracle-db = {
+      ingress_rules     = ["oracle-db-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
