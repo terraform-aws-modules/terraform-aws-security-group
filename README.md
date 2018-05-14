@@ -59,7 +59,7 @@ module "vote_service_sg" {
 }
 ```
 
-**Note:** it is not possible to use variable outputs from this module or other modules that contain calculated values when defining the security group resources. This is typically an issue when specifying either `ingress_with_source_security_group_id` or `egress_with_source_security_group_id` parameters and attempting to use the security group id of a resource which has not yet been created. However referencing variables that are already "hard-coded" in the .tf file (i.e. not calculated values dependent on the infrastructure being created) are fine. E.g. the VPC cidr block `"10.10.0.0/16"`. Also using data sources allows the use of external data/variables that are known at plan time and not regarded as calculated. More details [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/16).
+**Note:** it is not possible to use variable outputs from this module or other modules that contain calculated values when defining the security group resources. This is typically an issue when specifying either `ingress_with_source_security_group_id` or `egress_with_source_security_group_id` parameters and attempting to use the security group id of a resource which has not yet been created. However referencing variables that are already "hard-coded" in the .tf file (i.e. not calculated values dependent on the infrastructure being created) are fine. E.g. the VPC cidr block `"10.10.0.0/16"`. Also using data sources allows the use of external data/variables that are known at plan time and not regarded as calculated. More details [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/16). Check [this example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/dynamic) to see how to specify values inside security group rules (data-sources and variables are allowed).
 
 ##### 2. Security group with pre-defined rules (NOTE: Terraform should be version 0.11 or newer)
 
@@ -96,6 +96,7 @@ Examples
 * [Complete Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) shows all available parameters to configure security group.
 * [HTTP Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
 * [Disable creation of Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
+* [Dynamic values inside Security Group rules example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/dynamic) shows how to specify values inside security group rules (data-sources and variables are allowed).
 
 How to add/update rules/groups?
 -------------------------------
