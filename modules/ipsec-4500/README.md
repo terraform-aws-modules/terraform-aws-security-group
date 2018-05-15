@@ -4,7 +4,7 @@
 
 ```hcl
 module "ipsec_4500_security_group" {
-  source = "terraform-aws-modules/security-group/aws//modules/ipsec-4500"
+  source = "terraform-aws-modules/security-group/aws/modules/ipsec-4500"
 
   # omitted...
 }
