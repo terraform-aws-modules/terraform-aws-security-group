@@ -136,6 +136,9 @@ module "${group/-/_}_security_group" {
 \`\`\`
 
 All automatic values **${group} module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/${group}/auto_values.tf).
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 EOF
 
     list_of_modules=$(echo "$list_of_modules"; echo "* [$group](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/$group)")
