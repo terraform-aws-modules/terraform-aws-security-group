@@ -121,7 +121,7 @@ variable "rules" {
     web-jmx-tcp = [1099, 1099, "tcp", "JMX"]
 
     # WinRM
-    winrm-http-tcp = [5985, 5985, "tcp", "WinRM HTTP"]
+    winrm-http-tcp  = [5985, 5985, "tcp", "WinRM HTTP"]
     winrm-https-tcp = [5986, 5986, "tcp", "WinRM HTTPS"]
 
     # Zipkin
