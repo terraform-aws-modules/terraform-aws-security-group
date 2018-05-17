@@ -120,6 +120,10 @@ variable "rules" {
     # Web
     web-jmx-tcp = [1099, 1099, "tcp", "JMX"]
 
+    # WinRM
+    winrm-http-tcp = [5985, 5985, "tcp", "WinRM HTTP"]
+    winrm-https-tcp = [5986, 5986, "tcp", "WinRM HTTPS"]
+
     # Zipkin
     zipkin-admin-tcp       = [9990, 9990, "tcp", "Zipkin Admin port collector"]
     zipkin-admin-query-tcp = [9901, 9901, "tcp", "Zipkin Admin port query"]
@@ -303,6 +307,12 @@ variable "auto_groups" {
 
     web = {
       ingress_rules     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "web-jmx-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    winrm = {
+      ingress_rules     = ["winrm-http-tcp", "winrm-https-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
