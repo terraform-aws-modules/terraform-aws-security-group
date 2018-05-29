@@ -75,7 +75,7 @@ module "vote_service_sg" {
 
 ### Note about "value of 'count' cannot be computed"
 
-Terraform 0.11 has a limitation which does not allow **computed** values inside `count` attribute on resources (issues: #, #)
+Terraform 0.11 has a limitation which does not allow **computed** values inside `count` attribute on resources (issues: [#16712](https://github.com/hashicorp/terraform/issues/16712), [#18015](https://github.com/hashicorp/terraform/issues/18015), ...)
 
 Computed values are values provided as outputs from `module`. Non-computed values are all others - static values, values referenced as `variable` and from data-sources.
 
