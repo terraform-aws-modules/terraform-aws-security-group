@@ -20,7 +20,7 @@ This module aims to implement **ALL** combinations of arguments supported by AWS
 * Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ssh), [http-80](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/http-80), [mysql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mysql), see the whole list [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/README.md))
 * Conditionally create security group and all required security group rules ("single boolean switch").
 
-Ingress and egress rules can be configured in a variety of ways as listed on [the registry documentation](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/?tab=inputs).
+Ingress and egress rules can be configured in a variety of ways. See [inputs section](#inputs) for all supported arguments and [complete example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) for the complete use-case.
 
 If there is a missing feature or a bug - [open an issue](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/new).
 
@@ -28,7 +28,24 @@ If there is a missing feature or a bug - [open an issue](https://github.com/terr
 
 There are two ways to create security groups using this module:
 
-##### 1. Security group with custom rules
+1. [Specifying predefined rules (HTTP, SSH, etc)](https://github.com/terraform-aws-modules/terraform-aws-security-group#security-group-with-predefined-rules)
+1. [Specifying custom rules](https://github.com/terraform-aws-modules/terraform-aws-atlantis#security-group-with-custom-rules)
+
+### Security group with predefined rules
+
+```hcl
+module "web_server_sg" {
+  source = "terraform-aws-modules/security-group/aws//modules/http"
+
+  name        = "web-server"
+  description = "Security group for web-server with HTTP ports open within VPC"
+  vpc_id      = "vpc-12345678"
+
+  ingress_cidr_blocks = ["10.10.0.0/16"]
+}
+```
+
+### Security group with custom rules
 
 ```hcl
 module "vote_service_sg" {
@@ -56,21 +73,52 @@ module "vote_service_sg" {
 }
 ```
 
-**Note:** it is not possible to use variable outputs from this module or other modules that contain calculated values when defining the security group resources. This is typically an issue when specifying either `ingress_with_source_security_group_id` or `egress_with_source_security_group_id` parameters and attempting to use the security group id of a resource which has not yet been created. However referencing variables that are already "hard-coded" in the .tf file (i.e. not calculated values dependent on the infrastructure being created) are fine. E.g. the VPC cidr block `"10.10.0.0/16"`. Also using data sources allows the use of external data/variables that are known at plan time and not regarded as calculated. More details [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/16). Check [this example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/dynamic) to see how to specify values inside security group rules (data-sources and variables are allowed).
+### Note about "value of 'count' cannot be computed"
 
-##### 2. Security group with pre-defined rules (NOTE: Terraform should be version 0.11 or newer)
+Terraform 0.11 has a limitation which does not allow **computed** values inside `count` attribute on resources (issues: #, #)
+
+Computed values are values provided as outputs from `module`. Non-computed values are all others - static values, values referenced as `variable` and from data-sources.
+
+When you need to specify computed value inside security group rule argument you need to specify it using an argument which starts with `computed_` and provide a number of elements in the argument which starts with `number_of_computed_`. See these examples:
 
 ```hcl
-module "web_server_sg" {
-  source = "terraform-aws-modules/security-group/aws//modules/http"
+module "http_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+  # omitted for brevity
+}
 
-  name        = "web-server"
-  description = "Security group for web-server with HTTP ports open within VPC"
-  vpc_id      = "vpc-12345678"
+module "db_computed_source_sg" {
+  # omitted for brevity
 
-  ingress_cidr_blocks = ["10.10.0.0/16"]
+  vpc_id = "vpc-12345678" # these are valid values also - "${module.vpc.vpc_id}" and "${local.vpc_id}"
+
+  computed_ingress_with_source_security_group_id = [
+    {
+      rule                     = "mysql-tcp"
+      source_security_group_id = "${module.http_sg.this_security_group_id}"
+    }
+  ]
+  number_of_computed_ingress_with_source_security_group_id = 1
+}
+
+module "db_computed_sg" {
+  # omitted for brevity
+
+  ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}"]
+
+  computed_ingress_cidr_blocks = ["${module.vpc.vpc_id}"]
+  number_of_computed_ingress_cidr_blocks = 1
+}
+
+module "db_computed_merged_sg" {
+  # omitted for brevity
+
+  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}", "${module.vpc.vpc_id}"]
+  number_of_computed_ingress_cidr_blocks = 3
 }
 ```
+
+Note that `db_computed_sg` and `db_computed_merged_sg` are equal, because it is possible to put both computed and non-computed values in arguments starting with `computed_`.
 
 ## Conditional creation
 
@@ -92,6 +140,7 @@ module "vote_service_sg" {
 * [HTTP Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
 * [Disable creation of Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
 * [Dynamic values inside Security Group rules example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/dynamic) shows how to specify values inside security group rules (data-sources and variables are allowed).
+* [Computed values inside Security Group rules example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/computed) shows how to specify computed values inside security group rules (solution for `value of 'count' cannot be computed` problem).
 
 ## How to add/update rules/groups?
 
@@ -108,6 +157,16 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | auto_groups | Map of groups of security group rules to use to generate modules (see update_groups.sh) | map | `<map>` | no |
+| computed_egress_rules | List of computed egress rules to create by name | string | `<list>` | no |
+| computed_egress_with_cidr_blocks | List of computed egress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
+| computed_egress_with_ipv6_cidr_blocks | List of computed egress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
+| computed_egress_with_self | List of computed egress rules to create where 'self' is defined | string | `<list>` | no |
+| computed_egress_with_source_security_group_id | List of computed egress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
+| computed_ingress_rules | List of computed ingress rules to create by name | string | `<list>` | no |
+| computed_ingress_with_cidr_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
+| computed_ingress_with_ipv6_cidr_blocks | List of computed ingress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
+| computed_ingress_with_self | List of computed ingress rules to create where 'self' is defined | string | `<list>` | no |
+| computed_ingress_with_source_security_group_id | List of computed ingress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
 | create | Whether to create security group and all rules | string | `true` | no |
 | description | Description of security group | string | `Security Group managed by Terraform` | no |
 | egress_cidr_blocks | List of IPv4 CIDR ranges to use on all egress rules | string | `<list>` | no |
@@ -127,6 +186,16 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | ingress_with_self | List of ingress rules to create where 'self' is defined | string | `<list>` | no |
 | ingress_with_source_security_group_id | List of ingress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
 | name | Name of security group | string | - | yes |
+| number_of_computed_egress_rules | Number of computed egress rules to create by name | string | `0` | no |
+| number_of_computed_egress_with_cidr_blocks | Number of computed egress rules to create where 'cidr_blocks' is used | string | `0` | no |
+| number_of_computed_egress_with_ipv6_cidr_blocks | Number of computed egress rules to create where 'ipv6_cidr_blocks' is used | string | `0` | no |
+| number_of_computed_egress_with_self | Number of computed egress rules to create where 'self' is defined | string | `0` | no |
+| number_of_computed_egress_with_source_security_group_id | Number of computed egress rules to create where 'source_security_group_id' is used | string | `0` | no |
+| number_of_computed_ingress_rules | Number of computed ingress rules to create by name | string | `0` | no |
+| number_of_computed_ingress_with_cidr_blocks | Number of computed ingress rules to create where 'cidr_blocks' is used | string | `0` | no |
+| number_of_computed_ingress_with_ipv6_cidr_blocks | Number of computed ingress rules to create where 'ipv6_cidr_blocks' is used | string | `0` | no |
+| number_of_computed_ingress_with_self | Number of computed ingress rules to create where 'self' is defined | string | `0` | no |
+| number_of_computed_ingress_with_source_security_group_id | Number of computed ingress rules to create where 'source_security_group_id' is used | string | `0` | no |
 | rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map | `<map>` | no |
 | tags | A mapping of tags to assign to security group | string | `<map>` | no |
 | vpc_id | ID of the VPC where to create security group | string | - | yes |
