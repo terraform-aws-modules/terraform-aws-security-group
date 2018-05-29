@@ -29,7 +29,7 @@ If there is a missing feature or a bug - [open an issue](https://github.com/terr
 There are two ways to create security groups using this module:
 
 1. [Specifying predefined rules (HTTP, SSH, etc)](https://github.com/terraform-aws-modules/terraform-aws-security-group#security-group-with-predefined-rules)
-1. [Specifying custom rules](https://github.com/terraform-aws-modules/terraform-aws-atlantis#security-group-with-custom-rules)
+1. [Specifying custom rules](https://github.com/terraform-aws-modules/terraform-aws-security-group#security-group-with-custom-rules)
 
 ### Security group with predefined rules
 
