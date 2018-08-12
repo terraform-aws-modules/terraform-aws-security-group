@@ -35,7 +35,7 @@ There are two ways to create security groups using this module:
 
 ```hcl
 module "web_server_sg" {
-  source = "terraform-aws-modules/security-group/aws//modules/http"
+  source = "terraform-aws-modules/security-group/aws//modules/http-80"
 
   name        = "web-server"
   description = "Security group for web-server with HTTP ports open within VPC"
