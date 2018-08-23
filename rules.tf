@@ -111,7 +111,7 @@ variable "rules" {
 
     # Squid
     squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
-    
+
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
 
@@ -292,6 +292,12 @@ variable "auto_groups" {
 
     splunk = {
       ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    squid = {
+      ingress_rules     = ["squid-proxy-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
