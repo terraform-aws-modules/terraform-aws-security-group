@@ -109,6 +109,9 @@ variable "rules" {
     splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
 
+    # Squid
+    squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
+    
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
 
