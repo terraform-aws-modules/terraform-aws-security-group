@@ -9,6 +9,10 @@ resource "aws_security_group" "this" {
   vpc_id      = "${var.vpc_id}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 ###################################
