@@ -4,7 +4,7 @@
 resource "aws_security_group" "this" {
   count = "${var.create ? 1 : 0}"
 
-  name        = "${var.name}"
+  name_prefix = "${var.name}-"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
