@@ -15,8 +15,8 @@ variable "name" {
 }
 
 variable "use_name_prefix" {
-  default     = "false"
-  description = "Use name_prefix parameter to set the Security Group name instead of the name parameter"
+  default     = "true"
+  description = "Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation"
 }
 
 variable "description" {

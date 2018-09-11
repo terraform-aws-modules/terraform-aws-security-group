@@ -198,7 +198,7 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | number_of_computed_ingress_with_source_security_group_id | Number of computed ingress rules to create where 'source_security_group_id' is used | string | `0` | no |
 | rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map | `<map>` | no |
 | tags | A mapping of tags to assign to security group | string | `<map>` | no |
-| use_name_prefix | Use name_prefix parameter to set the Security Group name instead of the name parameter | string | `false` | no |
+| use_name_prefix | Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation | string | `true` | no |
 | vpc_id | ID of the VPC where to create security group | string | - | yes |
 
 ## Outputs

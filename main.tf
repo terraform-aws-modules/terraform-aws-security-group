@@ -1,18 +1,21 @@
+##################################
+# Get ID of created Security Group
+##################################
+locals {
+  this_sg_id = "${element(concat(coalescelist(aws_security_group.this.*.id, aws_security_group.this_name_prefix.*.id), list("")), 0)}"
+}
+
 ##########################
 # Security group with name
 ##########################
 resource "aws_security_group" "this" {
-  count = "${var.create && var.use_name_prefix ? 0 : 1}"
+  count = "${var.create && ! var.use_name_prefix ? 1 : 0}"
 
   name        = "${var.name}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 #################################
@@ -30,21 +33,6 @@ resource "aws_security_group" "this_name_prefix" {
   lifecycle {
     create_before_destroy = true
   }
-}
-
-##################################
-# Get ID of created Security Group
-##################################
-locals {
-  this_sg_id = "${
-    element(
-      coalescelist(
-        aws_security_group.this.*.id,
-        aws_security_group.this_name_prefix.*.id
-      ),
-      0
-    )
-  }"
 }
 
 ###################################
