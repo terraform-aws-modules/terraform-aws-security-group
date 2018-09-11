@@ -14,6 +14,11 @@ variable "name" {
   description = "Name of security group"
 }
 
+variable "use_name_prefix" {
+  default     = "false"
+  description = "Use name_prefix parameter to set the Security Group name instead of the name parameter"
+}
+
 variable "description" {
   description = "Description of security group"
   default     = "Security Group managed by Terraform"

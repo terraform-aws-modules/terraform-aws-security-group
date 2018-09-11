@@ -1,8 +1,25 @@
-#################
-# Security group
-#################
+##########################
+# Security group with name
+##########################
 resource "aws_security_group" "this" {
-  count = "${var.create ? 1 : 0}"
+  count = "${var.create && var.use_name_prefix ? 0 : 1}"
+
+  name        = "${var.name}"
+  description = "${var.description}"
+  vpc_id      = "${var.vpc_id}"
+
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+#################################
+# Security group with name_prefix
+#################################
+resource "aws_security_group" "this_name_prefix" {
+  count = "${var.create && var.use_name_prefix ? 1 : 0}"
 
   name_prefix = "${var.name}-"
   description = "${var.description}"
@@ -15,6 +32,21 @@ resource "aws_security_group" "this" {
   }
 }
 
+##################################
+# Get ID of created Security Group
+##################################
+locals {
+  this_sg_id = "${
+    element(
+      coalescelist(
+        aws_security_group.this.*.id,
+        aws_security_group.this_name_prefix.*.id
+      ),
+      0
+    )
+  }"
+}
+
 ###################################
 # Ingress - List of rules (simple)
 ###################################
@@ -22,7 +54,7 @@ resource "aws_security_group" "this" {
 resource "aws_security_group_rule" "ingress_rules" {
   count = "${var.create ? length(var.ingress_rules) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   cidr_blocks      = ["${var.ingress_cidr_blocks}"]
@@ -39,7 +71,7 @@ resource "aws_security_group_rule" "ingress_rules" {
 resource "aws_security_group_rule" "computed_ingress_rules" {
   count = "${var.create ? var.number_of_computed_ingress_rules : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   cidr_blocks      = ["${var.ingress_cidr_blocks}"]
@@ -59,7 +91,7 @@ resource "aws_security_group_rule" "computed_ingress_rules" {
 resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
   count = "${var.create ? length(var.ingress_with_source_security_group_id) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   source_security_group_id = "${lookup(var.ingress_with_source_security_group_id[count.index], "source_security_group_id")}"
@@ -76,7 +108,7 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
 resource "aws_security_group_rule" "computed_ingress_with_source_security_group_id" {
   count = "${var.create ? var.number_of_computed_ingress_with_source_security_group_id : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   source_security_group_id = "${lookup(var.computed_ingress_with_source_security_group_id[count.index], "source_security_group_id")}"
@@ -93,7 +125,7 @@ resource "aws_security_group_rule" "computed_ingress_with_source_security_group_
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   count = "${var.create ? length(var.ingress_with_cidr_blocks) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   cidr_blocks     = ["${split(",", lookup(var.ingress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.ingress_cidr_blocks)))}"]
@@ -109,7 +141,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
 resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
   count = "${var.create ? var.number_of_computed_ingress_with_cidr_blocks : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   cidr_blocks     = ["${split(",", lookup(var.computed_ingress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.ingress_cidr_blocks)))}"]
@@ -125,7 +157,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
 resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
   count = "${var.create ? length(var.ingress_with_ipv6_cidr_blocks) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   ipv6_cidr_blocks = ["${split(",", lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.ingress_ipv6_cidr_blocks)))}"]
@@ -141,7 +173,7 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
 resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
   count = "${var.create ? var.number_of_computed_ingress_with_ipv6_cidr_blocks : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   ipv6_cidr_blocks = ["${split(",", lookup(var.computed_ingress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.ingress_ipv6_cidr_blocks)))}"]
@@ -157,7 +189,7 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
 resource "aws_security_group_rule" "ingress_with_self" {
   count = "${var.create ? length(var.ingress_with_self) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   self             = "${lookup(var.ingress_with_self[count.index], "self", true)}"
@@ -174,7 +206,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
 resource "aws_security_group_rule" "computed_ingress_with_self" {
   count = "${var.create ? var.number_of_computed_ingress_with_self : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "ingress"
 
   self             = "${lookup(var.computed_ingress_with_self[count.index], "self", true)}"
@@ -198,7 +230,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
 resource "aws_security_group_rule" "egress_rules" {
   count = "${var.create ? length(var.egress_rules) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   cidr_blocks      = ["${var.egress_cidr_blocks}"]
@@ -215,7 +247,7 @@ resource "aws_security_group_rule" "egress_rules" {
 resource "aws_security_group_rule" "computed_egress_rules" {
   count = "${var.create ? var.number_of_computed_egress_rules : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   cidr_blocks      = ["${var.egress_cidr_blocks}"]
@@ -235,7 +267,7 @@ resource "aws_security_group_rule" "computed_egress_rules" {
 resource "aws_security_group_rule" "egress_with_source_security_group_id" {
   count = "${var.create ? length(var.egress_with_source_security_group_id) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   source_security_group_id = "${lookup(var.egress_with_source_security_group_id[count.index], "source_security_group_id")}"
@@ -252,7 +284,7 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
 resource "aws_security_group_rule" "computed_egress_with_source_security_group_id" {
   count = "${var.create ? var.number_of_computed_egress_with_source_security_group_id : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   source_security_group_id = "${lookup(var.computed_egress_with_source_security_group_id[count.index], "source_security_group_id")}"
@@ -269,7 +301,7 @@ resource "aws_security_group_rule" "computed_egress_with_source_security_group_i
 resource "aws_security_group_rule" "egress_with_cidr_blocks" {
   count = "${var.create ? length(var.egress_with_cidr_blocks) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   cidr_blocks     = ["${split(",", lookup(var.egress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.egress_cidr_blocks)))}"]
@@ -285,7 +317,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
 resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
   count = "${var.create ? var.number_of_computed_egress_with_cidr_blocks : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   cidr_blocks     = ["${split(",", lookup(var.computed_egress_with_cidr_blocks[count.index], "cidr_blocks", join(",", var.egress_cidr_blocks)))}"]
@@ -301,7 +333,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
 resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
   count = "${var.create ? length(var.egress_with_ipv6_cidr_blocks) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   ipv6_cidr_blocks = ["${split(",", lookup(var.egress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.egress_ipv6_cidr_blocks)))}"]
@@ -317,7 +349,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
 resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
   count = "${var.create ? var.number_of_computed_egress_with_ipv6_cidr_blocks : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   ipv6_cidr_blocks = ["${split(",", lookup(var.computed_egress_with_ipv6_cidr_blocks[count.index], "ipv6_cidr_blocks", join(",", var.egress_ipv6_cidr_blocks)))}"]
@@ -333,7 +365,7 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
 resource "aws_security_group_rule" "egress_with_self" {
   count = "${var.create ? length(var.egress_with_self) : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   self             = "${lookup(var.egress_with_self[count.index], "self", true)}"
@@ -350,7 +382,7 @@ resource "aws_security_group_rule" "egress_with_self" {
 resource "aws_security_group_rule" "computed_egress_with_self" {
   count = "${var.create ? var.number_of_computed_egress_with_self : 0}"
 
-  security_group_id = "${aws_security_group.this.id}"
+  security_group_id = "${local.this_sg_id}"
   type              = "egress"
 
   self             = "${lookup(var.computed_egress_with_self[count.index], "self", true)}"
