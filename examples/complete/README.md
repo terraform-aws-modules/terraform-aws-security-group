@@ -1,6 +1,6 @@
 # Complete Security Group example
 
-Configuration in this directory creates set of Security Group and Security Group Rules resources in various combination.
+Configuration in this directory creates set of Security Group and Security Group Rules resources in various combinations.
 
 Data sources are used to discover existing VPC resources (VPC and default security group).
 

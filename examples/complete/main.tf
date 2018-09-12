@@ -357,3 +357,19 @@ module "ipv4_ipv6_example" {
     },
   ]
 }
+
+#################################
+# Security group with fixed name
+#################################
+module "fixed_name_sg" {
+  source = "../../"
+
+  name        = "fixed-name-sg"
+  description = "Security group with fixed name"
+  vpc_id      = "${data.aws_vpc.default.id}"
+
+  use_name_prefix = false
+
+  ingress_cidr_blocks = ["10.10.0.0/16"]
+  ingress_rules       = ["https-443-tcp"]
+}
