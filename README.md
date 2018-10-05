@@ -168,6 +168,7 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | computed_ingress_with_self | List of computed ingress rules to create where 'self' is defined | string | `<list>` | no |
 | computed_ingress_with_source_security_group_id | List of computed ingress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
 | create | Whether to create security group and all rules | string | `true` | no |
+| create_group | Whether to create security group | string | `true` | no |
 | description | Description of security group | string | `Security Group managed by Terraform` | no |
 | egress_cidr_blocks | List of IPv4 CIDR ranges to use on all egress rules | string | `<list>` | no |
 | egress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all egress rules | string | `<list>` | no |
@@ -197,6 +198,7 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | number_of_computed_ingress_with_self | Number of computed ingress rules to create where 'self' is defined | string | `0` | no |
 | number_of_computed_ingress_with_source_security_group_id | Number of computed ingress rules to create where 'source_security_group_id' is used | string | `0` | no |
 | rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map | `<map>` | no |
+| security_group_id | ID of existing security group whose rules we will manage | string | `` | no |
 | tags | A mapping of tags to assign to security group | string | `<map>` | no |
 | use_name_prefix | Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation | string | `true` | no |
 | vpc_id | ID of the VPC where to create security group | string | - | yes |

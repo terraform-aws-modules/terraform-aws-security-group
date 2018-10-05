@@ -6,6 +6,16 @@ variable "create" {
   default     = true
 }
 
+variable "create_group" {
+  description = "Whether to create security group"
+  default     = true
+}
+
+variable "security_group_id" {
+  description = "ID of existing security group whose rules we will manage"
+  default     = ""
+}
+
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
 }
