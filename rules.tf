@@ -108,7 +108,7 @@ variable "rules" {
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
     splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
-    splunk-hec-tcp = [8088, 8088, "tcp", "Splunk HEC"]
+    splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
 
     # Squid
     squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
