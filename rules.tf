@@ -38,6 +38,9 @@ variable "rules" {
     dns-udp = [53, 53, "udp", "DNS"]
     dns-tcp = [53, 53, "tcp", "DNS"]
 
+    # NTP - Network Time Protocol
+    ntp-udp = [123, 123, "udp", "NTP"]
+
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
