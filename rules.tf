@@ -108,6 +108,7 @@ variable "rules" {
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
     splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
+    splunk-hec-tcp = [8088, 8088, "tcp", "Splunk HEC"]
 
     # Squid
     squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
@@ -291,7 +292,7 @@ variable "auto_groups" {
     }
 
     splunk = {
-      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp"]
+      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
