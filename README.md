@@ -151,41 +151,40 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 * Due to an [issue #1920](https://github.com/terraform-providers/terraform-provider-aws/issues/1920) in AWS provider, updates to the `description` of security group rules are ignored by this module. If you need to update `description` after the security group has been created you need to recreate security group rule.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | auto_groups | Map of groups of security group rules to use to generate modules (see update_groups.sh) | map | `<map>` | no |
-| computed_egress_rules | List of computed egress rules to create by name | string | `<list>` | no |
-| computed_egress_with_cidr_blocks | List of computed egress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
-| computed_egress_with_ipv6_cidr_blocks | List of computed egress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
-| computed_egress_with_self | List of computed egress rules to create where 'self' is defined | string | `<list>` | no |
-| computed_egress_with_source_security_group_id | List of computed egress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
-| computed_ingress_rules | List of computed ingress rules to create by name | string | `<list>` | no |
-| computed_ingress_with_cidr_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
-| computed_ingress_with_ipv6_cidr_blocks | List of computed ingress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
-| computed_ingress_with_self | List of computed ingress rules to create where 'self' is defined | string | `<list>` | no |
-| computed_ingress_with_source_security_group_id | List of computed ingress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
+| computed_egress_rules | List of computed egress rules to create by name | list | `<list>` | no |
+| computed_egress_with_cidr_blocks | List of computed egress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
+| computed_egress_with_ipv6_cidr_blocks | List of computed egress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
+| computed_egress_with_self | List of computed egress rules to create where 'self' is defined | list | `<list>` | no |
+| computed_egress_with_source_security_group_id | List of computed egress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
+| computed_ingress_rules | List of computed ingress rules to create by name | list | `<list>` | no |
+| computed_ingress_with_cidr_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
+| computed_ingress_with_ipv6_cidr_blocks | List of computed ingress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
+| computed_ingress_with_self | List of computed ingress rules to create where 'self' is defined | list | `<list>` | no |
+| computed_ingress_with_source_security_group_id | List of computed ingress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
 | create | Whether to create security group and all rules | string | `true` | no |
 | create_group | Whether to create security group | string | `true` | no |
 | description | Description of security group | string | `Security Group managed by Terraform` | no |
-| egress_cidr_blocks | List of IPv4 CIDR ranges to use on all egress rules | string | `<list>` | no |
-| egress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all egress rules | string | `<list>` | no |
-| egress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all egress rules | string | `<list>` | no |
-| egress_rules | List of egress rules to create by name | string | `<list>` | no |
-| egress_with_cidr_blocks | List of egress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
-| egress_with_ipv6_cidr_blocks | List of egress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
-| egress_with_self | List of egress rules to create where 'self' is defined | string | `<list>` | no |
-| egress_with_source_security_group_id | List of egress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
-| ingress_cidr_blocks | List of IPv4 CIDR ranges to use on all ingress rules | string | `<list>` | no |
-| ingress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all ingress rules | string | `<list>` | no |
-| ingress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all ingress rules | string | `<list>` | no |
-| ingress_rules | List of ingress rules to create by name | string | `<list>` | no |
-| ingress_with_cidr_blocks | List of ingress rules to create where 'cidr_blocks' is used | string | `<list>` | no |
-| ingress_with_ipv6_cidr_blocks | List of ingress rules to create where 'ipv6_cidr_blocks' is used | string | `<list>` | no |
-| ingress_with_self | List of ingress rules to create where 'self' is defined | string | `<list>` | no |
-| ingress_with_source_security_group_id | List of ingress rules to create where 'source_security_group_id' is used | string | `<list>` | no |
+| egress_cidr_blocks | List of IPv4 CIDR ranges to use on all egress rules | list | `<list>` | no |
+| egress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all egress rules | list | `<list>` | no |
+| egress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all egress rules | list | `<list>` | no |
+| egress_rules | List of egress rules to create by name | list | `<list>` | no |
+| egress_with_cidr_blocks | List of egress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
+| egress_with_ipv6_cidr_blocks | List of egress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
+| egress_with_self | List of egress rules to create where 'self' is defined | list | `<list>` | no |
+| egress_with_source_security_group_id | List of egress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
+| ingress_cidr_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list | `<list>` | no |
+| ingress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all ingress rules | list | `<list>` | no |
+| ingress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all ingress rules | list | `<list>` | no |
+| ingress_rules | List of ingress rules to create by name | list | `<list>` | no |
+| ingress_with_cidr_blocks | List of ingress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
+| ingress_with_ipv6_cidr_blocks | List of ingress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
+| ingress_with_self | List of ingress rules to create where 'self' is defined | list | `<list>` | no |
+| ingress_with_source_security_group_id | List of ingress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
 | name | Name of security group | string | - | yes |
 | number_of_computed_egress_rules | Number of computed egress rules to create by name | string | `0` | no |
 | number_of_computed_egress_with_cidr_blocks | Number of computed egress rules to create where 'cidr_blocks' is used | string | `0` | no |
@@ -199,7 +198,7 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 | number_of_computed_ingress_with_source_security_group_id | Number of computed ingress rules to create where 'source_security_group_id' is used | string | `0` | no |
 | rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map | `<map>` | no |
 | security_group_id | ID of existing security group whose rules we will manage | string | `` | no |
-| tags | A mapping of tags to assign to security group | string | `<map>` | no |
+| tags | A mapping of tags to assign to security group | map | `<map>` | no |
 | use_name_prefix | Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation | string | `true` | no |
 | vpc_id | ID of the VPC where to create security group | string | - | yes |
 

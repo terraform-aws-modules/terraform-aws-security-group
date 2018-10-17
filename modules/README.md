@@ -18,6 +18,7 @@ List of Security Groups implemented as Terraform modules
 * [mysql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mysql)
 * [nfs](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/nfs)
 * [nomad](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/nomad)
+* [ntp](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ntp)
 * [openvpn](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/openvpn)
 * [oracle-db](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/oracle-db)
 * [postgresql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/postgresql)

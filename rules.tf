@@ -20,6 +20,7 @@ variable "rules" {
 
     # Consul
     consul-tcp          = [8300, 8300, "tcp", "Consul server"]
+    consul-cli-rpc-tcp  = [8400, 8400, "tcp", "Consul CLI RPC"]
     consul-webui-tcp    = [8500, 8500, "tcp", "Consul web UI"]
     consul-dns-tcp      = [8600, 8600, "tcp", "Consul DNS"]
     consul-dns-udp      = [8600, 8600, "udp", "Consul DNS"]
@@ -37,6 +38,9 @@ variable "rules" {
     # DNS
     dns-udp = [53, 53, "udp", "DNS"]
     dns-tcp = [53, 53, "tcp", "DNS"]
+
+    # NTP - Network Time Protocol
+    ntp-udp = [123, 123, "udp", "NTP"]
 
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
@@ -108,6 +112,7 @@ variable "rules" {
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
     splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
+    splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
 
     # Squid
     squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
@@ -171,7 +176,7 @@ variable "auto_groups" {
     }
 
     consul = {
-      ingress_rules     = ["consul-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_rules     = ["consul-tcp", "consul-cli-rpc-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -272,6 +277,12 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    ntp = {
+      ingress_rules     = ["ntp-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
     rdp = {
       ingress_rules     = ["rdp-tcp", "rdp-udp"]
       ingress_with_self = ["all-all"]
@@ -291,7 +302,7 @@ variable "auto_groups" {
     }
 
     splunk = {
-      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp"]
+      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
