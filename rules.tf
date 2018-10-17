@@ -20,6 +20,7 @@ variable "rules" {
 
     # Consul
     consul-tcp          = [8300, 8300, "tcp", "Consul server"]
+    consul-cli-rpc-tcp  = [8400, 8400, "tcp", "Consul CLI RPC"]
     consul-webui-tcp    = [8500, 8500, "tcp", "Consul web UI"]
     consul-dns-tcp      = [8600, 8600, "tcp", "Consul DNS"]
     consul-dns-udp      = [8600, 8600, "udp", "Consul DNS"]
@@ -175,7 +176,7 @@ variable "auto_groups" {
     }
 
     consul = {
-      ingress_rules     = ["consul-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_rules     = ["consul-tcp", "consul-cli-rpc-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
