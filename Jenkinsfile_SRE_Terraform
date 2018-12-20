@@ -1,0 +1,25 @@
+library('sre-jenkinsfile@master')
+
+pipeline {
+    agent {
+        label 'JenkinsWorker_Universal'
+    }
+    triggers {
+      issueCommentTrigger('.*jenkins rebuild this.*')
+    }
+
+    stages {
+        stage('Pipeline Control') {
+            steps {
+                script {
+                    if(env.BRANCH_NAME == 'master') {
+                        echo 'Building master branch'
+                        terraform_module_master()
+                    } else {
+                        terraform_module()
+                    }
+                }
+            }
+        }
+    }
+}
