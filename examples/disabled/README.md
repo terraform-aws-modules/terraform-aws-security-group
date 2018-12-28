@@ -21,6 +21,6 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Description |
 |------|-------------|
-| this_security_group_id | The ID of the security group |
+| this\_security\_group\_id | The ID of the security group |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

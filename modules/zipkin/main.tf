@@ -1,11 +1,12 @@
 module "sg" {
   source = "../../"
 
-  create      = "${var.create}"
-  name        = "${var.name}"
-  description = "${var.description}"
-  vpc_id      = "${var.vpc_id}"
-  tags        = "${var.tags}"
+  create          = "${var.create}"
+  name            = "${var.name}"
+  use_name_prefix = "${var.use_name_prefix}"
+  description     = "${var.description}"
+  vpc_id          = "${var.vpc_id}"
+  tags            = "${var.tags}"
 
   ##########
   # Ingress

@@ -37,7 +37,9 @@ module "http_sg" {
 module "http_mysql_1_sg" {
   source = "../../modules/http-80"
 
-  name        = "http-mysql-1"
+  name            = "http-mysql-1"
+  use_name_prefix = false
+
   description = "Security group with HTTP and MySQL ports open for everybody (IPv4 CIDR)"
   vpc_id      = "${data.aws_vpc.default.id}"
 
