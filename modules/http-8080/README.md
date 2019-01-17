@@ -1,16 +1,16 @@
-# zipkin - AWS EC2-VPC Security Group Terraform module
+# http-8080 - AWS EC2-VPC Security Group Terraform module
 
 ## Usage
 
 ```hcl
-module "zipkin_security_group" {
-  source = "terraform-aws-modules/security-group/aws//modules/zipkin"
+module "http_8080_security_group" {
+  source = "terraform-aws-modules/security-group/aws//modules/http-8080"
 
   # omitted...
 }
 ```
 
-All automatic values **zipkin module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/zipkin/auto_values.tf).
+All automatic values **http-8080 module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/http-8080/auto_values.tf).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
@@ -23,7 +23,7 @@ All automatic values **zipkin module** is using are available [here](https://git
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | list | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | list | `[ "all-all" ]` | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | list | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | list | `[ "zipkin-admin-tcp", "zipkin-admin-query-tcp", "zipkin-admin-web-tcp", "zipkin-query-tcp", "zipkin-web-tcp" ]` | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | list | `[ "http-8080-tcp" ]` | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | list | `[ { "rule": "all-all" } ]` | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | string | `"0"` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | string | `"0"` | no |

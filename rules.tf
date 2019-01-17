@@ -51,7 +51,7 @@ variable "rules" {
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
 
     # HTTPS
-    https-443-tcp = [443, 443, "tcp", "HTTPS"]
+    https-443-tcp  = [443, 443, "tcp", "HTTPS"]
     https-8443-tcp = [8443, 8443, "tcp", "HTTPS"]
 
     # IPSEC
@@ -200,8 +200,20 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    http-8080 = {
+      ingress_rules     = ["http-8080-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
     https-443 = {
       ingress_rules     = ["https-443-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    https-8443 = {
+      ingress_rules     = ["https-8443-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
