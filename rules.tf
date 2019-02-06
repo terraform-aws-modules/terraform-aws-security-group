@@ -255,8 +255,8 @@ variable "auto_groups" {
       ingress_rules     = ["mongodb-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
-
     }
+
     mysql = {
       ingress_rules     = ["mysql-tcp"]
       ingress_with_self = ["all-all"]
