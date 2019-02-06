@@ -102,6 +102,12 @@ variable "rules" {
     # Puppet
     puppet-tcp = [8140, 8140, "tcp", "Puppet"]
 
+    # RabbitMQ
+    rabbitmq-5671-tcp  = [5671, 5671, "tcp", "RabbitMQ"]
+    rabbitmq-5672-tcp  = [5672, 5672, "tcp", "RabbitMQ"]
+    rabbitmq-15672-tcp  = [15671, 15671, "tcp", "RabbitMQ"]
+    rabbitmq-25672-tcp  = [25672, 25672, "tcp", "RabbitMQ"]
+
     # RDP
     rdp-tcp = [3389, 3389, "tcp", "Remote Desktop"]
     rdp-udp = [3389, 3389, "udp", "Remote Desktop"]
@@ -301,6 +307,12 @@ variable "auto_groups" {
 
     ntp = {
       ingress_rules     = ["ntp-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    rabbitmq = {
+      ingress_rules     = ["rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
