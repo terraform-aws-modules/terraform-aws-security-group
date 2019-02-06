@@ -16,6 +16,7 @@ List of Security Groups implemented as Terraform modules
 * [kafka](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kafka)
 * [ldaps](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ldaps)
 * [memcached](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/memcached)
+* [mongodb](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mongodb)
 * [mssql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mssql)
 * [mysql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mysql)
 * [nfs](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/nfs)

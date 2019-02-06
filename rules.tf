@@ -67,6 +67,9 @@ variable "rules" {
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
 
+    # MongoDB
+    mongodb-tcp = [27017, 27017, "tcp", "MongoDB"]
+
     # MySQL
     mysql-tcp = [3306, 3306, "tcp", "MySQL/Aurora"]
 
@@ -248,6 +251,12 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    mongodb = {
+      ingress_rules     = ["mongodb-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+
+    }
     mysql = {
       ingress_rules     = ["mysql-tcp"]
       ingress_with_self = ["all-all"]
