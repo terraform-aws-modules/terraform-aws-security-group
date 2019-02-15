@@ -15,7 +15,7 @@ resource "aws_security_group" "this" {
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
-  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)), map("managed_by", "terraform"))}"
 }
 
 #################################
@@ -28,7 +28,7 @@ resource "aws_security_group" "this_name_prefix" {
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
-  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)), map("managed_by", "terraform"))}"
 
   lifecycle {
     create_before_destroy = true
