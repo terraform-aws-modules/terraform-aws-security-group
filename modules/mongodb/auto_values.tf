@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = "list"
-  default     = ["mongodb-tcp"]
+  default     = ["mongodb-27017-tcp", "mongodb-27018-tcp", "mongodb-27019-tcp"]
 }
 
 variable "auto_ingress_with_self" {
