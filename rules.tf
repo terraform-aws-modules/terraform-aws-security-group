@@ -107,7 +107,7 @@ variable "rules" {
     # RabbitMQ
     rabbitmq-5671-tcp  = [5671, 5671, "tcp", "RabbitMQ"]
     rabbitmq-5672-tcp  = [5672, 5672, "tcp", "RabbitMQ"]
-    rabbitmq-15672-tcp = [15671, 15671, "tcp", "RabbitMQ"]
+    rabbitmq-15672-tcp = [15672, 15672, "tcp", "RabbitMQ"]
     rabbitmq-25672-tcp = [25672, 25672, "tcp", "RabbitMQ"]
 
     # RDP
