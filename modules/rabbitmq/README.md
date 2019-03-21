@@ -23,7 +23,7 @@ All automatic values **rabbitmq module** is using are available [here](https://g
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | list | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | list | `[ "all-all" ]` | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | list | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | list | `[ "rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp" ]` | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | list | `[ "rabbitmq-4369-tcp", "rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp" ]` | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | list | `[ { "rule": "all-all" } ]` | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | string | `"0"` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | string | `"0"` | no |
