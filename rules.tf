@@ -102,7 +102,8 @@ variable "rules" {
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
 
     # Puppet
-    puppet-tcp = [8140, 8140, "tcp", "Puppet"]
+    puppet-tcp   = [8140, 8140, "tcp", "Puppet"]
+    puppetdb-tcp = [8081, 8081, "tcp", "PuppetDB"]
 
     # RabbitMQ
     rabbitmq-4369-tcp  = [4369, 4369, "tcp", "RabbitMQ epmd"]
