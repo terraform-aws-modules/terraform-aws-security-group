@@ -315,6 +315,12 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
 
+    puppet = {
+      ingress_rules     = ["puppet-tcp", "puppetdb-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
     rabbitmq = {
       ingress_rules     = ["rabbitmq-4369-tcp", "rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp"]
       ingress_with_self = ["all-all"]

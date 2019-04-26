@@ -25,6 +25,7 @@ List of Security Groups implemented as Terraform modules
 * [openvpn](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/openvpn)
 * [oracle-db](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/oracle-db)
 * [postgresql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/postgresql)
+* [puppet](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/puppet)
 * [rabbitmq](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/rabbitmq)
 * [rdp](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/rdp)
 * [redis](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/redis)
