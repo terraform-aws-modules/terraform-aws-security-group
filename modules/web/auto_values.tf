@@ -5,53 +5,55 @@
 
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "web-jmx-tcp"]
 }
 
 variable "auto_ingress_with_self" {
   description = "List of maps defining ingress rules with self to add automatically"
-  type        = "list"
+  type        = list(string)
 
-  default = [{
-    "rule" = "all-all"
-  }]
+  default = [
+    {
+      "rule" = "all-all"
+    },
+  ]
 }
 
 variable "auto_egress_rules" {
   description = "List of egress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = ["all-all"]
 }
 
 variable "auto_egress_with_self" {
   description = "List of maps defining egress rules with self to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 # Computed
 variable "auto_computed_ingress_rules" {
   description = "List of ingress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "auto_computed_ingress_with_self" {
   description = "List of maps defining computed ingress rules with self to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "auto_computed_egress_rules" {
   description = "List of computed egress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
 variable "auto_computed_egress_with_self" {
   description = "List of maps defining computed egress rules with self to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = []
 }
 
@@ -75,3 +77,4 @@ variable "auto_number_of_computed_egress_with_self" {
   description = "Number of computed egress rules to create where 'self' is defined"
   default     = 0
 }
+
