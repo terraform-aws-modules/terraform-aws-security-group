@@ -24,6 +24,12 @@ Ingress and egress rules can be configured in a variety of ways. See [inputs sec
 
 If there is a missing feature or a bug - [open an issue](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/new).
 
+## Terraform versions
+
+For Terraform 0.12 use version `v3.*` of this module.
+
+If you are using Terraform 0.11 you can use versions `v2.*`.
+
 ## Usage
 
 There are two ways to create security groups using this module:
