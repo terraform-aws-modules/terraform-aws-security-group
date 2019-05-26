@@ -6,11 +6,7 @@
 <a name="v3.0.0"></a>
 ## [v3.0.0] - 2019-05-26
 
-- Upgrade module to support Terraform 0.12
-- run terraform 0.12upgrade on modules
-- update examples for 0.12
-- set var types
-- run upgrade tool
+- Upgrade module to support Terraform 0.12 ([#120](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/120))
 
 
 <a name="v2.17.0"></a>
