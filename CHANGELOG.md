@@ -4,8 +4,9 @@
 
 
 <a name="v3.0.0"></a>
-## [v3.0.0] - 2019-05-24
+## [v3.0.0] - 2019-05-26
 
+- Upgrade module to support Terraform 0.12
 - run terraform 0.12upgrade on modules
 - update examples for 0.12
 - set var types
