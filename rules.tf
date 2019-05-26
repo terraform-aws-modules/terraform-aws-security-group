@@ -1,6 +1,6 @@
 variable "rules" {
   description = "Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description'])"
-  type        = map(list(string))
+  type        = map(list(any)) # // or any?
 
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
   # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
@@ -138,7 +138,7 @@ variable "rules" {
 
 variable "auto_groups" {
   description = "Map of groups of security group rules to use to generate modules (see update_groups.sh)"
-  type        = map(map(list(string)))
+  type        = map(map(list(string))) // or any?
 
   # Valid keys - ingress_rules, egress_rules, ingress_with_self, egress_with_self
   default = {

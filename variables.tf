@@ -9,23 +9,23 @@ variable "create" {
 
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
-  type        = "string"
+  type        = string
 }
 
 variable "name" {
   description = "Name of security group"
-  type        = "string"
+  type        = string
 }
 
 variable "use_name_prefix" {
   description = "Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation"
-  type        = "string"
+  type        = bool
   default     = true
 }
 
 variable "description" {
   description = "Description of security group"
-  type        = "string"
+  type        = string
   default     = "Security Group managed by Terraform"
 }
 
@@ -268,4 +268,3 @@ variable "number_of_computed_egress_with_source_security_group_id" {
   type        = number
   default     = 0
 }
-
