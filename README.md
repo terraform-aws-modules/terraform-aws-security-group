@@ -112,14 +112,14 @@ module "db_computed_sg" {
 
   ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}"]
 
-  computed_ingress_cidr_blocks = ["${module.vpc.vpc_id}"]
+  computed_ingress_cidr_blocks = ["${module.vpc.vpc_cidr_block}"]
   number_of_computed_ingress_cidr_blocks = 1
 }
 
 module "db_computed_merged_sg" {
   # omitted for brevity
 
-  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}", "${module.vpc.vpc_id}"]
+  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}", "${module.vpc.vpc_cidr_block}"]
   number_of_computed_ingress_cidr_blocks = 3
 }
 ```
