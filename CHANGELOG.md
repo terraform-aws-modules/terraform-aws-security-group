@@ -3,9 +3,16 @@
 
 
 
+<a name="v3.0.1"></a>
+## [v3.0.1] - 2019-05-27
+
+- Fixed computed example in README ([#122](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/122))
+
+
 <a name="v3.0.0"></a>
 ## [v3.0.0] - 2019-05-26
 
+- Updated CHANGELOG
 - Upgrade module to support Terraform 0.12 ([#120](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/120))
 
 
@@ -350,7 +357,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.1...HEAD
+[v3.0.1]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.0...v3.0.1
 [v3.0.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v2.17.0...v3.0.0
 [v2.17.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v2.16.0...v2.17.0
 [v2.16.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v2.15.0...v2.16.0
