@@ -16,6 +16,12 @@ resource "aws_security_group" "this" {
   vpc_id      = "${var.vpc_id}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.name)), map("managed_by", "terraform"))}"
+
+  lifecycle {
+    ignore_changes = [
+      "tags.kubernetes.io"
+    ]
+  }
 }
 
 #################################
@@ -32,6 +38,9 @@ resource "aws_security_group" "this_name_prefix" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = [
+      "tags.kubernetes.io"
+    ]
   }
 }
 
