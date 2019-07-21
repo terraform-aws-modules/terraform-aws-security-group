@@ -24,7 +24,7 @@ All automatic values **splunk module** is using are available [here](https://git
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | list(map(string)) | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | list(string) | `[ "all-all" ]` | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | list(map(string)) | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | list(string) | `[ "splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp" ]` | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | list(string) | `[ "splunk-indexer-tcp", "splunk-web-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp" ]` | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | list(map(string)) | `[ { "rule": "all-all" } ]` | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | number | `"0"` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | number | `"0"` | no |
