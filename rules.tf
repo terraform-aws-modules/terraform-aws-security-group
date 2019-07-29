@@ -99,7 +99,7 @@ variable "rules" {
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
     # Splunk
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
-    splunk-clients-tcp = [8080, 8080, "tcp", "Splunk clients"]
+    splunk-web-tcp = [8000, 8000, "tcp", "Splunk Web"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
     splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
     # Squid
