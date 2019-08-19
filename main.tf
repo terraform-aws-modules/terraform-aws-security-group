@@ -29,8 +29,7 @@ resource "aws_security_group" "this" {
 
   lifecycle {
     ignore_changes = [
-      "tags.%",
-      "tags.kubernetes.io"
+      tags["kubernetes.io"]
     ]
   }
 }
@@ -55,6 +54,9 @@ resource "aws_security_group" "this_name_prefix" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = [
+      tags["kubernetes.io"]
+    ]
   }
 }
 
