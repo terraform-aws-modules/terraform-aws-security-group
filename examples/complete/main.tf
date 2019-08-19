@@ -1,5 +1,11 @@
 provider "aws" {
   region = "eu-west-1"
+
+  skip_credentials_validation = true
+  skip_requesting_account_id  = true
+  skip_get_ec2_platforms      = true
+  skip_metadata_api_check     = true
+  skip_region_validation      = true
 }
 
 #############################################################
@@ -11,7 +17,7 @@ data "aws_vpc" "default" {
 
 data "aws_security_group" "default" {
   name   = "default"
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
 }
 
 ##################################################
@@ -32,7 +38,7 @@ module "main_sg" {
 
   name        = "main-sg"
   description = "Security group which is used as an argument in complete-sg"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress_cidr_blocks = ["10.10.0.0/16"]
   ingress_rules       = ["https-443-tcp"]
@@ -46,7 +52,7 @@ module "complete_sg" {
 
   name        = "complete-sg"
   description = "Security group with all available arguments set (this is just an example)"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = data.aws_vpc.default.id
 
   tags = {
     Cash       = "king"
@@ -97,7 +103,7 @@ module "complete_sg" {
       to_port     = 25
       protocol    = 6
       description = "Service name with vpc cidr"
-      cidr_blocks = "${module.vpc.vpc_cidr_block}"
+      cidr_blocks = module.vpc.vpc_cidr_block
     },
   ]
 
@@ -130,28 +136,28 @@ module "complete_sg" {
   ingress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
-      source_security_group_id = "${data.aws_security_group.default.id}"
+      source_security_group_id = data.aws_security_group.default.id
     },
     {
       from_port                = 10
       to_port                  = 10
       protocol                 = 6
       description              = "Service name"
-      source_security_group_id = "${data.aws_security_group.default.id}"
+      source_security_group_id = data.aws_security_group.default.id
     },
   ]
 
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = "${module.main_sg.this_security_group_id}"
+      source_security_group_id = module.main_sg.this_security_group_id
     },
     {
       from_port                = 23
       to_port                  = 23
       protocol                 = 6
       description              = "Service name"
-      source_security_group_id = "${module.main_sg.this_security_group_id}"
+      source_security_group_id = module.main_sg.this_security_group_id
     },
   ]
 
@@ -225,7 +231,7 @@ module "complete_sg" {
   computed_egress_with_cidr_blocks = [
     {
       rule        = "https-443-tcp"
-      cidr_blocks = "${module.vpc.vpc_cidr_block}"
+      cidr_blocks = module.vpc.vpc_cidr_block
     },
   ]
 
@@ -258,21 +264,21 @@ module "complete_sg" {
   egress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
-      source_security_group_id = "${data.aws_security_group.default.id}"
+      source_security_group_id = data.aws_security_group.default.id
     },
     {
       from_port                = 10
       to_port                  = 10
       protocol                 = 6
       description              = "Service name"
-      source_security_group_id = "${data.aws_security_group.default.id}"
+      source_security_group_id = data.aws_security_group.default.id
     },
   ]
 
   computed_egress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = "${module.main_sg.this_security_group_id}"
+      source_security_group_id = module.main_sg.this_security_group_id
     },
   ]
 
@@ -315,7 +321,7 @@ module "ipv4_ipv6_example" {
 
   name        = "ipv4-ipv6-example"
   description = "IPv4 and IPv6 example"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress_with_cidr_blocks = [
     {
@@ -366,10 +372,11 @@ module "fixed_name_sg" {
 
   name        = "fixed-name-sg"
   description = "Security group with fixed name"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = data.aws_vpc.default.id
 
   use_name_prefix = false
 
   ingress_cidr_blocks = ["10.10.0.0/16"]
   ingress_rules       = ["https-443-tcp"]
 }
+

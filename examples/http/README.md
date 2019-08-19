@@ -21,10 +21,10 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Description |
 |------|-------------|
-| this_security_group_description | The description of the security group |
-| this_security_group_id | The ID of the security group |
-| this_security_group_name | The name of the security group |
-| this_security_group_owner_id | The owner ID |
-| this_security_group_vpc_id | The VPC ID |
+| this\_security\_group\_description | The description of the security group |
+| this\_security\_group\_id | The ID of the security group |
+| this\_security\_group\_name | The name of the security group |
+| this\_security\_group\_owner\_id | The owner ID |
+| this\_security\_group\_vpc\_id | The VPC ID |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
