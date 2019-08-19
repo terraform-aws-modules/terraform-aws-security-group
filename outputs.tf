@@ -42,12 +42,3 @@ output "this_security_group_description" {
     [""],
   )[0]
 }
-
-//output "this_security_group_ingress" {
-//  description = "The ingress rules"
-//  value       = "${element(concat(aws_security_group.this.*.ingress, list("")), 0)}"
-//}
-//output "this_security_group_egress" {
-//  description = "The egress rules"
-//    value       = "${element(concat(aws_security_group.this.*.egress, list("")), 0)"
-//}
