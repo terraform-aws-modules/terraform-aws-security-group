@@ -10,6 +10,12 @@ set -e
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 check_dependencies() {
+  if [[ ! $(command -v sed) ]]; then
+    echo "ERROR: The binary 'sed' is required by this script but is not installed or in the system's PATH."
+    echo "Check documentation: https://www.gnu.org/software/sed/"
+    exit 1
+  fi
+
   if [[ ! $(command -v json2hcl) ]]; then
     echo "ERROR: The binary 'json2hcl' is required by this script but is not installed or in the system's PATH."
     echo "Check documentation: https://github.com/kvz/json2hcl"
@@ -24,7 +30,8 @@ check_dependencies() {
 }
 
 auto_groups_data() {
-  json2hcl -reverse < rules.tf | jq -r '..|.auto_groups?|values|.[0]|.default|.[0]'
+  # Removing line with "type" because it json2hcl works with HCL1 only (ref https://github.com/kvz/json2hcl/issues/12)
+  sed '/type/ d' rules.tf | json2hcl -reverse | jq -r '..|.auto_groups?|values|.[0]|.default|.[0]'
 }
 
 auto_groups_keys() {
@@ -131,71 +138,75 @@ main() {
 
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = $ingress_rules
 }
 
 variable "auto_ingress_with_self" {
   description = "List of maps defining ingress rules with self to add automatically"
-  type        = "list"
+  type        = list(map(string))
   default     = $ingress_with_self
 }
 
 variable "auto_egress_rules" {
   description = "List of egress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = $egress_rules
 }
 
 variable "auto_egress_with_self" {
   description = "List of maps defining egress rules with self to add automatically"
-  type        = "list"
+  type        = list(map(string))
   default     = $egress_with_self
 }
 
 # Computed
 variable "auto_computed_ingress_rules" {
   description = "List of ingress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = $computed_ingress_rules
 }
 
 variable "auto_computed_ingress_with_self" {
   description = "List of maps defining computed ingress rules with self to add automatically"
-  type        = "list"
+  type        = list(map(string))
   default     = $computed_ingress_with_self
 }
 
 variable "auto_computed_egress_rules" {
   description = "List of computed egress rules to add automatically"
-  type        = "list"
+  type        = list(string)
   default     = $computed_egress_rules
 }
 
 variable "auto_computed_egress_with_self" {
   description = "List of maps defining computed egress rules with self to add automatically"
-  type        = "list"
+  type        = list(map(string))
   default     = $computed_egress_with_self
 }
 
 # Number of computed rules
 variable "auto_number_of_computed_ingress_rules" {
   description = "Number of computed ingress rules to create by name"
+  type        = number
   default     = $number_of_computed_ingress_rules
 }
 
 variable "auto_number_of_computed_ingress_with_self" {
   description = "Number of computed ingress rules to create where 'self' is defined"
+  type        = number
   default     = $number_of_computed_ingress_with_self
 }
 
 variable "auto_number_of_computed_egress_rules" {
   description = "Number of computed egress rules to create by name"
+  type        = number
   default     = $number_of_computed_egress_rules
 }
 
 variable "auto_number_of_computed_egress_with_self" {
   description = "Number of computed egress rules to create where 'self' is defined"
+  type        = number
   default     = $number_of_computed_egress_with_self
 }
 
@@ -208,7 +219,8 @@ EOF
 
 \`\`\`hcl
 module "${group/-/_}_security_group" {
-  source = "terraform-aws-modules/security-group/aws//modules/${group}"
+  source  = "terraform-aws-modules/security-group/aws//modules/${group}"
+  version = "~> 3.0"
 
   # omitted...
 }

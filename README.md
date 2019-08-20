@@ -24,6 +24,12 @@ Ingress and egress rules can be configured in a variety of ways. See [inputs sec
 
 If there is a missing feature or a bug - [open an issue](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/new).
 
+## Terraform versions
+
+For Terraform 0.12 use version `v3.*` of this module.
+
+If you are using Terraform 0.11 you can use versions `v2.*`.
+
 ## Usage
 
 There are two ways to create security groups using this module:
@@ -106,15 +112,15 @@ module "db_computed_sg" {
 
   ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}"]
 
-  computed_ingress_cidr_blocks = ["${module.vpc.vpc_id}"]
+  computed_ingress_cidr_blocks = ["${module.vpc.vpc_cidr_block}"]
   number_of_computed_ingress_cidr_blocks = 1
 }
 
 module "db_computed_merged_sg" {
   # omitted for brevity
 
-  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}", "${module.vpc.vpc_id}"]
-  number_of_computed_ingress_cidr_blocks = 3
+  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${module.vpc.vpc_cidr_block}"]
+  number_of_computed_ingress_cidr_blocks = 2
 }
 ```
 
@@ -155,60 +161,60 @@ Rules and groups are defined in [rules.tf](https://github.com/terraform-aws-modu
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| auto_groups | Map of groups of security group rules to use to generate modules (see update_groups.sh) | map | `<map>` | no |
-| computed_egress_rules | List of computed egress rules to create by name | list | `<list>` | no |
-| computed_egress_with_cidr_blocks | List of computed egress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
-| computed_egress_with_ipv6_cidr_blocks | List of computed egress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
-| computed_egress_with_self | List of computed egress rules to create where 'self' is defined | list | `<list>` | no |
-| computed_egress_with_source_security_group_id | List of computed egress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
-| computed_ingress_rules | List of computed ingress rules to create by name | list | `<list>` | no |
-| computed_ingress_with_cidr_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
-| computed_ingress_with_ipv6_cidr_blocks | List of computed ingress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
-| computed_ingress_with_self | List of computed ingress rules to create where 'self' is defined | list | `<list>` | no |
-| computed_ingress_with_source_security_group_id | List of computed ingress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
-| create | Whether to create security group and all rules | string | `true` | no |
-| description | Description of security group | string | `Security Group managed by Terraform` | no |
-| egress_cidr_blocks | List of IPv4 CIDR ranges to use on all egress rules | list | `<list>` | no |
-| egress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all egress rules | list | `<list>` | no |
-| egress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all egress rules | list | `<list>` | no |
-| egress_rules | List of egress rules to create by name | list | `<list>` | no |
-| egress_with_cidr_blocks | List of egress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
-| egress_with_ipv6_cidr_blocks | List of egress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
-| egress_with_self | List of egress rules to create where 'self' is defined | list | `<list>` | no |
-| egress_with_source_security_group_id | List of egress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
-| ingress_cidr_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list | `<list>` | no |
-| ingress_ipv6_cidr_blocks | List of IPv6 CIDR ranges to use on all ingress rules | list | `<list>` | no |
-| ingress_prefix_list_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all ingress rules | list | `<list>` | no |
-| ingress_rules | List of ingress rules to create by name | list | `<list>` | no |
-| ingress_with_cidr_blocks | List of ingress rules to create where 'cidr_blocks' is used | list | `<list>` | no |
-| ingress_with_ipv6_cidr_blocks | List of ingress rules to create where 'ipv6_cidr_blocks' is used | list | `<list>` | no |
-| ingress_with_self | List of ingress rules to create where 'self' is defined | list | `<list>` | no |
-| ingress_with_source_security_group_id | List of ingress rules to create where 'source_security_group_id' is used | list | `<list>` | no |
-| name | Name of security group | string | - | yes |
-| number_of_computed_egress_rules | Number of computed egress rules to create by name | string | `0` | no |
-| number_of_computed_egress_with_cidr_blocks | Number of computed egress rules to create where 'cidr_blocks' is used | string | `0` | no |
-| number_of_computed_egress_with_ipv6_cidr_blocks | Number of computed egress rules to create where 'ipv6_cidr_blocks' is used | string | `0` | no |
-| number_of_computed_egress_with_self | Number of computed egress rules to create where 'self' is defined | string | `0` | no |
-| number_of_computed_egress_with_source_security_group_id | Number of computed egress rules to create where 'source_security_group_id' is used | string | `0` | no |
-| number_of_computed_ingress_rules | Number of computed ingress rules to create by name | string | `0` | no |
-| number_of_computed_ingress_with_cidr_blocks | Number of computed ingress rules to create where 'cidr_blocks' is used | string | `0` | no |
-| number_of_computed_ingress_with_ipv6_cidr_blocks | Number of computed ingress rules to create where 'ipv6_cidr_blocks' is used | string | `0` | no |
-| number_of_computed_ingress_with_self | Number of computed ingress rules to create where 'self' is defined | string | `0` | no |
-| number_of_computed_ingress_with_source_security_group_id | Number of computed ingress rules to create where 'source_security_group_id' is used | string | `0` | no |
-| rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map | `<map>` | no |
-| tags | A mapping of tags to assign to security group | map | `<map>` | no |
-| use_name_prefix | Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation | string | `true` | no |
-| vpc_id | ID of the VPC where to create security group | string | - | yes |
+| auto\_groups | Map of groups of security group rules to use to generate modules (see update_groups.sh) | map(map(list(string))) | `{ "carbon-relay-ng": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "carbon-line-in-tcp", "carbon-line-in-udp", "carbon-pickle-tcp", "carbon-pickle-udp", "carbon-gui-udp" ], "ingress_with_self": [ "all-all" ] } ], "cassandra": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "cassandra-clients-tcp", "cassandra-thrift-clients-tcp", "cassandra-jmx-tcp" ], "ingress_with_self": [ "all-all" ] } ], "consul": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "consul-tcp", "consul-cli-rpc-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp" ], "ingress_with_self": [ "all-all" ] } ], "docker-swarm": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "docker-swarm-mngmt-tcp", "docker-swarm-node-tcp", "docker-swarm-node-udp", "docker-swarm-overlay-udp" ], "ingress_with_self": [ "all-all" ] } ], "elasticsearch": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "elasticsearch-rest-tcp", "elasticsearch-java-tcp" ], "ingress_with_self": [ "all-all" ] } ], "http-80": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "http-80-tcp" ], "ingress_with_self": [ "all-all" ] } ], "http-8080": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "http-8080-tcp" ], "ingress_with_self": [ "all-all" ] } ], "https-443": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "https-443-tcp" ], "ingress_with_self": [ "all-all" ] } ], "https-8443": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "https-8443-tcp" ], "ingress_with_self": [ "all-all" ] } ], "ipsec-4500": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "ipsec-4500-udp" ], "ingress_with_self": [ "all-all" ] } ], "ipsec-500": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "ipsec-500-udp" ], "ingress_with_self": [ "all-all" ] } ], "kafka": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "kafka-broker-tcp" ], "ingress_with_self": [ "all-all" ] } ], "ldaps": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "ldaps-tcp" ], "ingress_with_self": [ "all-all" ] } ], "memcached": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "memcached-tcp" ], "ingress_with_self": [ "all-all" ] } ], "mongodb": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "mongodb-27017-tcp", "mongodb-27018-tcp", "mongodb-27019-tcp" ], "ingress_with_self": [ "all-all" ] } ], "mssql": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "mssql-tcp", "mssql-udp", "mssql-analytics-tcp", "mssql-broker-tcp" ], "ingress_with_self": [ "all-all" ] } ], "mysql": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "mysql-tcp" ], "ingress_with_self": [ "all-all" ] } ], "nfs": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "nfs-tcp" ], "ingress_with_self": [ "all-all" ] } ], "nomad": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "nomad-http-tcp", "nomad-rpc-tcp", "nomad-serf-tcp", "nomad-serf-udp" ], "ingress_with_self": [ "all-all" ] } ], "ntp": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "ntp-udp" ], "ingress_with_self": [ "all-all" ] } ], "openvpn": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "openvpn-udp", "openvpn-tcp", "openvpn-https-tcp" ], "ingress_with_self": [ "all-all" ] } ], "oracle-db": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "oracle-db-tcp" ], "ingress_with_self": [ "all-all" ] } ], "postgresql": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "postgresql-tcp" ], "ingress_with_self": [ "all-all" ] } ], "puppet": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "puppet-tcp", "puppetdb-tcp" ], "ingress_with_self": [ "all-all" ] } ], "rabbitmq": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "rabbitmq-4369-tcp", "rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp" ], "ingress_with_self": [ "all-all" ] } ], "rdp": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "rdp-tcp", "rdp-udp" ], "ingress_with_self": [ "all-all" ] } ], "redis": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "redis-tcp" ], "ingress_with_self": [ "all-all" ] } ], "redshift": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "redshift-tcp" ], "ingress_with_self": [ "all-all" ] } ], "splunk": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "splunk-indexer-tcp", "splunk-web-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp" ], "ingress_with_self": [ "all-all" ] } ], "squid": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "squid-proxy-tcp" ], "ingress_with_self": [ "all-all" ] } ], "ssh": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "ssh-tcp" ], "ingress_with_self": [ "all-all" ] } ], "storm": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "storm-nimbus-tcp", "storm-ui-tcp", "storm-supervisor-tcp" ], "ingress_with_self": [ "all-all" ] } ], "web": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "http-80-tcp", "http-8080-tcp", "https-443-tcp", "web-jmx-tcp" ], "ingress_with_self": [ "all-all" ] } ], "winrm": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "winrm-http-tcp", "winrm-https-tcp" ], "ingress_with_self": [ "all-all" ] } ], "zipkin": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "zipkin-admin-tcp", "zipkin-admin-query-tcp", "zipkin-admin-web-tcp", "zipkin-query-tcp", "zipkin-web-tcp" ], "ingress_with_self": [ "all-all" ] } ], "zookeeper": [ { "egress_rules": [ "all-all" ], "ingress_rules": [ "zookeeper-2181-tcp", "zookeeper-2888-tcp", "zookeeper-3888-tcp", "zookeeper-jmx-tcp" ], "ingress_with_self": [ "all-all" ] } ] }` | no |
+| computed\_egress\_rules | List of computed egress rules to create by name | list(string) | `[]` | no |
+| computed\_egress\_with\_cidr\_blocks | List of computed egress rules to create where 'cidr_blocks' is used | list(map(string)) | `[]` | no |
+| computed\_egress\_with\_ipv6\_cidr\_blocks | List of computed egress rules to create where 'ipv6_cidr_blocks' is used | list(map(string)) | `[]` | no |
+| computed\_egress\_with\_self | List of computed egress rules to create where 'self' is defined | list(map(string)) | `[]` | no |
+| computed\_egress\_with\_source\_security\_group\_id | List of computed egress rules to create where 'source_security_group_id' is used | list(map(string)) | `[]` | no |
+| computed\_ingress\_rules | List of computed ingress rules to create by name | list(string) | `[]` | no |
+| computed\_ingress\_with\_cidr\_blocks | List of computed ingress rules to create where 'cidr_blocks' is used | list(map(string)) | `[]` | no |
+| computed\_ingress\_with\_ipv6\_cidr\_blocks | List of computed ingress rules to create where 'ipv6_cidr_blocks' is used | list(map(string)) | `[]` | no |
+| computed\_ingress\_with\_self | List of computed ingress rules to create where 'self' is defined | list(map(string)) | `[]` | no |
+| computed\_ingress\_with\_source\_security\_group\_id | List of computed ingress rules to create where 'source_security_group_id' is used | list(map(string)) | `[]` | no |
+| create | Whether to create security group and all rules | bool | `"true"` | no |
+| description | Description of security group | string | `"Security Group managed by Terraform"` | no |
+| egress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all egress rules | list(string) | `[ "0.0.0.0/0" ]` | no |
+| egress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all egress rules | list(string) | `[ "::/0" ]` | no |
+| egress\_prefix\_list\_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all egress rules | list(string) | `[]` | no |
+| egress\_rules | List of egress rules to create by name | list(string) | `[]` | no |
+| egress\_with\_cidr\_blocks | List of egress rules to create where 'cidr_blocks' is used | list(map(string)) | `[]` | no |
+| egress\_with\_ipv6\_cidr\_blocks | List of egress rules to create where 'ipv6_cidr_blocks' is used | list(map(string)) | `[]` | no |
+| egress\_with\_self | List of egress rules to create where 'self' is defined | list(map(string)) | `[]` | no |
+| egress\_with\_source\_security\_group\_id | List of egress rules to create where 'source_security_group_id' is used | list(map(string)) | `[]` | no |
+| ingress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all ingress rules | list(string) | `[]` | no |
+| ingress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all ingress rules | list(string) | `[]` | no |
+| ingress\_prefix\_list\_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all ingress rules | list(string) | `[]` | no |
+| ingress\_rules | List of ingress rules to create by name | list(string) | `[]` | no |
+| ingress\_with\_cidr\_blocks | List of ingress rules to create where 'cidr_blocks' is used | list(map(string)) | `[]` | no |
+| ingress\_with\_ipv6\_cidr\_blocks | List of ingress rules to create where 'ipv6_cidr_blocks' is used | list(map(string)) | `[]` | no |
+| ingress\_with\_self | List of ingress rules to create where 'self' is defined | list(map(string)) | `[]` | no |
+| ingress\_with\_source\_security\_group\_id | List of ingress rules to create where 'source_security_group_id' is used | list(map(string)) | `[]` | no |
+| name | Name of security group | string | n/a | yes |
+| number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | number | `"0"` | no |
+| number\_of\_computed\_egress\_with\_cidr\_blocks | Number of computed egress rules to create where 'cidr_blocks' is used | number | `"0"` | no |
+| number\_of\_computed\_egress\_with\_ipv6\_cidr\_blocks | Number of computed egress rules to create where 'ipv6_cidr_blocks' is used | number | `"0"` | no |
+| number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | number | `"0"` | no |
+| number\_of\_computed\_egress\_with\_source\_security\_group\_id | Number of computed egress rules to create where 'source_security_group_id' is used | number | `"0"` | no |
+| number\_of\_computed\_ingress\_rules | Number of computed ingress rules to create by name | number | `"0"` | no |
+| number\_of\_computed\_ingress\_with\_cidr\_blocks | Number of computed ingress rules to create where 'cidr_blocks' is used | number | `"0"` | no |
+| number\_of\_computed\_ingress\_with\_ipv6\_cidr\_blocks | Number of computed ingress rules to create where 'ipv6_cidr_blocks' is used | number | `"0"` | no |
+| number\_of\_computed\_ingress\_with\_self | Number of computed ingress rules to create where 'self' is defined | number | `"0"` | no |
+| number\_of\_computed\_ingress\_with\_source\_security\_group\_id | Number of computed ingress rules to create where 'source_security_group_id' is used | number | `"0"` | no |
+| rules | Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description']) | map(list(any)) | `{ "_": [ "", "", "" ], "all-all": [ -1, -1, "-1", "All protocols" ], "all-icmp": [ -1, -1, "icmp", "All IPV4 ICMP" ], "all-ipv6-icmp": [ -1, -1, 58, "All IPV6 ICMP" ], "all-tcp": [ 0, 65535, "tcp", "All TCP ports" ], "all-udp": [ 0, 65535, "udp", "All UDP ports" ], "carbon-admin-tcp": [ 2004, 2004, "tcp", "Carbon admin" ], "carbon-gui-udp": [ 8081, 8081, "tcp", "Carbon GUI" ], "carbon-line-in-tcp": [ 2003, 2003, "tcp", "Carbon line-in" ], "carbon-line-in-udp": [ 2003, 2003, "udp", "Carbon line-in" ], "carbon-pickle-tcp": [ 2013, 2013, "tcp", "Carbon pickle" ], "carbon-pickle-udp": [ 2013, 2013, "udp", "Carbon pickle" ], "cassandra-clients-tcp": [ 9042, 9042, "tcp", "Cassandra clients" ], "cassandra-jmx-tcp": [ 7199, 7199, "tcp", "JMX" ], "cassandra-thrift-clients-tcp": [ 9160, 9160, "tcp", "Cassandra Thrift clients" ], "consul-cli-rpc-tcp": [ 8400, 8400, "tcp", "Consul CLI RPC" ], "consul-dns-tcp": [ 8600, 8600, "tcp", "Consul DNS" ], "consul-dns-udp": [ 8600, 8600, "udp", "Consul DNS" ], "consul-serf-lan-tcp": [ 8301, 8301, "tcp", "Serf LAN" ], "consul-serf-lan-udp": [ 8301, 8301, "udp", "Serf LAN" ], "consul-serf-wan-tcp": [ 8302, 8302, "tcp", "Serf WAN" ], "consul-serf-wan-udp": [ 8302, 8302, "udp", "Serf WAN" ], "consul-tcp": [ 8300, 8300, "tcp", "Consul server" ], "consul-webui-tcp": [ 8500, 8500, "tcp", "Consul web UI" ], "dns-tcp": [ 53, 53, "tcp", "DNS" ], "dns-udp": [ 53, 53, "udp", "DNS" ], "docker-swarm-mngmt-tcp": [ 2377, 2377, "tcp", "Docker Swarm cluster management" ], "docker-swarm-node-tcp": [ 7946, 7946, "tcp", "Docker Swarm node" ], "docker-swarm-node-udp": [ 7946, 7946, "udp", "Docker Swarm node" ], "docker-swarm-overlay-udp": [ 4789, 4789, "udp", "Docker Swarm Overlay Network Traffic" ], "elasticsearch-java-tcp": [ 9300, 9300, "tcp", "Elasticsearch Java interface" ], "elasticsearch-rest-tcp": [ 9200, 9200, "tcp", "Elasticsearch REST interface" ], "http-80-tcp": [ 80, 80, "tcp", "HTTP" ], "http-8080-tcp": [ 8080, 8080, "tcp", "HTTP" ], "https-443-tcp": [ 443, 443, "tcp", "HTTPS" ], "https-8443-tcp": [ 8443, 8443, "tcp", "HTTPS" ], "ipsec-4500-udp": [ 4500, 4500, "udp", "IPSEC NAT-T" ], "ipsec-500-udp": [ 500, 500, "udp", "IPSEC ISAKMP" ], "kafka-broker-tcp": [ 9092, 9092, "tcp", "Kafka broker 0.8.2+" ], "ldaps-tcp": [ 636, 636, "tcp", "LDAPS" ], "memcached-tcp": [ 11211, 11211, "tcp", "Memcached" ], "mongodb-27017-tcp": [ 27017, 27017, "tcp", "MongoDB" ], "mongodb-27018-tcp": [ 27018, 27018, "tcp", "MongoDB shard" ], "mongodb-27019-tcp": [ 27019, 27019, "tcp", "MongoDB config server" ], "mssql-analytics-tcp": [ 2383, 2383, "tcp", "MSSQL Analytics" ], "mssql-broker-tcp": [ 4022, 4022, "tcp", "MSSQL Broker" ], "mssql-tcp": [ 1433, 1433, "tcp", "MSSQL Server" ], "mssql-udp": [ 1434, 1434, "udp", "MSSQL Browser" ], "mysql-tcp": [ 3306, 3306, "tcp", "MySQL/Aurora" ], "nfs-tcp": [ 2049, 2049, "tcp", "NFS/EFS" ], "nomad-http-tcp": [ 4646, 4646, "tcp", "Nomad HTTP" ], "nomad-rpc-tcp": [ 4647, 4647, "tcp", "Nomad RPC" ], "nomad-serf-tcp": [ 4648, 4648, "tcp", "Serf" ], "nomad-serf-udp": [ 4648, 4648, "udp", "Serf" ], "ntp-udp": [ 123, 123, "udp", "NTP" ], "openvpn-https-tcp": [ 443, 443, "tcp", "OpenVPN" ], "openvpn-tcp": [ 943, 943, "tcp", "OpenVPN" ], "openvpn-udp": [ 1194, 1194, "udp", "OpenVPN" ], "oracle-db-tcp": [ 1521, 1521, "tcp", "Oracle" ], "postgresql-tcp": [ 5432, 5432, "tcp", "PostgreSQL" ], "puppet-tcp": [ 8140, 8140, "tcp", "Puppet" ], "puppetdb-tcp": [ 8081, 8081, "tcp", "PuppetDB" ], "rabbitmq-15672-tcp": [ 15672, 15672, "tcp", "RabbitMQ" ], "rabbitmq-25672-tcp": [ 25672, 25672, "tcp", "RabbitMQ" ], "rabbitmq-4369-tcp": [ 4369, 4369, "tcp", "RabbitMQ epmd" ], "rabbitmq-5671-tcp": [ 5671, 5671, "tcp", "RabbitMQ" ], "rabbitmq-5672-tcp": [ 5672, 5672, "tcp", "RabbitMQ" ], "rdp-tcp": [ 3389, 3389, "tcp", "Remote Desktop" ], "rdp-udp": [ 3389, 3389, "udp", "Remote Desktop" ], "redis-tcp": [ 6379, 6379, "tcp", "Redis" ], "redshift-tcp": [ 5439, 5439, "tcp", "Redshift" ], "splunk-clients-tcp": [ 8080, 8080, "tcp", "Splunk clients" ], "splunk-hec-tcp": [ 8088, 8088, "tcp", "Splunk HEC" ], "splunk-indexer-tcp": [ 9997, 9997, "tcp", "Splunk indexer" ], "splunk-splunkd-tcp": [ 8089, 8089, "tcp", "Splunkd" ], "squid-proxy-tcp": [ 3128, 3128, "tcp", "Squid default proxy" ], "ssh-tcp": [ 22, 22, "tcp", "SSH" ], "storm-nimbus-tcp": [ 6627, 6627, "tcp", "Nimbus" ], "storm-supervisor-tcp": [ 6700, 6703, "tcp", "Supervisor" ], "storm-ui-tcp": [ 8080, 8080, "tcp", "Storm UI" ], "web-jmx-tcp": [ 1099, 1099, "tcp", "JMX" ], "winrm-http-tcp": [ 5985, 5985, "tcp", "WinRM HTTP" ], "winrm-https-tcp": [ 5986, 5986, "tcp", "WinRM HTTPS" ], "zipkin-admin-query-tcp": [ 9901, 9901, "tcp", "Zipkin Admin port query" ], "zipkin-admin-tcp": [ 9990, 9990, "tcp", "Zipkin Admin port collector" ], "zipkin-admin-web-tcp": [ 9991, 9991, "tcp", "Zipkin Admin port web" ], "zipkin-query-tcp": [ 9411, 9411, "tcp", "Zipkin query port" ], "zipkin-web-tcp": [ 8080, 8080, "tcp", "Zipkin web port" ], "zookeeper-2181-tcp": [ 2181, 2181, "tcp", "Zookeeper" ], "zookeeper-2888-tcp": [ 2888, 2888, "tcp", "Zookeeper" ], "zookeeper-3888-tcp": [ 3888, 3888, "tcp", "Zookeeper" ], "zookeeper-jmx-tcp": [ 7199, 7199, "tcp", "JMX" ] }` | no |
+| tags | A mapping of tags to assign to security group | map(string) | `{}` | no |
+| use\_name\_prefix | Whether to use name_prefix or fixed name. Should be true to able to update security group name after initial creation | bool | `"true"` | no |
+| vpc\_id | ID of the VPC where to create security group | string | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this_security_group_description | The description of the security group |
-| this_security_group_id | The ID of the security group |
-| this_security_group_name | The name of the security group |
-| this_security_group_owner_id | The owner ID |
-| this_security_group_vpc_id | The VPC ID |
+| this\_security\_group\_description | The description of the security group |
+| this\_security\_group\_id | The ID of the security group |
+| this\_security\_group\_name | The name of the security group |
+| this\_security\_group\_owner\_id | The owner ID |
+| this\_security\_group\_vpc\_id | The VPC ID |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

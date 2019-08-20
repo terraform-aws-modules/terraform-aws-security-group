@@ -12,19 +12,8 @@ import (
 )
 
 func TestTerraform(t *testing.T) {
-    t.Parallel()
-
     terraformOptions := &terraform.Options{
-		TerraformDir: "..",
-
-		// Variables to pass to our Terraform code using -var options
-		Vars: map[string]interface{}{
-      "vpc_id": "vpc-00d6b51d02b2d5160",
-      "name": "securitygroup-test",
-      "use_name_prefix": "false",
-      "egress_cidr_blocks": []string{"0.0.0.0/0",},
-      "egress_rules": []string{"all-all",},
-		},
+		TerraformDir: ".",
 
 		// Environment variables to set when running Terraform
 		EnvVars: map[string]string{
