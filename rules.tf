@@ -5,6 +5,12 @@ variable "rules" {
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
   # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
   default = {
+    # ActiveMQ
+    activemq-5671-tcp  = [5671, 5671, "tcp", "ActiveMQ AMQP"]
+    activemq-8883-tcp  = [8883, 8883, "tcp", "ActiveMQ MQTT"]
+    activemq-61614-tcp = [61614, 61614, "tcp", "ActiveMQ STOMP"]
+    activemq-61617-tcp = [61617, 61617, "tcp", "ActiveMQ OpenWire"]
+    activemq-61619-tcp = [61619, 61619, "tcp", "ActiveMQ WebSocket"]
     # Carbon relay
     carbon-line-in-tcp = [2003, 2003, "tcp", "Carbon line-in"]
     carbon-line-in-udp = [2003, 2003, "udp", "Carbon line-in"]
@@ -98,7 +104,7 @@ variable "rules" {
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
     # Splunk
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
-    splunk-web-tcp = [8000, 8000, "tcp", "Splunk Web"]
+    splunk-web-tcp     = [8000, 8000, "tcp", "Splunk Web"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
     splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
     # Squid
@@ -142,6 +148,11 @@ variable "auto_groups" {
 
   # Valid keys - ingress_rules, egress_rules, ingress_with_self, egress_with_self
   default = {
+    activemq = {
+      ingress_rules     = ["activemq-5671-tcp", "activemq-8883-tcp", "activemq-61614-tcp", "activemq-61617-tcp", "activemq-61619-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     carbon-relay-ng = {
       ingress_rules     = ["carbon-line-in-tcp", "carbon-line-in-udp", "carbon-pickle-tcp", "carbon-pickle-udp", "carbon-gui-udp"]
       ingress_with_self = ["all-all"]

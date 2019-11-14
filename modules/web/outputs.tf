@@ -22,4 +22,3 @@ output "this_security_group_description" {
   description = "The description of the security group"
   value       = module.sg.this_security_group_description
 }
-
