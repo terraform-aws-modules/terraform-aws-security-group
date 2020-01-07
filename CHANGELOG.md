@@ -3,9 +3,16 @@
 
 
 
+<a name="v3.3.0"></a>
+## [v3.3.0] - 2020-01-07
+
+- Empty the known issues section + pre-commit ([#150](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/150))
+
+
 <a name="v3.2.0"></a>
 ## [v3.2.0] - 2019-11-14
 
+- Updated CHANGELOG
 - Updated pre-commit hooks
 - Add ActiveMQ rules ([#143](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/143))
 
@@ -373,7 +380,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.3.0...HEAD
+[v3.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.2.0...v3.3.0
 [v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.1...v3.1.0
 [v3.0.1]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.0...v3.0.1
