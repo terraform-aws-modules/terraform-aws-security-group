@@ -3,9 +3,16 @@
 
 
 
+<a name="v3.4.0"></a>
+## [v3.4.0] - 2020-01-21
+
+- Updated pre-commit-terraform with terraform-docs 0.8.0 support ([#153](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/153))
+
+
 <a name="v3.3.0"></a>
 ## [v3.3.0] - 2020-01-07
 
+- Updated CHANGELOG
 - Empty the known issues section + pre-commit ([#150](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/150))
 
 
@@ -380,7 +387,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.4.0...HEAD
+[v3.4.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.3.0...v3.4.0
 [v3.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.2.0...v3.3.0
 [v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.1...v3.1.0
