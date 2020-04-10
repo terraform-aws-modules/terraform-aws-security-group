@@ -56,6 +56,8 @@ variable "rules" {
     ipsec-4500-udp = [4500, 4500, "udp", "IPSEC NAT-T"]
     # Kafka
     kafka-broker-tcp = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
+    # Kubernetes
+    kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
     # LDAPS
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
     # Memcached
@@ -210,6 +212,11 @@ variable "auto_groups" {
     }
     kafka = {
       ingress_rules     = ["kafka-broker-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kafka = {
+      ingress_rules     = ["kubernetes-api-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
