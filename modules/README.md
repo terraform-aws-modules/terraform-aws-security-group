@@ -8,6 +8,7 @@ List of Security Groups implemented as Terraform modules
 * [consul](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/consul)
 * [docker-swarm](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/docker-swarm)
 * [elasticsearch](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/elasticsearch)
+* [grafana](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/grafana)
 * [http-80](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/http-80)
 * [http-8080](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/http-8080)
 * [https-443](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/https-443)
