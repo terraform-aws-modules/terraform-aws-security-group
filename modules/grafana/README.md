@@ -28,7 +28,7 @@ No provider.
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | `list(map(string))` | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | `list(string)` | <pre>[<br>  "all-all"<br>]<br></pre> | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | `list(map(string))` | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "grafana"<br>]<br></pre> | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "grafana-tcp"<br>]<br></pre> | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | `list(map(string))` | <pre>[<br>  {<br>    "rule": "all-all"<br>  }<br>]<br></pre> | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | `number` | `0` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | `number` | `0` | no |
