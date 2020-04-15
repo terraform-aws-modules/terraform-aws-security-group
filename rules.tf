@@ -215,7 +215,7 @@ variable "auto_groups" {
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
-    kafka = {
+    kubernetes-api = {
       ingress_rules     = ["kubernetes-api-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
