@@ -47,6 +47,16 @@ variable "rules" {
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
     # Grafana
     grafana-tcp = [3000, 3000, "tcp", "Grafana Dashboard"]
+    # Graphite Statsd
+    graphite-webui    = [80, 80, "tcp", "Graphite admin interface"]
+    graphite-2003-tcp = [2003, 2003, "tcp", "Carbon receiver plain text"]
+    graphite-2004-tcp = [2004, 2004, "tcp", "Carbon receiver pickle"]
+    graphite-2023-tcp = [2023, 2023, "tcp", "Carbon aggregator plaintext"]
+    graphite-2024-tcp = [2024, 2024, "tcp", "Carbon aggregator pickle"]
+    graphite-8080-tcp = [8080, 8080, "tcp", "Graphite gunicorn port"]
+    graphite-8125-tcp = [8125, 8125, "tcp", "Statsd TCP"]
+    graphite-8125-udp = [8125, 8125, "udp", "Statsd UDP default"]
+    graphite-8216-tcp = [8216, 8126, "tcp", "Statsd admin"]
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
@@ -185,6 +195,11 @@ variable "auto_groups" {
     }
     grafana = {
       ingress_rules     = ["grafana-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    graphite-statsd = {
+      ingress_rules     = ["graphite-webui", "graphite-2003-tcp", "graphite-2004-tcp", "graphite-2023-tcp", "graphite-2024-tcp", "graphite-8080-tcp", "graphite-8125-tcp", "graphite-8125-udp", "graphite-8216-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
