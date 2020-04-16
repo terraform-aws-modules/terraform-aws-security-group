@@ -15,6 +15,7 @@ List of Security Groups implemented as Terraform modules
 * [ipsec-4500](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ipsec-4500)
 * [ipsec-500](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ipsec-500)
 * [kafka](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kafka)
+* [kubernetes-api](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kubernetes-api)
 * [ldaps](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ldaps)
 * [memcached](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/memcached)
 * [mongodb](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mongodb)
