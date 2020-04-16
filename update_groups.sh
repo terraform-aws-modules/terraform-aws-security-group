@@ -87,7 +87,7 @@ main() {
     echo "Making group: $group"
 
     mkdir -p "modules/$group"
-    cp modules/_templates/{main,outputs,variables}.tf "modules/$group"
+    cp modules/_templates/{main,outputs,variables,versions}.tf "modules/$group"
 
     # Get group values
     ingress_rules=$(get_auto_value "$auto_groups_data" "$group" "ingress_rules")

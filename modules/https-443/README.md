@@ -14,6 +14,13 @@ module "https_443_security_group" {
 All automatic values **https-443 module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/https-443/auto_values.tf).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.42 |
+
 ## Providers
 
 No provider.
@@ -21,21 +28,21 @@ No provider.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | auto\_computed\_egress\_rules | List of computed egress rules to add automatically | `list(string)` | `[]` | no |
 | auto\_computed\_egress\_with\_self | List of maps defining computed egress rules with self to add automatically | `list(map(string))` | `[]` | no |
 | auto\_computed\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | `[]` | no |
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | `list(map(string))` | `[]` | no |
-| auto\_egress\_rules | List of egress rules to add automatically | `list(string)` | <pre>[<br>  "all-all"<br>]<br></pre> | no |
+| auto\_egress\_rules | List of egress rules to add automatically | `list(string)` | <pre>[<br>  "all-all"<br>]</pre> | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | `list(map(string))` | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "https-443-tcp"<br>]<br></pre> | no |
-| auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | `list(map(string))` | <pre>[<br>  {<br>    "rule": "all-all"<br>  }<br>]<br></pre> | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "https-443-tcp"<br>]</pre> | no |
+| auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | `list(map(string))` | <pre>[<br>  {<br>    "rule": "all-all"<br>  }<br>]</pre> | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | `number` | `0` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | `number` | `0` | no |
 | auto\_number\_of\_computed\_ingress\_rules | Number of computed ingress rules to create by name | `number` | `0` | no |
 | auto\_number\_of\_computed\_ingress\_with\_self | Number of computed ingress rules to create where 'self' is defined | `number` | `0` | no |
-| computed\_egress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all computed egress rules | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
-| computed\_egress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all computed egress rules | `list(string)` | <pre>[<br>  "::/0"<br>]<br></pre> | no |
+| computed\_egress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all computed egress rules | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| computed\_egress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all computed egress rules | `list(string)` | <pre>[<br>  "::/0"<br>]</pre> | no |
 | computed\_egress\_prefix\_list\_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all computed egress rules | `list(string)` | `[]` | no |
 | computed\_egress\_rules | List of computed egress rules to create by name | `list(string)` | `[]` | no |
 | computed\_egress\_with\_cidr\_blocks | List of computed egress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
@@ -52,8 +59,8 @@ No provider.
 | computed\_ingress\_with\_source\_security\_group\_id | List of computed ingress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
 | create | Whether to create security group and all rules | `bool` | `true` | no |
 | description | Description of security group | `string` | `"Security Group managed by Terraform"` | no |
-| egress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all egress rules | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]<br></pre> | no |
-| egress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all egress rules | `list(string)` | <pre>[<br>  "::/0"<br>]<br></pre> | no |
+| egress\_cidr\_blocks | List of IPv4 CIDR ranges to use on all egress rules | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
+| egress\_ipv6\_cidr\_blocks | List of IPv6 CIDR ranges to use on all egress rules | `list(string)` | <pre>[<br>  "::/0"<br>]</pre> | no |
 | egress\_prefix\_list\_ids | List of prefix list IDs (for allowing access to VPC endpoints) to use on all egress rules | `list(string)` | `[]` | no |
 | egress\_rules | List of egress rules to create by name | `list(string)` | `[]` | no |
 | egress\_with\_cidr\_blocks | List of egress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
