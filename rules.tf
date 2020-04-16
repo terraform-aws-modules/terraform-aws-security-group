@@ -45,6 +45,8 @@ variable "rules" {
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+    # Grafana
+    grafana-tcp = [3000, 3000, "tcp", "Grafana Dashboard"]
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
@@ -55,8 +57,10 @@ variable "rules" {
     ipsec-500-udp  = [500, 500, "udp", "IPSEC ISAKMP"]
     ipsec-4500-udp = [4500, 4500, "udp", "IPSEC NAT-T"]
     # Kafka
-    kafka-broker-tcp = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
+    kafka-broker-tcp     = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
     kafka-broker-tls-tcp = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    # Kubernetes
+    kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
     # LDAPS
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
     # Memcached
@@ -179,6 +183,11 @@ variable "auto_groups" {
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
+    grafana = {
+      ingress_rules     = ["grafana-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     http-80 = {
       ingress_rules     = ["http-80-tcp"]
       ingress_with_self = ["all-all"]
@@ -211,6 +220,11 @@ variable "auto_groups" {
     }
     kafka = {
       ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kubernetes-api = {
+      ingress_rules     = ["kubernetes-api-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
