@@ -3,7 +3,7 @@ variable "rules" {
   type        = map(list(any))
 
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
-  # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
+  # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 17, IPV6-ICMP = 58
   default = {
     # ActiveMQ
     activemq-5671-tcp  = [5671, 5671, "tcp", "ActiveMQ AMQP"]
