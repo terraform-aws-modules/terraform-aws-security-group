@@ -45,6 +45,8 @@ variable "rules" {
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+    # Grafana
+    grafana-tcp = [3000, 3000, "tcp", "Grafana Dashboard"]
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
@@ -177,6 +179,11 @@ variable "auto_groups" {
     }
     elasticsearch = {
       ingress_rules     = ["elasticsearch-rest-tcp", "elasticsearch-java-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    grafana = {
+      ingress_rules     = ["grafana-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
