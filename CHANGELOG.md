@@ -1,6 +1,31 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+
+<a name="v3.5.0"></a>
+## [v3.5.0] - 2020-04-16
+
+- fix: Set requirements for AWS provider and Terraform
+- fix: Add Kafka broker rule for TLS port ([#155](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/155))
+- feat: Added support of grafana dashboard - 3000-tcp ([#167](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/167))
+- feat: Added support of kubernetes api server - 6443-tcp ([#166](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/166))
+
+
+<a name="v3.4.0"></a>
+## [v3.4.0] - 2020-01-21
+
+- Updated pre-commit-terraform with terraform-docs 0.8.0 support ([#153](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/153))
+
+
+<a name="v3.3.0"></a>
+## [v3.3.0] - 2020-01-07
+
+- Empty the known issues section + pre-commit ([#150](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/150))
 
 
 <a name="v3.2.0"></a>
@@ -13,7 +38,6 @@
 <a name="v3.1.0"></a>
 ## [v3.1.0] - 2019-07-21
 
-- Updated CHANGELOG
 - Fix Splunk Web ([#132](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/132))
 - Updated terraform_docs pre-commit hook
 
@@ -21,14 +45,12 @@
 <a name="v3.0.1"></a>
 ## [v3.0.1] - 2019-05-27
 
-- Updated CHANGELOG
 - Fixed computed example in README ([#122](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/122))
 
 
 <a name="v3.0.0"></a>
 ## [v3.0.0] - 2019-05-26
 
-- Updated CHANGELOG
 - Upgrade module to support Terraform 0.12 ([#120](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/120))
 
 
@@ -56,7 +78,6 @@
 ## [v2.14.0] - 2019-02-17
 
 - Updated docs after [#104](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/104)
-- Merge pull request [#104](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/104) from mvasilenko/add-mongodb-cluster-rules
 - add rules for MongoDB cluster ports
 
 
@@ -64,7 +85,6 @@
 ## [v2.13.0] - 2019-02-06
 
 - Run pre-commit
-- Merge pull request [#102](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/102) from mvasilenko/add-rabbitmq-to-rules-tf
 - add rule for rabbitmq
 
 
@@ -72,7 +92,6 @@
 ## [v2.12.0] - 2019-02-06
 
 - Run pre-commit
-- Merge pull request [#100](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/100) from mvasilenko/add-mongodb-to-rules-tf
 - add name rule for mongodb
 
 
@@ -278,7 +297,6 @@
 ## [v1.7.0] - 2018-01-10
 
 - Add NFS tcp port ([#28](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/28))
-- [ci skip] Get more Open Source Helpers ([#26](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/26))
 
 
 <a name="v1.6.0"></a>
@@ -333,16 +351,13 @@
 <a name="v1.1.4"></a>
 ## [v1.1.4] - 2017-10-26
 
-- Merge pull request [#13](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/13) from Shapeways/master
 - Merge branch 'master' of github.com:Shapeways/terraform-aws-security-group
 - Add Puppet to rules.tf
-- Merge pull request [#1](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/1) from terraform-aws-modules/master
 
 
 <a name="v1.1.3"></a>
 ## [v1.1.3] - 2017-10-20
 
-- Merge pull request [#9](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/9) from Shapeways/master
 - Add DNS udp and tcp to rules.
 
 
@@ -355,14 +370,12 @@
 <a name="v1.1.1"></a>
 ## [v1.1.1] - 2017-10-11
 
-- Merge pull request [#5](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/5) from grem11n/master
 - Update default all-all rule
 
 
 <a name="v1.1.0"></a>
 ## [v1.1.0] - 2017-10-06
 
-- Merge pull request [#3](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/3) from terraform-aws-modules/remove_default_ip_cidrs
 - Removed default cidr for ingress rules, fixed self variable name
 
 
@@ -373,7 +386,10 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.5.0...HEAD
+[v3.5.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.4.0...v3.5.0
+[v3.4.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.3.0...v3.4.0
+[v3.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.2.0...v3.3.0
 [v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.1...v3.1.0
 [v3.0.1]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.0.0...v3.0.1
