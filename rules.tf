@@ -69,6 +69,8 @@ variable "rules" {
     # Kafka
     kafka-broker-tcp     = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
     kafka-broker-tls-tcp = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    # Kibana
+    kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
     # Kubernetes
     kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
     # LDAPS
@@ -240,6 +242,11 @@ variable "auto_groups" {
     }
     kubernetes-api = {
       ingress_rules     = ["kubernetes-api-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kibana = {
+      ingress_rules     = ["kibana-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
