@@ -56,7 +56,7 @@ variable "rules" {
     graphite-8080-tcp = [8080, 8080, "tcp", "Graphite gunicorn port"]
     graphite-8125-tcp = [8125, 8125, "tcp", "Statsd TCP"]
     graphite-8125-udp = [8125, 8125, "udp", "Statsd UDP default"]
-    graphite-8216-tcp = [8216, 8126, "tcp", "Statsd admin"]
+    graphite-8126-tcp = [8126, 8126, "tcp", "Statsd admin"]
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
@@ -69,6 +69,8 @@ variable "rules" {
     # Kafka
     kafka-broker-tcp     = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
     kafka-broker-tls-tcp = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    # Kibana
+    kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
     # Kubernetes
     kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
     # LDAPS
@@ -199,7 +201,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     graphite-statsd = {
-      ingress_rules     = ["graphite-webui", "graphite-2003-tcp", "graphite-2004-tcp", "graphite-2023-tcp", "graphite-2024-tcp", "graphite-8080-tcp", "graphite-8125-tcp", "graphite-8125-udp", "graphite-8216-tcp"]
+      ingress_rules     = ["graphite-webui", "graphite-2003-tcp", "graphite-2004-tcp", "graphite-2023-tcp", "graphite-2024-tcp", "graphite-8080-tcp", "graphite-8125-tcp", "graphite-8125-udp", "graphite-8126-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -240,6 +242,11 @@ variable "auto_groups" {
     }
     kubernetes-api = {
       ingress_rules     = ["kubernetes-api-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kibana = {
+      ingress_rules     = ["kibana-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
