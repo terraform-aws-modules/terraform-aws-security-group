@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.9.0"></a>
+## [v3.9.0] - 2020-05-11
+
+- feat: Adding support for prometheus and alertmanager ([#173](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/173))
+
+
 <a name="v3.8.0"></a>
 ## [v3.8.0] - 2020-04-20
 
@@ -408,7 +414,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.8.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.9.0...HEAD
+[v3.9.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.8.0...v3.9.0
 [v3.8.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.7.0...v3.8.0
 [v3.7.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.6.0...v3.7.0
 [v3.6.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.5.0...v3.6.0
