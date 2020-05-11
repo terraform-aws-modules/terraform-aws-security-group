@@ -11,7 +11,7 @@ variable "rules" {
     activemq-61614-tcp = [61614, 61614, "tcp", "ActiveMQ STOMP"]
     activemq-61617-tcp = [61617, 61617, "tcp", "ActiveMQ OpenWire"]
     activemq-61619-tcp = [61619, 61619, "tcp", "ActiveMQ WebSocket"]
-		# Alert Manager
+    # Alert Manager
     alertmanager-9093-tcp = [9093, 9093, "tcp", "Alert Manager"]
     alertmanager-9094-tcp = [9094, 9094, "tcp", "Alert Manager Cluster"]
     # Carbon relay
@@ -107,8 +107,8 @@ variable "rules" {
     # Puppet
     puppet-tcp   = [8140, 8140, "tcp", "Puppet"]
     puppetdb-tcp = [8081, 8081, "tcp", "PuppetDB"]
-		# Prometheus
-    prometheus-http-tcp = [9090, 9090, "tcp", "Prometheus"]
+    # Prometheus
+    prometheus-http-tcp             = [9090, 9090, "tcp", "Prometheus"]
     prometheus-pushgateway-http-tcp = [9091, 9091, "tcp", "Prometheus Pushgateway"]
     # Oracle Database
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
