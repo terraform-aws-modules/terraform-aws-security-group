@@ -3,6 +3,7 @@ List of Security Groups implemented as Terraform modules
 
 
 * [activemq](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/activemq)
+* [alertmanager](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/alertmanager)
 * [carbon-relay-ng](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/carbon-relay-ng)
 * [cassandra](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/cassandra)
 * [consul](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/consul)
@@ -30,6 +31,7 @@ List of Security Groups implemented as Terraform modules
 * [openvpn](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/openvpn)
 * [oracle-db](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/oracle-db)
 * [postgresql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/postgresql)
+* [prometheus](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/prometheus)
 * [puppet](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/puppet)
 * [rabbitmq](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/rabbitmq)
 * [rdp](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/rdp)
