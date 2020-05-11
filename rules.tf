@@ -11,6 +11,9 @@ variable "rules" {
     activemq-61614-tcp = [61614, 61614, "tcp", "ActiveMQ STOMP"]
     activemq-61617-tcp = [61617, 61617, "tcp", "ActiveMQ OpenWire"]
     activemq-61619-tcp = [61619, 61619, "tcp", "ActiveMQ WebSocket"]
+		# Alert Manager
+    alertmanager-9093-tcp = [9093, 9093, "tcp", "Alert Manager"]
+    alertmanager-9094-tcp = [9094, 9094, "tcp", "Alert Manager Cluster"]
     # Carbon relay
     carbon-line-in-tcp = [2003, 2003, "tcp", "Carbon line-in"]
     carbon-line-in-udp = [2003, 2003, "udp", "Carbon line-in"]
@@ -101,11 +104,14 @@ variable "rules" {
     openvpn-https-tcp = [443, 443, "tcp", "OpenVPN"]
     # PostgreSQL
     postgresql-tcp = [5432, 5432, "tcp", "PostgreSQL"]
-    # Oracle Database
-    oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # Puppet
     puppet-tcp   = [8140, 8140, "tcp", "Puppet"]
     puppetdb-tcp = [8081, 8081, "tcp", "PuppetDB"]
+		# Prometheus
+    prometheus-http-tcp = [9090, 9090, "tcp", "Prometheus"]
+    prometheus-pushgateway-http-tcp = [9091, 9091, "tcp", "Prometheus Pushgateway"]
+    # Oracle Database
+    oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # RabbitMQ
     rabbitmq-4369-tcp  = [4369, 4369, "tcp", "RabbitMQ epmd"]
     rabbitmq-5671-tcp  = [5671, 5671, "tcp", "RabbitMQ"]
@@ -167,6 +173,11 @@ variable "auto_groups" {
   default = {
     activemq = {
       ingress_rules     = ["activemq-5671-tcp", "activemq-8883-tcp", "activemq-61614-tcp", "activemq-61617-tcp", "activemq-61619-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    alertmanager = {
+      ingress_rules     = ["alertmanager-9093-tcp", "alertmanager-9094-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -307,6 +318,11 @@ variable "auto_groups" {
     }
     puppet = {
       ingress_rules     = ["puppet-tcp", "puppetdb-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    prometheus = {
+      ingress_rules     = ["prometheus-http-tcp", "prometheus-pushgateway-http-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
