@@ -22,6 +22,7 @@ List of Security Groups implemented as Terraform modules
 * [kubernetes-api](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kubernetes-api)
 * [ldaps](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ldaps)
 * [memcached](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/memcached)
+* [minio](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/minio)
 * [mongodb](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mongodb)
 * [mssql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mssql)
 * [mysql](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/mysql)

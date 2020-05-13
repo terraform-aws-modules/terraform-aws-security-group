@@ -80,6 +80,8 @@ variable "rules" {
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
+    # MinIO
+    minio-tcp = [9000, 9000, "tcp", "MinIO"]    
     # MongoDB
     mongodb-27017-tcp = [27017, 27017, "tcp", "MongoDB"]
     mongodb-27018-tcp = [27018, 27018, "tcp", "MongoDB shard"]
@@ -268,6 +270,11 @@ variable "auto_groups" {
     }
     memcached = {
       ingress_rules     = ["memcached-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    minio = {
+      ingress_rules     = ["minio-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
