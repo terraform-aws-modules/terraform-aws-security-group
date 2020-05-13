@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.10.0"></a>
+## [v3.10.0] - 2020-05-13
+
+- fix: Fixed MinIO rules formatting
+- feat: Adding support for MinIO ([#174](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/174))
+
+
 <a name="v3.9.0"></a>
 ## [v3.9.0] - 2020-05-11
 
@@ -414,7 +421,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.9.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.10.0...HEAD
+[v3.10.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.9.0...v3.10.0
 [v3.9.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.8.0...v3.9.0
 [v3.8.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.7.0...v3.8.0
 [v3.7.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.6.0...v3.7.0
