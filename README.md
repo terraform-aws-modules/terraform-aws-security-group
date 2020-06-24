@@ -161,7 +161,7 @@ No issue is creating limit on this module.
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.6 |
+| terraform | >= 0.12.6, < 0.14 |
 | aws | ~> 2.42 |
 
 ## Providers
