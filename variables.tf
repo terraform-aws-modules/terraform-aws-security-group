@@ -35,6 +35,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "revoke_rules" {
+  description = "Whether to revoke the rules on a delete (required for EMR)."
+  type        = bool
+  default     = false
+}
+
 ##########
 # Ingress
 ##########
