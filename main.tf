@@ -19,6 +19,8 @@ resource "aws_security_group" "this" {
   description = var.description
   vpc_id      = var.vpc_id
 
+  revoke_rules_on_delete = var.revoke_rules
+  
   tags = merge(
     var.tags,
     {
@@ -37,6 +39,8 @@ resource "aws_security_group" "this_name_prefix" {
   description = var.description
   vpc_id      = var.vpc_id
 
+  revoke_rules_on_delete = var.revoke_rules
+  
   tags = merge(
     var.tags,
     {
