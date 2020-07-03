@@ -18,7 +18,7 @@ All automatic values **ssh module** is using are available [here](https://github
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.6 |
+| terraform | >= 0.12.6, < 0.14 |
 | aws | ~> 2.42 |
 
 ## Providers
@@ -92,6 +92,7 @@ No provider.
 | number\_of\_computed\_ingress\_with\_ipv6\_cidr\_blocks | Number of computed ingress rules to create where 'ipv6\_cidr\_blocks' is used | `number` | `0` | no |
 | number\_of\_computed\_ingress\_with\_self | Number of computed ingress rules to create where 'self' is defined | `number` | `0` | no |
 | number\_of\_computed\_ingress\_with\_source\_security\_group\_id | Number of computed ingress rules to create where 'source\_security\_group\_id' is used | `number` | `0` | no |
+| revoke\_rules\_on\_delete | Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. Enable for EMR. | `bool` | `false` | no |
 | tags | A mapping of tags to assign to security group | `map(string)` | `{}` | no |
 | use\_name\_prefix | Whether to use name\_prefix or fixed name. Should be true to able to update security group name after initial creation | `bool` | `true` | no |
 | vpc\_id | ID of the VPC where to create security group | `string` | n/a | yes |
