@@ -15,9 +15,10 @@ locals {
 resource "aws_security_group" "this" {
   count = var.create && false == var.use_name_prefix ? 1 : 0
 
-  name        = var.name
-  description = var.description
-  vpc_id      = var.vpc_id
+  name                   = var.name
+  description            = var.description
+  vpc_id                 = var.vpc_id
+  revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
     var.tags,
@@ -33,9 +34,10 @@ resource "aws_security_group" "this" {
 resource "aws_security_group" "this_name_prefix" {
   count = var.create && var.use_name_prefix ? 1 : 0
 
-  name_prefix = "${var.name}-"
-  description = var.description
-  vpc_id      = var.vpc_id
+  name_prefix            = "${var.name}-"
+  description            = var.description
+  vpc_id                 = var.vpc_id
+  revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
     var.tags,

@@ -1,17 +1,17 @@
-# web - AWS EC2-VPC Security Group Terraform module
+# logstash - AWS EC2-VPC Security Group Terraform module
 
 ## Usage
 
 ```hcl
-module "web_security_group" {
-  source  = "terraform-aws-modules/security-group/aws//modules/web"
+module "logstash_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/logstash"
   version = "~> 3.0"
 
   # omitted...
 }
 ```
 
-All automatic values **web module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/web/auto_values.tf).
+All automatic values **logstash module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/logstash/auto_values.tf).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -35,7 +35,7 @@ No provider.
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | `list(map(string))` | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | `list(string)` | <pre>[<br>  "all-all"<br>]</pre> | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | `list(map(string))` | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "http-80-tcp",<br>  "http-8080-tcp",<br>  "https-443-tcp",<br>  "web-jmx-tcp"<br>]</pre> | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "logstash-tcp"<br>]</pre> | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | `list(map(string))` | <pre>[<br>  {<br>    "rule": "all-all"<br>  }<br>]</pre> | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | `number` | `0` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | `number` | `0` | no |
