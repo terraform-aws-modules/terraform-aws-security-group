@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.12.0"></a>
+## [v3.12.0] - 2020-07-03
+
+- feat: Added optional revoke_rules_on_delete functionality (required for EMR) ([#179](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/179))
+
+
 <a name="v3.11.0"></a>
 ## [v3.11.0] - 2020-06-24
 
@@ -427,7 +433,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.11.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.12.0...HEAD
+[v3.12.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.11.0...v3.12.0
 [v3.11.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.10.0...v3.11.0
 [v3.10.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.9.0...v3.10.0
 [v3.9.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.8.0...v3.9.0
