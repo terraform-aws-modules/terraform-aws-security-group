@@ -1,6 +1,7 @@
 List of Security Groups implemented as Terraform modules
 ========================================================
 
+
 * [carbon-relay-ng](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/carbon-relay-ng)
 * [cassandra](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/cassandra)
 * [consul](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/consul)
@@ -29,6 +30,7 @@ List of Security Groups implemented as Terraform modules
 * [rdp](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/rdp)
 * [redis](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/redis)
 * [redshift](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/redshift)
+* [solr](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/solr)
 * [splunk](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/splunk)
 * [squid](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/squid)
 * [ssh](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ssh)
@@ -38,3 +40,4 @@ List of Security Groups implemented as Terraform modules
 * [zipkin](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/zipkin)
 * [zookeeper](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/zookeeper)
 * [_templates](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/_templates) - Source templates for all other modules. Change carefully, test thoughtfully!
+
