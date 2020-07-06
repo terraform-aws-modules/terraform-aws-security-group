@@ -9,7 +9,6 @@ module "sg" {
   revoke_rules_on_delete = var.revoke_rules_on_delete
   tags                   = var.tags
 
-
   ##########
   # Ingress
   ##########

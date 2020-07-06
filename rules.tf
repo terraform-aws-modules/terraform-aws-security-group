@@ -127,7 +127,6 @@ variable "rules" {
     rdp-udp = [3389, 3389, "udp", "Remote Desktop"]
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
-
     # Redshift
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
     # Splunk
@@ -137,7 +136,6 @@ variable "rules" {
     splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
     # Squid
     squid-proxy-tcp = [3128, 3128, "tcp", "Squid default proxy"]
-
     # SSH
     ssh-tcp = [22, 22, "tcp", "SSH"]
     # Storm

@@ -1,7 +1,6 @@
 #################
 # Security group
 #################
-
 variable "create" {
   description = "Whether to create security group and all rules"
   type        = bool
@@ -347,4 +346,3 @@ variable "number_of_computed_egress_prefix_list_ids" {
   type        = number
   default     = 0
 }
-
