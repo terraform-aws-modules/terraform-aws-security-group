@@ -19,7 +19,7 @@ All automatic values **kubernetes-api module** is using are available [here](htt
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.6, < 0.14 |
-| aws | ~> 2.42 |
+| aws | ~> 3.0 |
 
 ## Providers
 
