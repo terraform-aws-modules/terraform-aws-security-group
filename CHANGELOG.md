@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.14.0"></a>
+## [v3.14.0] - 2020-08-13
+
+- feat: aws-provider version bump to >= 2.42, < 4.0 ([#184](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/184))
+
+
 <a name="v3.13.0"></a>
 ## [v3.13.0] - 2020-07-20
 
@@ -439,7 +445,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.13.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.14.0...HEAD
+[v3.14.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.13.0...v3.14.0
 [v3.13.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.12.0...v3.13.0
 [v3.12.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.11.0...v3.12.0
 [v3.11.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.10.0...v3.11.0
