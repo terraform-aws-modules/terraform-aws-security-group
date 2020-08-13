@@ -179,7 +179,7 @@ module "complete_sg" {
       from_port = 41
       to_port   = 51
       protocol  = 6
-      self      = false
+      self      = true
     },
   ]
 
@@ -300,7 +300,7 @@ module "complete_sg" {
       from_port = 41
       to_port   = 51
       protocol  = 6
-      self      = false
+      self      = true
     },
   ]
 
