@@ -19,7 +19,7 @@ All automatic values **mongodb module** is using are available [here](https://gi
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.6, < 0.14 |
-| aws | ~> 2.42 |
+| aws | >= 2.42, < 4.0 |
 
 ## Providers
 
