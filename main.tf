@@ -21,10 +21,10 @@ resource "aws_security_group" "this" {
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
-    var.tags,
     {
       "Name" = format("%s", var.name)
     },
+    var.tags,
   )
 }
 
@@ -40,10 +40,10 @@ resource "aws_security_group" "this_name_prefix" {
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
-    var.tags,
     {
       "Name" = format("%s", var.name)
     },
+    var.tags, 
   )
 
   lifecycle {
