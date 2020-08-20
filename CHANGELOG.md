@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.16.0"></a>
+## [v3.16.0] - 2020-08-20
+
+- chore: Fixed formatting
+- feat: Allow custom Name tag for security group ([#187](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/187))
+
+
 <a name="v3.15.0"></a>
 ## [v3.15.0] - 2020-08-13
 
@@ -451,7 +458,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.15.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.16.0...HEAD
+[v3.16.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.15.0...v3.16.0
 [v3.15.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.14.0...v3.15.0
 [v3.14.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.13.0...v3.14.0
 [v3.13.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.12.0...v3.13.0
