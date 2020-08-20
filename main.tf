@@ -43,7 +43,7 @@ resource "aws_security_group" "this_name_prefix" {
     {
       "Name" = format("%s", var.name)
     },
-    var.tags, 
+    var.tags,
   )
 
   lifecycle {
