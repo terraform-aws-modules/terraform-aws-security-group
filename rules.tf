@@ -3,8 +3,17 @@ variable "rules" {
   type        = map(list(any))
 
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
-  # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
+  # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 17, IPV6-ICMP = 58
   default = {
+    # ActiveMQ
+    activemq-5671-tcp  = [5671, 5671, "tcp", "ActiveMQ AMQP"]
+    activemq-8883-tcp  = [8883, 8883, "tcp", "ActiveMQ MQTT"]
+    activemq-61614-tcp = [61614, 61614, "tcp", "ActiveMQ STOMP"]
+    activemq-61617-tcp = [61617, 61617, "tcp", "ActiveMQ OpenWire"]
+    activemq-61619-tcp = [61619, 61619, "tcp", "ActiveMQ WebSocket"]
+    # Alert Manager
+    alertmanager-9093-tcp = [9093, 9093, "tcp", "Alert Manager"]
+    alertmanager-9094-tcp = [9094, 9094, "tcp", "Alert Manager Cluster"]
     # Carbon relay
     carbon-line-in-tcp = [2003, 2003, "tcp", "Carbon line-in"]
     carbon-line-in-udp = [2003, 2003, "udp", "Carbon line-in"]
@@ -39,6 +48,18 @@ variable "rules" {
     # Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+    # Grafana
+    grafana-tcp = [3000, 3000, "tcp", "Grafana Dashboard"]
+    # Graphite Statsd
+    graphite-webui    = [80, 80, "tcp", "Graphite admin interface"]
+    graphite-2003-tcp = [2003, 2003, "tcp", "Carbon receiver plain text"]
+    graphite-2004-tcp = [2004, 2004, "tcp", "Carbon receiver pickle"]
+    graphite-2023-tcp = [2023, 2023, "tcp", "Carbon aggregator plaintext"]
+    graphite-2024-tcp = [2024, 2024, "tcp", "Carbon aggregator pickle"]
+    graphite-8080-tcp = [8080, 8080, "tcp", "Graphite gunicorn port"]
+    graphite-8125-tcp = [8125, 8125, "tcp", "Statsd TCP"]
+    graphite-8125-udp = [8125, 8125, "udp", "Statsd UDP default"]
+    graphite-8126-tcp = [8126, 8126, "tcp", "Statsd admin"]
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
     http-8080-tcp = [8080, 8080, "tcp", "HTTP"]
@@ -49,11 +70,22 @@ variable "rules" {
     ipsec-500-udp  = [500, 500, "udp", "IPSEC ISAKMP"]
     ipsec-4500-udp = [4500, 4500, "udp", "IPSEC NAT-T"]
     # Kafka
-    kafka-broker-tcp = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
+    kafka-broker-tcp        = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
+    kafka-broker-tls-tcp    = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    kafka-jmx-exporter-tcp  = [11001, 11001, "tcp", "Kafka JMX Exporter"]
+    kafka-node-exporter-tcp = [11002, 11002, "tcp", "Kafka Node Exporter"]
+    # Kibana
+    kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
+    # Kubernetes
+    kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
     # LDAPS
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
+    # Logstash
+    logstash-tcp = [5044, 5044, "tcp", "Logstash"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
+    # MinIO
+    minio-tcp = [9000, 9000, "tcp", "MinIO"]
     # MongoDB
     mongodb-27017-tcp = [27017, 27017, "tcp", "MongoDB"]
     mongodb-27018-tcp = [27018, 27018, "tcp", "MongoDB shard"]
@@ -78,11 +110,14 @@ variable "rules" {
     openvpn-https-tcp = [443, 443, "tcp", "OpenVPN"]
     # PostgreSQL
     postgresql-tcp = [5432, 5432, "tcp", "PostgreSQL"]
-    # Oracle Database
-    oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # Puppet
     puppet-tcp   = [8140, 8140, "tcp", "Puppet"]
     puppetdb-tcp = [8081, 8081, "tcp", "PuppetDB"]
+    # Prometheus
+    prometheus-http-tcp             = [9090, 9090, "tcp", "Prometheus"]
+    prometheus-pushgateway-http-tcp = [9091, 9091, "tcp", "Prometheus Pushgateway"]
+    # Oracle Database
+    oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # RabbitMQ
     rabbitmq-4369-tcp  = [4369, 4369, "tcp", "RabbitMQ epmd"]
     rabbitmq-5671-tcp  = [5671, 5671, "tcp", "RabbitMQ"]
@@ -96,9 +131,11 @@ variable "rules" {
     redis-tcp = [6379, 6379, "tcp", "Redis"]
     # Redshift
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
+    # Solr
+    solr-tcp = [8983, 8987, "tcp", "Solr"]
     # Splunk
     splunk-indexer-tcp = [9997, 9997, "tcp", "Splunk indexer"]
-    splunk-web-tcp = [8000, 8000, "tcp", "Splunk Web"]
+    splunk-web-tcp     = [8000, 8000, "tcp", "Splunk Web"]
     splunk-splunkd-tcp = [8089, 8089, "tcp", "Splunkd"]
     splunk-hec-tcp     = [8088, 8088, "tcp", "Splunk HEC"]
     # Squid
@@ -142,6 +179,16 @@ variable "auto_groups" {
 
   # Valid keys - ingress_rules, egress_rules, ingress_with_self, egress_with_self
   default = {
+    activemq = {
+      ingress_rules     = ["activemq-5671-tcp", "activemq-8883-tcp", "activemq-61614-tcp", "activemq-61617-tcp", "activemq-61619-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    alertmanager = {
+      ingress_rules     = ["alertmanager-9093-tcp", "alertmanager-9094-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     carbon-relay-ng = {
       ingress_rules     = ["carbon-line-in-tcp", "carbon-line-in-udp", "carbon-pickle-tcp", "carbon-pickle-udp", "carbon-gui-udp"]
       ingress_with_self = ["all-all"]
@@ -164,6 +211,16 @@ variable "auto_groups" {
     }
     elasticsearch = {
       ingress_rules     = ["elasticsearch-rest-tcp", "elasticsearch-java-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    grafana = {
+      ingress_rules     = ["grafana-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    graphite-statsd = {
+      ingress_rules     = ["graphite-webui", "graphite-2003-tcp", "graphite-2004-tcp", "graphite-2023-tcp", "graphite-2024-tcp", "graphite-8080-tcp", "graphite-8125-tcp", "graphite-8125-udp", "graphite-8126-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -198,7 +255,17 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     kafka = {
-      ingress_rules     = ["kafka-broker-tcp"]
+      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kubernetes-api = {
+      ingress_rules     = ["kubernetes-api-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    kibana = {
+      ingress_rules     = ["kibana-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -207,8 +274,18 @@ variable "auto_groups" {
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
+    logstash = {
+      ingress_rules     = ["logstash-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     memcached = {
       ingress_rules     = ["memcached-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    minio = {
+      ingress_rules     = ["minio-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -262,6 +339,11 @@ variable "auto_groups" {
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
+    prometheus = {
+      ingress_rules     = ["prometheus-http-tcp", "prometheus-pushgateway-http-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     rabbitmq = {
       ingress_rules     = ["rabbitmq-4369-tcp", "rabbitmq-5671-tcp", "rabbitmq-5672-tcp", "rabbitmq-15672-tcp", "rabbitmq-25672-tcp"]
       ingress_with_self = ["all-all"]
@@ -279,6 +361,11 @@ variable "auto_groups" {
     }
     redshift = {
       ingress_rules     = ["redshift-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    solr = {
+      ingress_rules     = ["solr-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }

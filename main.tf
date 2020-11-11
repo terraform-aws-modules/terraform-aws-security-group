@@ -15,16 +15,17 @@ locals {
 resource "aws_security_group" "this" {
   count = var.create && false == var.use_name_prefix ? 1 : 0
 
-  name        = var.name
-  description = var.description
-  vpc_id      = var.vpc_id
+  name                   = var.name
+  description            = var.description
+  vpc_id                 = var.vpc_id
+  revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
-    var.tags,
     {
       "Name" = format("%s", var.name),
       "managed_by" = "terraform"
     },
+    var.tags,
   )
 
   lifecycle {
@@ -40,16 +41,17 @@ resource "aws_security_group" "this" {
 resource "aws_security_group" "this_name_prefix" {
   count = var.create && var.use_name_prefix ? 1 : 0
 
-  name_prefix = "${var.name}-"
-  description = var.description
-  vpc_id      = var.vpc_id
+  name_prefix            = "${var.name}-"
+  description            = var.description
+  vpc_id                 = var.vpc_id
+  revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
-    var.tags,
     {
       "Name" = format("%s", var.name),
       "managed_by" = "terraform"
     },
+    var.tags,
   )
 
   lifecycle {
@@ -108,7 +110,6 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
   type              = "ingress"
 
   source_security_group_id = var.ingress_with_source_security_group_id[count.index]["source_security_group_id"]
-  ipv6_cidr_blocks         = var.ingress_ipv6_cidr_blocks
   prefix_list_ids          = var.ingress_prefix_list_ids
   description = lookup(
     var.ingress_with_source_security_group_id[count.index],
@@ -153,7 +154,6 @@ resource "aws_security_group_rule" "computed_ingress_with_source_security_group_
   type              = "ingress"
 
   source_security_group_id = var.computed_ingress_with_source_security_group_id[count.index]["source_security_group_id"]
-  ipv6_cidr_blocks         = var.ingress_ipv6_cidr_blocks
   prefix_list_ids          = var.ingress_prefix_list_ids
   description = lookup(
     var.computed_ingress_with_source_security_group_id[count.index],
@@ -377,9 +377,8 @@ resource "aws_security_group_rule" "ingress_with_self" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  self             = lookup(var.ingress_with_self[count.index], "self", true)
-  ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
-  prefix_list_ids  = var.ingress_prefix_list_ids
+  self            = lookup(var.ingress_with_self[count.index], "self", true)
+  prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.ingress_with_self[count.index],
     "description",
@@ -410,9 +409,8 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  self             = lookup(var.computed_ingress_with_self[count.index], "self", true)
-  ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
-  prefix_list_ids  = var.ingress_prefix_list_ids
+  self            = lookup(var.computed_ingress_with_self[count.index], "self", true)
+  prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.computed_ingress_with_self[count.index],
     "description",
@@ -488,7 +486,6 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
   type              = "egress"
 
   source_security_group_id = var.egress_with_source_security_group_id[count.index]["source_security_group_id"]
-  ipv6_cidr_blocks         = var.egress_ipv6_cidr_blocks
   prefix_list_ids          = var.egress_prefix_list_ids
   description = lookup(
     var.egress_with_source_security_group_id[count.index],
@@ -533,7 +530,6 @@ resource "aws_security_group_rule" "computed_egress_with_source_security_group_i
   type              = "egress"
 
   source_security_group_id = var.computed_egress_with_source_security_group_id[count.index]["source_security_group_id"]
-  ipv6_cidr_blocks         = var.egress_ipv6_cidr_blocks
   prefix_list_ids          = var.egress_prefix_list_ids
   description = lookup(
     var.computed_egress_with_source_security_group_id[count.index],
@@ -757,9 +753,8 @@ resource "aws_security_group_rule" "egress_with_self" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  self             = lookup(var.egress_with_self[count.index], "self", true)
-  ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
+  self            = lookup(var.egress_with_self[count.index], "self", true)
+  prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.egress_with_self[count.index],
     "description",
@@ -790,9 +785,8 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  self             = lookup(var.computed_egress_with_self[count.index], "self", true)
-  ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
+  self            = lookup(var.computed_egress_with_self[count.index], "self", true)
+  prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.computed_egress_with_self[count.index],
     "description",
