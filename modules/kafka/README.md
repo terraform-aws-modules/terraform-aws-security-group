@@ -18,8 +18,8 @@ All automatic values **kafka module** is using are available [here](https://gith
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.42, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.42 |
 
 ## Providers
 
