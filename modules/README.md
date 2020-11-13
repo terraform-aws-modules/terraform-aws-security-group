@@ -20,6 +20,7 @@ List of Security Groups implemented as Terraform modules
 * [kafka](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kafka)
 * [kibana](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kibana)
 * [kubernetes-api](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/kubernetes-api)
+* [ldap](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ldap)
 * [ldaps](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ldaps)
 * [logstash](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/logstash)
 * [memcached](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/memcached)

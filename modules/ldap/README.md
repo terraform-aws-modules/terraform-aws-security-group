@@ -1,17 +1,17 @@
-# mongodb - AWS EC2-VPC Security Group Terraform module
+# ldap - AWS EC2-VPC Security Group Terraform module
 
 ## Usage
 
 ```hcl
-module "mongodb_security_group" {
-  source  = "terraform-aws-modules/security-group/aws//modules/mongodb"
+module "ldap_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/ldap"
   version = "~> 3.0"
 
   # omitted...
 }
 ```
 
-All automatic values **mongodb module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/mongodb/auto_values.tf).
+All automatic values **ldap module** is using are available [here](https://github.com/terraform-aws-modules/terraform-aws-security-group/blob/master/modules/ldap/auto_values.tf).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -35,7 +35,7 @@ No provider.
 | auto\_computed\_ingress\_with\_self | List of maps defining computed ingress rules with self to add automatically | `list(map(string))` | `[]` | no |
 | auto\_egress\_rules | List of egress rules to add automatically | `list(string)` | <pre>[<br>  "all-all"<br>]</pre> | no |
 | auto\_egress\_with\_self | List of maps defining egress rules with self to add automatically | `list(map(string))` | `[]` | no |
-| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "mongodb-27017-tcp",<br>  "mongodb-27018-tcp",<br>  "mongodb-27019-tcp"<br>]</pre> | no |
+| auto\_ingress\_rules | List of ingress rules to add automatically | `list(string)` | <pre>[<br>  "ldap-tcp"<br>]</pre> | no |
 | auto\_ingress\_with\_self | List of maps defining ingress rules with self to add automatically | `list(map(string))` | <pre>[<br>  {<br>    "rule": "all-all"<br>  }<br>]</pre> | no |
 | auto\_number\_of\_computed\_egress\_rules | Number of computed egress rules to create by name | `number` | `0` | no |
 | auto\_number\_of\_computed\_egress\_with\_self | Number of computed egress rules to create where 'self' is defined | `number` | `0` | no |

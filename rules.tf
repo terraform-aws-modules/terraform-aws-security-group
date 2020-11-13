@@ -78,6 +78,8 @@ variable "rules" {
     kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
     # Kubernetes
     kubernetes-api-tcp = [6443, 6443, "tcp", "Kubernetes API Server"]
+    # LDAP
+    ldap-tcp = [389, 389, "tcp", "LDAP"]
     # LDAPS
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
     # Logstash
@@ -266,6 +268,11 @@ variable "auto_groups" {
     }
     kibana = {
       ingress_rules     = ["kibana-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    ldap = {
+      ingress_rules     = ["ldap-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }

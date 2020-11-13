@@ -18,8 +18,8 @@ All automatic values **grafana module** is using are available [here](https://gi
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.42, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.42 |
 
 ## Providers
 

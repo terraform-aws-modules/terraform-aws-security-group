@@ -18,8 +18,8 @@ All automatic values **ipsec-500 module** is using are available [here](https://
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.42, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.42 |
 
 ## Providers
 
