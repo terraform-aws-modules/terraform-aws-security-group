@@ -169,7 +169,7 @@ variable "rules" {
     all-tcp       = [0, 65535, "tcp", "All TCP ports"]
     all-udp       = [0, 65535, "udp", "All UDP ports"]
     all-icmp      = [-1, -1, "icmp", "All IPV4 ICMP"]
-    all-ipv6-icmp = [-1, -1, 58, "All IPV6 ICMP"]
+    all-ipv6-icmp = [-1, -1, "icmpv6", "All IPV6 ICMP"]
     # This is a fallback rule to pass to lookup() as default. It does not open anything, because it should never be used.
     _ = ["", "", ""]
   }
