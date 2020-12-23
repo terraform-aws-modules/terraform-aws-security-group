@@ -133,6 +133,8 @@ variable "rules" {
     redis-tcp = [6379, 6379, "tcp", "Redis"]
     # Redshift
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
+    # SaltStack
+    salt-stack-tcp = [4505, 4506, "tcp", "SaltStack"]    
     # Solr
     solr-tcp = [8983, 8987, "tcp", "Solr"]
     # Splunk
