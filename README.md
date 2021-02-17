@@ -170,6 +170,17 @@ No issue is creating limit on this module.
 |------|---------|
 | aws | >= 2.42 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.42/docs/resources/security_group) |
+| [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/2.42/docs/resources/security_group_rule) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -229,7 +240,6 @@ No issue is creating limit on this module.
 | this\_security\_group\_name | The name of the security group |
 | this\_security\_group\_owner\_id | The owner ID |
 | this\_security\_group\_vpc\_id | The VPC ID |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors

@@ -25,6 +25,16 @@ All automatic values **solr module** is using are available [here](https://githu
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| sg | ../../ |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -106,5 +116,4 @@ No provider.
 | this\_security\_group\_name | The name of the security group |
 | this\_security\_group\_owner\_id | The owner ID |
 | this\_security\_group\_vpc\_id | The VPC ID |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

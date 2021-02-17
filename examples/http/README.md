@@ -27,6 +27,23 @@ No requirements.
 |------|---------|
 | aws | n/a |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| http_mysql_1_sg | ../../modules/http-80 |  |
+| http_mysql_2_sg | ../../modules/http-80 |  |
+| http_sg | ../../modules/http-80 |  |
+| http_with_egress_minimal_sg | ../../modules/http-80 |  |
+| http_with_egress_sg | ../../modules/http-80 |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
+
 ## Inputs
 
 No input.
@@ -40,5 +57,4 @@ No input.
 | this\_security\_group\_name | The name of the security group |
 | this\_security\_group\_owner\_id | The owner ID |
 | this\_security\_group\_vpc\_id | The VPC ID |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
