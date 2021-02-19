@@ -178,8 +178,8 @@ No Modules.
 
 | Name |
 |------|
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.42/docs/resources/security_group) |
 | [aws_security_group_rule](https://registry.terraform.io/providers/hashicorp/aws/2.42/docs/resources/security_group_rule) |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.42/docs/resources/security_group) |
 
 ## Inputs
 
