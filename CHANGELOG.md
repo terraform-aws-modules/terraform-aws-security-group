@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.18.0"></a>
+## [v3.18.0] - 2021-02-20
+
+- chore: update documentation based on latest `terraform-docs` which includes module and resource sections ([#205](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/205))
+
+
 <a name="v3.17.0"></a>
 ## [v3.17.0] - 2020-11-13
 
@@ -464,7 +470,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.17.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.18.0...HEAD
+[v3.18.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.17.0...v3.18.0
 [v3.17.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.16.0...v3.17.0
 [v3.16.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.15.0...v3.16.0
 [v3.15.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.14.0...v3.15.0
