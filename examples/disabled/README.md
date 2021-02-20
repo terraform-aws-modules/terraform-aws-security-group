@@ -27,6 +27,20 @@ No requirements.
 |------|---------|
 | aws | n/a |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| complete_sg_disabled | ../../ |  |
+| http_sg_disabled | ../../modules/http-80 |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
+
 ## Inputs
 
 No input.
@@ -36,5 +50,4 @@ No input.
 | Name | Description |
 |------|-------------|
 | this\_security\_group\_id | The ID of the security group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
