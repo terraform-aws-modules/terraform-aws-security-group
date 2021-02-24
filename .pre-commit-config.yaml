@@ -4,7 +4,6 @@ repos:
     hooks:
       - id: terraform_fmt
       - id: terraform_docs
-      - id: terraform_tflint
   - repo: git://github.com/pre-commit/pre-commit-hooks
     rev: v3.4.0
     hooks:
