@@ -25,32 +25,32 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| http_sg | ../../modules/http-80 |  |
+| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 |  |
 
 ## Resources
 
-| Name |
-|------|
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) |
-| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
+| Name | Type |
+|------|------|
+| [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
+| [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this\_security\_group\_description | The description of the security group |
-| this\_security\_group\_id | The ID of the security group |
-| this\_security\_group\_name | The name of the security group |
-| this\_security\_group\_owner\_id | The owner ID |
-| this\_security\_group\_vpc\_id | The VPC ID |
+| <a name="output_this_security_group_description"></a> [this\_security\_group\_description](#output\_this\_security\_group\_description) | The description of the security group |
+| <a name="output_this_security_group_id"></a> [this\_security\_group\_id](#output\_this\_security\_group\_id) | The ID of the security group |
+| <a name="output_this_security_group_name"></a> [this\_security\_group\_name](#output\_this\_security\_group\_name) | The name of the security group |
+| <a name="output_this_security_group_owner_id"></a> [this\_security\_group\_owner\_id](#output\_this\_security\_group\_owner\_id) | The owner ID |
+| <a name="output_this_security_group_vpc_id"></a> [this\_security\_group\_vpc\_id](#output\_this\_security\_group\_vpc\_id) | The VPC ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
