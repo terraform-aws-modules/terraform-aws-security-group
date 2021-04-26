@@ -47,9 +47,9 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_this_security_group_description"></a> [this\_security\_group\_description](#output\_this\_security\_group\_description) | The description of the security group |
-| <a name="output_this_security_group_id"></a> [this\_security\_group\_id](#output\_this\_security\_group\_id) | The ID of the security group |
-| <a name="output_this_security_group_name"></a> [this\_security\_group\_name](#output\_this\_security\_group\_name) | The name of the security group |
-| <a name="output_this_security_group_owner_id"></a> [this\_security\_group\_owner\_id](#output\_this\_security\_group\_owner\_id) | The owner ID |
-| <a name="output_this_security_group_vpc_id"></a> [this\_security\_group\_vpc\_id](#output\_this\_security\_group\_vpc\_id) | The VPC ID |
+| <a name="output_security_group_description"></a> [security\_group\_description](#output\_security\_group\_description) | The description of the security group |
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The ID of the security group |
+| <a name="output_security_group_name"></a> [security\_group\_name](#output\_security\_group\_name) | The name of the security group |
+| <a name="output_security_group_owner_id"></a> [security\_group\_owner\_id](#output\_security\_group\_owner\_id) | The owner ID |
+| <a name="output_security_group_vpc_id"></a> [security\_group\_vpc\_id](#output\_security\_group\_vpc\_id) | The VPC ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

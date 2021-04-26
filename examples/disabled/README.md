@@ -49,5 +49,5 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_this_security_group_id"></a> [this\_security\_group\_id](#output\_this\_security\_group\_id) | The ID of the security group |
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The ID of the security group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -150,14 +150,14 @@ module "complete_sg" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
     {
       from_port                = 23
       to_port                  = 23
       protocol                 = 6
       description              = "Service name"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
   ]
 
@@ -278,7 +278,7 @@ module "complete_sg" {
   computed_egress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
   ]
 
