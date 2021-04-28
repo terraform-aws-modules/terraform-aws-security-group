@@ -96,12 +96,12 @@ module "http_sg" {
 module "db_computed_source_sg" {
   # omitted for brevity
 
-  vpc_id = "vpc-12345678" # these are valid values also - "${module.vpc.vpc_id}" and "${local.vpc_id}"
+  vpc_id = "vpc-12345678" # these are valid values also - `module.vpc.vpc_id` and `local.vpc_id`
 
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
-      source_security_group_id = "${module.http_sg.this_security_group_id}"
+      source_security_group_id = module.http_sg.security_group_id
     }
   ]
   number_of_computed_ingress_with_source_security_group_id = 1
@@ -110,16 +110,16 @@ module "db_computed_source_sg" {
 module "db_computed_sg" {
   # omitted for brevity
 
-  ingress_cidr_blocks = ["10.10.0.0/16", "${data.aws_security_group.default.id}"]
+  ingress_cidr_blocks = ["10.10.0.0/16", data.aws_security_group.default.id]
 
-  computed_ingress_cidr_blocks = ["${module.vpc.vpc_cidr_block}"]
+  computed_ingress_cidr_blocks           = [module.vpc.vpc_cidr_block]
   number_of_computed_ingress_cidr_blocks = 1
 }
 
 module "db_computed_merged_sg" {
   # omitted for brevity
 
-  computed_ingress_cidr_blocks = ["10.10.0.0/16", "${module.vpc.vpc_cidr_block}"]
+  computed_ingress_cidr_blocks           = ["10.10.0.0/16", module.vpc.vpc_cidr_block]
   number_of_computed_ingress_cidr_blocks = 2
 }
 ```
