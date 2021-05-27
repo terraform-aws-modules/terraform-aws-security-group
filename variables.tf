@@ -7,14 +7,28 @@ variable "create" {
   default     = true
 }
 
+variable "create_sg" {
+  description = "Whether to create security group"
+  type        = bool
+  default     = true
+}
+
+variable "security_group_id" {
+  description = "ID of existing security group whose rules we will manage"
+  type        = string
+  default     = null
+}
+
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
   type        = string
+  default     = null
 }
 
 variable "name" {
-  description = "Name of security group"
+  description = "Name of security group - not required if create_group is false"
   type        = string
+  default     = null
 }
 
 variable "use_name_prefix" {

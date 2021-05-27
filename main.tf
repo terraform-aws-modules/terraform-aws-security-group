@@ -2,18 +2,14 @@
 # Get ID of created Security Group
 ##################################
 locals {
-  this_sg_id = concat(
-    aws_security_group.this.*.id,
-    aws_security_group.this_name_prefix.*.id,
-    [""],
-  )[0]
+  this_sg_id = var.create_sg ? concat(aws_security_group.this.*.id, aws_security_group.this_name_prefix.*.id, [""])[0] : var.security_group_id
 }
 
 ##########################
 # Security group with name
 ##########################
 resource "aws_security_group" "this" {
-  count = var.create && false == var.use_name_prefix ? 1 : 0
+  count = var.create && var.create_sg && !var.use_name_prefix ? 1 : 0
 
   name                   = var.name
   description            = var.description
@@ -32,7 +28,7 @@ resource "aws_security_group" "this" {
 # Security group with name_prefix
 #################################
 resource "aws_security_group" "this_name_prefix" {
-  count = var.create && var.use_name_prefix ? 1 : 0
+  count = var.create && var.create_sg && var.use_name_prefix ? 1 : 0
 
   name_prefix            = "${var.name}-"
   description            = var.description
