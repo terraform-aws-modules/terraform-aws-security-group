@@ -7,7 +7,7 @@ variable "create" {
   default     = true
 }
 
-variable "create_group" {
+variable "create_sg" {
   description = "Whether to create security group"
   type        = bool
   default     = true
@@ -22,6 +22,7 @@ variable "security_group_id" {
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
   type        = string
+  default     = null
 }
 
 variable "name" {

@@ -32,9 +32,10 @@ resource "aws_security_group" "service_two" {
 # Add SG rules
 ########################################################
 
-module "rules-only_one" {
-  source            = "../../"
-  create_group      = false
+module "rules_one" {
+  source = "../../"
+
+  create_sg         = false
   security_group_id = aws_security_group.service_one.id
   ingress_with_source_security_group_id = [
     {
@@ -43,12 +44,12 @@ module "rules-only_one" {
       source_security_group_id = aws_security_group.service_two.id
     },
   ]
-  vpc_id = data.aws_vpc.default.id
 }
 
-module "rules-only_two" {
-  source            = "../../"
-  create_group      = false
+module "rules_two" {
+  source = "../../"
+
+  create_sg         = false
   security_group_id = aws_security_group.service_two.id
   ingress_with_source_security_group_id = [
     {
@@ -57,6 +58,5 @@ module "rules-only_two" {
       source_security_group_id = aws_security_group.service_one.id
     },
   ]
-  vpc_id = data.aws_vpc.default.id
 }
 

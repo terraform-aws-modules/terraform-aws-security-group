@@ -380,3 +380,20 @@ module "fixed_name_sg" {
   ingress_rules       = ["https-443-tcp"]
 }
 
+############################
+# Only security group rules
+############################
+module "only_rules" {
+  source = "../../"
+
+  create_sg         = false
+  security_group_id = module.complete_sg.security_group_id
+  ingress_with_source_security_group_id = [
+    {
+      description              = "http from service one"
+      rule                     = "http-80-tcp"
+      source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+}
+

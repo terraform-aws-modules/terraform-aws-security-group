@@ -31,8 +31,8 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_rules-only_one"></a> [rules-only\_one](#module\_rules-only\_one) | ../../ |  |
-| <a name="module_rules-only_two"></a> [rules-only\_two](#module\_rules-only\_two) | ../../ |  |
+| <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ |  |
+| <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ |  |
 
 ## Resources
 
