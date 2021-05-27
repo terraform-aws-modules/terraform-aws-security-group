@@ -2,14 +2,11 @@
 # Get ID of created Security Group
 ##################################
 locals {
-  description = var.create_group ? var.description : "Not used"
-  name        = var.create_group ? var.name : "Not used"
-  this_sg_id = concat(
-    [var.security_group_id],
-    aws_security_group.this.*.id,
-    aws_security_group.this_name_prefix.*.id,
-    [""],
-  )[0]
+  this_sg_id = coalesce(
+    var.security_group_id,
+    join("", aws_security_group.this.*.id),
+    join("", aws_security_group.this_name_prefix.*.id),
+  )
 }
 
 ##########################
@@ -18,14 +15,14 @@ locals {
 resource "aws_security_group" "this" {
   count = var.create && var.create_group && !var.use_name_prefix ? 1 : 0
 
-  name                   = local.name
-  description            = local.description
+  name                   = var.name
+  description            = var.description
   vpc_id                 = var.vpc_id
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
     {
-      "Name" = format("%s", local.name)
+      "Name" = format("%s", var.name)
     },
     var.tags,
   )
@@ -37,14 +34,14 @@ resource "aws_security_group" "this" {
 resource "aws_security_group" "this_name_prefix" {
   count = var.create && var.create_group && var.use_name_prefix ? 1 : 0
 
-  name_prefix            = "${local.name}-"
-  description            = local.description
+  name_prefix            = "${var.name}-"
+  description            = var.description
   vpc_id                 = var.vpc_id
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
     {
-      "Name" = format("%s", local.name)
+      "Name" = format("%s", var.name)
     },
     var.tags,
   )
