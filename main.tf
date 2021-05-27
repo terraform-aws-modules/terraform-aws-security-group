@@ -13,7 +13,7 @@ locals {
 # Security group with name
 ##########################
 resource "aws_security_group" "this" {
-  count = var.create && var.create_group && !var.use_name_prefix ? 1 : 0
+  count = var.create && var.create_group && false == var.use_name_prefix ? 1 : 0
 
   name                   = var.name
   description            = var.description
