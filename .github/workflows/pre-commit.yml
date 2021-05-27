@@ -19,7 +19,7 @@ jobs:
       - name: Build matrix
         id: matrix
         run: |
-          DIRS=$(python -c "import json; import glob; print(json.dumps([x.replace('/versions.tf', '') for x in glob.glob('./**/versions.tf', recursive=True)]))")
+          DIRS=$(python -c "import json; import glob; import re; print(json.dumps([x.replace('/versions.tf', '') for x in glob.glob('./**/versions.tf', recursive=True) if not re.match(r'^.+/_', x)]))")
           echo "::set-output name=directories::$DIRS"
     outputs:
       directories: ${{ steps.matrix.outputs.directories }}
