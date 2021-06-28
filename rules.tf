@@ -133,6 +133,14 @@ variable "rules" {
     redis-tcp = [6379, 6379, "tcp", "Redis"]
     # Redshift
     redshift-tcp = [5439, 5439, "tcp", "Redshift"]
+    # SaltStack
+    saltstack-tcp = [4505, 4506, "tcp", "SaltStack"]
+    # SMTP
+    smtp-tcp                 = [25, 25, "tcp", "SMTP"]
+    smtp-submission-587-tcp  = [587, 587, "tcp", "SMTP Submission"]
+    smtp-submission-2587-tcp = [2587, 2587, "tcp", "SMTP Submission"]
+    smtps-465-tcp            = [465, 465, "tcp", "SMTPS"]
+    smtps-2456-tcp           = [2465, 2465, "tcp", "SMTPS"]
     # Solr
     solr-tcp = [8983, 8987, "tcp", "Solr"]
     # Splunk
@@ -368,6 +376,21 @@ variable "auto_groups" {
     }
     redshift = {
       ingress_rules     = ["redshift-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    smtp = {
+      ingress_rules     = ["smtp-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    smtp-submission = {
+      ingress_rules     = ["smtp-submission-587-tcp", "smtp-submission-2587-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    smtps = {
+      ingress_rules     = ["smtps-465-tcp", "smtps-2465-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
