@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.3.0"></a>
+## [v4.3.0] - 2021-06-28
+
+- feat: Add rules for SMTP, SMTPS, SaltStack ([#220](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/220))
+
+
 <a name="v4.2.0"></a>
 ## [v4.2.0] - 2021-05-27
 
@@ -491,7 +497,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.3.0...HEAD
+[v4.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v3.18.0...v4.0.0
