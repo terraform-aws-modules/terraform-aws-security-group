@@ -126,6 +126,11 @@ variable "rules" {
     rabbitmq-5672-tcp  = [5672, 5672, "tcp", "RabbitMQ"]
     rabbitmq-15672-tcp = [15672, 15672, "tcp", "RabbitMQ"]
     rabbitmq-25672-tcp = [25672, 25672, "tcp", "RabbitMQ"]
+    # RADIUS
+    radius-1812-udp  = [1812, 1812, "udp", "RADIUS protocol"]
+    radius-1813-udp  = [1813, 1813, "udp", "RADIUS protocol"]
+    # RADSEC
+    radsec-2083-tcp  = [2083, 2083, "tcp", "RADSEC protocol"]
     # RDP
     rdp-tcp = [3389, 3389, "tcp", "Remote Desktop"]
     rdp-udp = [3389, 3389, "udp", "Remote Desktop"]
