@@ -26,15 +26,16 @@ variable "rules" {
     cassandra-thrift-clients-tcp = [9160, 9160, "tcp", "Cassandra Thrift clients"]
     cassandra-jmx-tcp            = [7199, 7199, "tcp", "JMX"]
     # Consul
-    consul-tcp          = [8300, 8300, "tcp", "Consul server"]
-    consul-cli-rpc-tcp  = [8400, 8400, "tcp", "Consul CLI RPC"]
-    consul-webui-tcp    = [8500, 8500, "tcp", "Consul web UI"]
-    consul-dns-tcp      = [8600, 8600, "tcp", "Consul DNS"]
-    consul-dns-udp      = [8600, 8600, "udp", "Consul DNS"]
-    consul-serf-lan-tcp = [8301, 8301, "tcp", "Serf LAN"]
-    consul-serf-lan-udp = [8301, 8301, "udp", "Serf LAN"]
-    consul-serf-wan-tcp = [8302, 8302, "tcp", "Serf WAN"]
-    consul-serf-wan-udp = [8302, 8302, "udp", "Serf WAN"]
+    consul-tcp                = [8300, 8300, "tcp", "Consul server"]
+    consul-grpc-tcp           = [8502, 8502, "tcp", "Consul gRPC"]
+    consul-webui-http-tcp     = [8500, 8500, "tcp", "Consul web UI HTTP"]
+    consul-webui-https-tcp    = [8501, 8501, "tcp", "Consul web UI HTTPS"]
+    consul-dns-tcp            = [8600, 8600, "tcp", "Consul DNS"]
+    consul-dns-udp            = [8600, 8600, "udp", "Consul DNS"]
+    consul-serf-lan-tcp       = [8301, 8301, "tcp", "Serf LAN"]
+    consul-serf-lan-udp       = [8301, 8301, "udp", "Serf LAN"]
+    consul-serf-wan-tcp       = [8302, 8302, "tcp", "Serf WAN"]
+    consul-serf-wan-udp       = [8302, 8302, "udp", "Serf WAN"]
     # Docker Swarm
     docker-swarm-mngmt-tcp   = [2377, 2377, "tcp", "Docker Swarm cluster management"]
     docker-swarm-node-tcp    = [7946, 7946, "tcp", "Docker Swarm node"]
@@ -210,7 +211,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     consul = {
-      ingress_rules     = ["consul-tcp", "consul-cli-rpc-tcp", "consul-webui-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
