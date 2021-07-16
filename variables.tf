@@ -26,7 +26,7 @@ variable "vpc_id" {
 }
 
 variable "name" {
-  description = "Name of security group - not required if create_group is false"
+  description = "Name of security group - not required if create_sg is false"
   type        = string
   default     = null
 }
