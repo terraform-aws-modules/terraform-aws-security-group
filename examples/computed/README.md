@@ -23,14 +23,14 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/https-443 |  |
-| <a name="module_mysql_sg"></a> [mysql\_sg](#module\_mysql\_sg) | ../../modules/mysql |  |
+| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/https-443 | n/a |
+| <a name="module_mysql_sg"></a> [mysql\_sg](#module\_mysql\_sg) | ../../modules/mysql | n/a |
 
 ## Resources
 

@@ -25,13 +25,13 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 |  |
+| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 | n/a |
 
 ## Resources
 

@@ -48,6 +48,11 @@ variable "revoke_rules_on_delete" {
   type        = bool
   default     = false
 }
+variable "enable_prefix_lists_cross_over" {
+  description = "Instruct Terraform to create crossing over ingress and egress Security Group Rules that cover also the Prefix lists provided as input."
+  type        = bool
+  default     = true
+}
 
 variable "tags" {
   description = "A mapping of tags to assign to security group"
@@ -87,6 +92,11 @@ variable "ingress_with_source_security_group_id" {
   type        = list(map(string))
   default     = []
 }
+variable "ingress_with_prefix_list_ids" {
+  description = "List of ingress rules to create where 'prefix_list_ids' is used only"
+  type        = list(map(string))
+  default     = []
+}
 
 variable "ingress_cidr_blocks" {
   description = "List of IPv4 CIDR ranges to use on all ingress rules"
@@ -103,11 +113,6 @@ variable "ingress_ipv6_cidr_blocks" {
 variable "ingress_prefix_list_ids" {
   description = "List of prefix list IDs (for allowing access to VPC endpoints) to use on all ingress rules"
   type        = list(string)
-  default     = []
-}
-variable "ingress_with_prefix_list_ids" {
-  description = "List of ingress rules to create where 'prefix_list_ids' is used only"
-  type        = list(map(string))
   default     = []
 }
 
@@ -313,7 +318,7 @@ variable "number_of_computed_egress_with_source_security_group_id" {
   type        = number
   default     = 0
 }
-variable "computed_egress_with_prefix_list_ids" {
+variable "number_of_computed_egress_with_prefix_list_ids" {
   description = "Number of computed egress rules to create where 'prefix_list_ids' is used only"
   type        = number
   default     = 0

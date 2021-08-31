@@ -50,9 +50,10 @@ module "main_sg" {
 module "complete_sg" {
   source = "../../"
 
-  name        = "complete-sg"
-  description = "Security group with all available arguments set (this is just an example)"
-  vpc_id      = data.aws_vpc.default.id
+  name                           = "complete-sg"
+  description                    = "Security group with all available arguments set (this is just an example)"
+  vpc_id                         = data.aws_vpc.default.id
+  enable_prefix_lists_cross_over = false
 
   tags = {
     Cash       = "king"
@@ -66,7 +67,7 @@ module "complete_sg" {
   ingress_ipv6_cidr_blocks = ["2001:db8::/64"]
 
   # Prefix list ids to use in all ingress rules in this module.
-  # ingress_prefix_list_ids = ["pl-123456"]
+  ingress_prefix_list_ids = ["pl-6da54004"]
   # Open for all CIDRs defined in ingress_cidr_blocks
   ingress_rules = ["https-443-tcp"]
 
@@ -195,6 +196,42 @@ module "complete_sg" {
 
   number_of_computed_ingress_with_self = 1
 
+
+  # Open for Prefix List Ids only (rule or from_port+to_port+protocol+description)
+  ingress_with_prefix_list_ids = [
+    {
+      rule = "nfs-tcp"
+    },
+    {
+      from_port   = 30
+      to_port     = 40
+      protocol    = 6
+      description = "Service name"
+      self        = true
+    },
+    {
+      from_port = 41
+      to_port   = 51
+      protocol  = 6
+      self      = true
+    }
+  ]
+
+  computed_ingress_with_prefix_list_ids = [
+    {
+      from_port   = 32
+      to_port     = 43
+      protocol    = 6
+      description = "Service name. VPC ID: ${module.vpc.vpc_id}"
+      self        = true
+    }
+  ]
+
+  number_of_computed_ingress_with_prefix_list_ids = 1
+
+  # Prefix list ids to use in all egress rules in this module.
+  egress_prefix_list_ids = ["pl-6da54004"]
+
   # Default CIDR blocks, which will be used for all egress rules in this module. Typically these are CIDR blocks of the VPC.
   # If this is not specified then no CIDR blocks will be used.
   egress_cidr_blocks = ["10.10.0.0/16"]
@@ -311,6 +348,39 @@ module "complete_sg" {
   ]
 
   number_of_computed_egress_with_self = 1
+
+  # Open for Prefix List Ids only (rule or from_port+to_port+protocol+description)
+
+  egress_with_prefix_list_ids = [
+    {
+      rule = "nfs-tcp"
+    },
+    {
+      from_port   = 30
+      to_port     = 40
+      protocol    = 6
+      description = "Service name"
+      self        = true
+    },
+    {
+      from_port = 41
+      to_port   = 51
+      protocol  = 6
+      self      = true
+    }
+  ]
+
+  computed_egress_with_prefix_list_ids = [
+    {
+      from_port   = 32
+      to_port     = 43
+      protocol    = 6
+      description = "Service name. VPC ID: ${module.vpc.vpc_id}"
+      self        = true
+    }
+  ]
+
+  number_of_computed_egress_with_prefix_list_ids = 1
 }
 
 ######################################################

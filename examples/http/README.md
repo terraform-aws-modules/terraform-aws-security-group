@@ -25,17 +25,17 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_http_mysql_1_sg"></a> [http\_mysql\_1\_sg](#module\_http\_mysql\_1\_sg) | ../../modules/http-80 |  |
-| <a name="module_http_mysql_2_sg"></a> [http\_mysql\_2\_sg](#module\_http\_mysql\_2\_sg) | ../../modules/http-80 |  |
-| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 |  |
-| <a name="module_http_with_egress_minimal_sg"></a> [http\_with\_egress\_minimal\_sg](#module\_http\_with\_egress\_minimal\_sg) | ../../modules/http-80 |  |
-| <a name="module_http_with_egress_sg"></a> [http\_with\_egress\_sg](#module\_http\_with\_egress\_sg) | ../../modules/http-80 |  |
+| <a name="module_http_mysql_1_sg"></a> [http\_mysql\_1\_sg](#module\_http\_mysql\_1\_sg) | ../../modules/http-80 | n/a |
+| <a name="module_http_mysql_2_sg"></a> [http\_mysql\_2\_sg](#module\_http\_mysql\_2\_sg) | ../../modules/http-80 | n/a |
+| <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 | n/a |
+| <a name="module_http_with_egress_minimal_sg"></a> [http\_with\_egress\_minimal\_sg](#module\_http\_with\_egress\_minimal\_sg) | ../../modules/http-80 | n/a |
+| <a name="module_http_with_egress_sg"></a> [http\_with\_egress\_sg](#module\_http\_with\_egress\_sg) | ../../modules/http-80 | n/a |
 
 ## Resources
 

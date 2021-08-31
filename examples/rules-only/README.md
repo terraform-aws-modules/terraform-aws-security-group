@@ -25,14 +25,14 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.56.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ |  |
-| <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ |  |
+| <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ | n/a |
+| <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ | n/a |
 
 ## Resources
 

@@ -29,7 +29,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_sg"></a> [sg](#module\_sg) | ../../ |  |
+| <a name="module_sg"></a> [sg](#module\_sg) | ../../ | n/a |
 
 ## Resources
 

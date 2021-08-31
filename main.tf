@@ -76,7 +76,7 @@ resource "aws_security_group_rule" "computed_ingress_rules" {
 
   cidr_blocks      = var.ingress_cidr_blocks
   ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
-  prefix_list_ids  = var.ingress_prefix_list_ids
+  prefix_list_ids  = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description      = var.rules[var.computed_ingress_rules[count.index]][3]
 
   from_port = var.rules[var.computed_ingress_rules[count.index]][0]
@@ -95,7 +95,7 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
   type              = "ingress"
 
   source_security_group_id = var.ingress_with_source_security_group_id[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.ingress_prefix_list_ids
+  prefix_list_ids          = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.ingress_with_source_security_group_id[count.index],
     "description",
@@ -139,7 +139,7 @@ resource "aws_security_group_rule" "computed_ingress_with_source_security_group_
   type              = "ingress"
 
   source_security_group_id = var.computed_ingress_with_source_security_group_id[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.ingress_prefix_list_ids
+  prefix_list_ids          = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.computed_ingress_with_source_security_group_id[count.index],
     "description",
@@ -190,7 +190,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
       join(",", var.ingress_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.ingress_with_cidr_blocks[count.index],
     "description",
@@ -229,7 +229,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
       join(",", var.ingress_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.computed_ingress_with_cidr_blocks[count.index],
     "description",
@@ -280,7 +280,7 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
       join(",", var.ingress_ipv6_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.ingress_with_ipv6_cidr_blocks[count.index],
     "description",
@@ -319,7 +319,7 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
       join(",", var.ingress_ipv6_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.computed_ingress_with_ipv6_cidr_blocks[count.index],
     "description",
@@ -363,7 +363,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
   type              = "ingress"
 
   self            = lookup(var.ingress_with_self[count.index], "self", true)
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.ingress_with_self[count.index],
     "description",
@@ -395,7 +395,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
   type              = "ingress"
 
   self            = lookup(var.computed_ingress_with_self[count.index], "self", true)
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.ingress_prefix_list_ids : null
   description = lookup(
     var.computed_ingress_with_self[count.index],
     "description",
@@ -420,7 +420,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
 }
 # Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
 resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
-  count = var.create ? length(var.ingress_with_prefix_list_ids) : 0
+  count = var.create && length(var.ingress_prefix_list_ids) > 0 ? length(var.ingress_with_prefix_list_ids) : 0
 
   security_group_id = local.this_sg_id
   type              = "ingress"
@@ -451,7 +451,7 @@ resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
 
 # Computed - Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
 resource "aws_security_group_rule" "computed_ingress_with_prefix_list_ids" {
-  count = var.create ? var.number_of_computed_ingress_with_prefix_list_ids : 0
+  count = var.create && length(var.ingress_prefix_list_ids) > 0 ? var.number_of_computed_ingress_with_prefix_list_ids : 0
 
   security_group_id = local.this_sg_id
   type              = "ingress"
@@ -496,7 +496,7 @@ resource "aws_security_group_rule" "egress_rules" {
 
   cidr_blocks      = var.egress_cidr_blocks
   ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
+  prefix_list_ids  = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description      = var.rules[var.egress_rules[count.index]][3]
 
   from_port = var.rules[var.egress_rules[count.index]][0]
@@ -513,7 +513,7 @@ resource "aws_security_group_rule" "computed_egress_rules" {
 
   cidr_blocks      = var.egress_cidr_blocks
   ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
+  prefix_list_ids  = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description      = var.rules[var.computed_egress_rules[count.index]][3]
 
   from_port = var.rules[var.computed_egress_rules[count.index]][0]
@@ -532,7 +532,7 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
   type              = "egress"
 
   source_security_group_id = var.egress_with_source_security_group_id[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.egress_prefix_list_ids
+  prefix_list_ids          = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.egress_with_source_security_group_id[count.index],
     "description",
@@ -576,7 +576,7 @@ resource "aws_security_group_rule" "computed_egress_with_source_security_group_i
   type              = "egress"
 
   source_security_group_id = var.computed_egress_with_source_security_group_id[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.egress_prefix_list_ids
+  prefix_list_ids          = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.computed_egress_with_source_security_group_id[count.index],
     "description",
@@ -627,7 +627,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
       join(",", var.egress_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.egress_with_cidr_blocks[count.index],
     "description",
@@ -666,7 +666,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
       join(",", var.egress_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.computed_egress_with_cidr_blocks[count.index],
     "description",
@@ -717,7 +717,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
       join(",", var.egress_ipv6_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.egress_with_ipv6_cidr_blocks[count.index],
     "description",
@@ -756,7 +756,7 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
       join(",", var.egress_ipv6_cidr_blocks),
     ),
   )
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.computed_egress_with_ipv6_cidr_blocks[count.index],
     "description",
@@ -800,7 +800,7 @@ resource "aws_security_group_rule" "egress_with_self" {
   type              = "egress"
 
   self            = lookup(var.egress_with_self[count.index], "self", true)
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.egress_with_self[count.index],
     "description",
@@ -832,7 +832,7 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
   type              = "egress"
 
   self            = lookup(var.computed_egress_with_self[count.index], "self", true)
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = var.enable_prefix_lists_cross_over ? var.egress_prefix_list_ids : null
   description = lookup(
     var.computed_egress_with_self[count.index],
     "description",
@@ -858,12 +858,12 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
 
 # Security group rules with "egress_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
 resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
-  count = var.create ? length(var.egress_with_prefix_list_ids) : 0
+  count = var.create && length(var.egress_prefix_list_ids) > 0 ? length(var.egress_with_prefix_list_ids) : 0
 
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  prefix_list_ids          = var.egress_prefix_list_ids
+  prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.egress_with_prefix_list_ids[count.index],
     "description",
@@ -901,13 +901,12 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
 
 # Computed - Security group rules with "source_security_group_id", but without "cidr_blocks", "self" or "source_security_group_id"
 resource "aws_security_group_rule" "computed_egress_with_prefix_list_ids" {
-  count = var.create ? var.number_of_computed_egress_with_prefix_list_ids : 0
+  count = var.create && length(var.egress_prefix_list_ids) > 0 ? var.number_of_computed_egress_with_prefix_list_ids : 0
 
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  source_security_group_id = var.computed_egress_with_prefix_list_ids[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.egress_prefix_list_ids
+  prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.computed_egress_with_prefix_list_ids[count.index],
     "description",
