@@ -105,6 +105,11 @@ variable "ingress_prefix_list_ids" {
   type        = list(string)
   default     = []
 }
+variable "ingress_with_prefix_list_ids" {
+  description = "List of ingress rules to create where 'prefix_list_ids' is used only"
+  type        = list(map(string))
+  default     = []
+}
 
 ###################
 # Computed Ingress
@@ -135,6 +140,11 @@ variable "computed_ingress_with_ipv6_cidr_blocks" {
 
 variable "computed_ingress_with_source_security_group_id" {
   description = "List of computed ingress rules to create where 'source_security_group_id' is used"
+  type        = list(map(string))
+  default     = []
+}
+variable "computed_ingress_with_prefix_list_ids" {
+  description = "List of computed ingress rules to create where 'prefix_list_ids' is used"
   type        = list(map(string))
   default     = []
 }
@@ -171,6 +181,11 @@ variable "number_of_computed_ingress_with_source_security_group_id" {
   type        = number
   default     = 0
 }
+variable "number_of_computed_ingress_with_prefix_list_ids" {
+  description = "Number of computed ingress rules to create where 'prefix_list_ids' is used"
+  type        = number
+  default     = 0
+}
 
 #########
 # Egress
@@ -201,6 +216,11 @@ variable "egress_with_ipv6_cidr_blocks" {
 
 variable "egress_with_source_security_group_id" {
   description = "List of egress rules to create where 'source_security_group_id' is used"
+  type        = list(map(string))
+  default     = []
+}
+variable "egress_with_prefix_list_ids" {
+  description = "List of egress rules to create where 'prefix_list_ids' is used only"
   type        = list(map(string))
   default     = []
 }
@@ -255,6 +275,11 @@ variable "computed_egress_with_source_security_group_id" {
   type        = list(map(string))
   default     = []
 }
+variable "computed_egress_with_prefix_list_ids" {
+  description = "List of computed egress rules to create where 'prefix_list_ids' is used only"
+  type        = list(map(string))
+  default     = []
+}
 
 ##################################
 # Number of computed egress rules
@@ -285,6 +310,11 @@ variable "number_of_computed_egress_with_ipv6_cidr_blocks" {
 
 variable "number_of_computed_egress_with_source_security_group_id" {
   description = "Number of computed egress rules to create where 'source_security_group_id' is used"
+  type        = number
+  default     = 0
+}
+variable "computed_egress_with_prefix_list_ids" {
+  description = "Number of computed egress rules to create where 'prefix_list_ids' is used only"
   type        = number
   default     = 0
 }
