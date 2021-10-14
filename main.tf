@@ -22,6 +22,11 @@ resource "aws_security_group" "this" {
     },
     var.tags,
   )
+
+  timeouts {
+    create = var.timeout_create
+    delete = var.timeout_delete
+  }
 }
 
 #################################
@@ -44,6 +49,11 @@ resource "aws_security_group" "this_name_prefix" {
 
   lifecycle {
     create_before_destroy = true
+  }
+
+  timeouts {
+    create = var.timeout_create
+    delete = var.timeout_delete
   }
 }
 
