@@ -24,8 +24,8 @@ resource "aws_security_group" "this" {
   )
 
   timeouts {
-    create = var.timeout_create
-    delete = var.timeout_delete
+    create = var.create_timeout
+    delete = var.delete_timeout
   }
 }
 
@@ -52,8 +52,8 @@ resource "aws_security_group" "this_name_prefix" {
   }
 
   timeouts {
-    create = var.timeout_create
-    delete = var.timeout_delete
+    create = var.create_timeout
+    delete = var.delete_timeout
   }
 }
 
