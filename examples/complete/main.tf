@@ -311,6 +311,9 @@ module "complete_sg" {
   ]
 
   number_of_computed_egress_with_self = 1
+
+  create_timeout = "15m"
+  delete_timeout = "45m"
 }
 
 ######################################################
@@ -397,19 +400,3 @@ module "only_rules" {
   ]
 }
 
-#######################################
-# Security group with modified timeouts
-#######################################
-module "ch_timeout_sg" {
-  source = "../../"
-
-  name        = "ch-timeout-sg"
-  description = "Security group with modified timeouts"
-  vpc_id      = data.aws_vpc.default.id
-
-  create_timeout = "15m"
-  delete_timeout = "45m"
-
-  ingress_cidr_blocks = ["10.10.0.0/16"]
-  ingress_rules       = ["https-443-tcp"]
-}
