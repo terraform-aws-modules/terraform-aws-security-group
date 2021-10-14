@@ -55,6 +55,18 @@ variable "tags" {
   default     = {}
 }
 
+variable "create_timeout" {
+  description = "Time to wait for a security group to be created"
+  type        = string
+  default     = "10m"
+}
+
+variable "delete_timeout" {
+  description = "Time to wait for a security group to be deleted"
+  type        = string
+  default     = "15m"
+}
+
 ##########
 # Ingress
 ##########

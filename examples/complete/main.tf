@@ -311,6 +311,9 @@ module "complete_sg" {
   ]
 
   number_of_computed_egress_with_self = 1
+
+  create_timeout = "15m"
+  delete_timeout = "45m"
 }
 
 ######################################################
