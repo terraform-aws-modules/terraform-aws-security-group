@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.4.0"></a>
+## [v4.4.0] - 2021-10-14
+
+- feat: Add timeouts configuration options ([#229](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/229))
+
+
 <a name="v4.3.0"></a>
 ## [v4.3.0] - 2021-06-28
 
@@ -497,7 +503,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.4.0...HEAD
+[v4.4.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.3.0...v4.4.0
 [v4.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.0.0...v4.1.0
