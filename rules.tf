@@ -441,4 +441,3 @@ variable "auto_groups" {
     }
   }
 }
-

@@ -38,4 +38,3 @@ module "http_sg_disabled" {
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
 }
-
