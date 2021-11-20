@@ -123,7 +123,7 @@ Note that `db_computed_sg` and `db_computed_merged_sg` are equal, because it is 
 
 ## Conditional creation
 
-Sometimes you need to have a way to create security group conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `create`.
+Sometimes you need a way to conditionally create a security group. If you're using Terraform < 0.13 which lacks module support for [count](https://www.terraform.io/docs/language/meta-arguments/count.html), you can instead specify the argument `create`.
 
 ```hcl
 # This security group will not be created
