@@ -59,4 +59,3 @@ module "rules_two" {
     },
   ]
 }
-

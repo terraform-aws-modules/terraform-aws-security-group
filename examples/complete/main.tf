@@ -399,4 +399,3 @@ module "only_rules" {
     },
   ]
 }
-
