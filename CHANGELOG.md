@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.5.0"></a>
+## [v4.5.0] - 2021-11-20
+
+- feat: update minimum required versions of AWS provider to >= 3.0 and Terraform >= 0.13.1, update pre-commit and CI configs to latest ([#230](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/230))
+
+
 <a name="v4.4.0"></a>
 ## [v4.4.0] - 2021-10-14
 
@@ -503,7 +509,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.4.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.5.0...HEAD
+[v4.5.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.4.0...v4.5.0
 [v4.4.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.3.0...v4.4.0
 [v4.3.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.1.0...v4.2.0
