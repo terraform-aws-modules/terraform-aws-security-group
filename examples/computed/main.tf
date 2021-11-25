@@ -46,10 +46,9 @@ module "mysql_sg" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
-      source_security_group_id = module.http_sg.this_security_group_id
+      source_security_group_id = module.http_sg.security_group_id
     },
   ]
 
   number_of_computed_ingress_with_source_security_group_id = 1
 }
-

@@ -1,10 +1,13 @@
 repos:
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.45.0
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.58.0
     hooks:
       - id: terraform_fmt
+      - id: terraform_validate
       - id: terraform_docs
-  - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.3.0
+        args:
+          - '--args=--lockfile=false'
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
     hooks:
       - id: check-merge-conflict

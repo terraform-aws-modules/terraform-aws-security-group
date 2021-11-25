@@ -150,14 +150,14 @@ module "complete_sg" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
     {
       from_port                = 23
       to_port                  = 23
       protocol                 = 6
       description              = "Service name"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
   ]
 
@@ -278,7 +278,7 @@ module "complete_sg" {
   computed_egress_with_source_security_group_id = [
     {
       rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.this_security_group_id
+      source_security_group_id = module.main_sg.security_group_id
     },
   ]
 
@@ -311,6 +311,9 @@ module "complete_sg" {
   ]
 
   number_of_computed_egress_with_self = 1
+
+  create_timeout = "15m"
+  delete_timeout = "45m"
 }
 
 ######################################################
@@ -380,3 +383,19 @@ module "fixed_name_sg" {
   ingress_rules       = ["https-443-tcp"]
 }
 
+############################
+# Only security group rules
+############################
+module "only_rules" {
+  source = "../../"
+
+  create_sg         = false
+  security_group_id = module.complete_sg.security_group_id
+  ingress_with_source_security_group_id = [
+    {
+      description              = "http from service one"
+      rule                     = "http-80-tcp"
+      source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+}

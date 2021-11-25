@@ -16,9 +16,9 @@ check_dependencies() {
     exit 1
   fi
 
-  if [[ ! $(command -v json2hcl) ]]; then
-    echo "ERROR: The binary 'json2hcl' is required by this script but is not installed or in the system's PATH."
-    echo "Check documentation: https://github.com/kvz/json2hcl"
+  if [[ ! $(command -v hcl2json) ]]; then
+    echo "ERROR: The binary 'hcl2json' is required by this script but is not installed or in the system's PATH."
+    echo "Check documentation: https://github.com/tmccombs/hcl2json"
     exit 1
   fi
 
@@ -30,8 +30,7 @@ check_dependencies() {
 }
 
 auto_groups_data() {
-  # Removing line with "type" because it json2hcl works with HCL1 only (ref https://github.com/kvz/json2hcl/issues/12)
-  sed '/type/ d' rules.tf | json2hcl -reverse | jq -r '..|.auto_groups?|values|.[0]|.default|.[0]'
+  hcl2json rules.tf | jq -r '..|.auto_groups?|values|.[0].default'
 }
 
 auto_groups_keys() {
@@ -45,7 +44,7 @@ get_auto_value() {
   local group=$2
   local var=$3
 
-  echo "$data" | jq -rc '.[$group][0][$var]' --arg group "$group" --arg var "$var"
+  echo "$data" | jq -rc '.[$group][$var]' --arg group "$group" --arg var "$var"
 }
 
 set_list_if_null() {
@@ -209,7 +208,6 @@ variable "auto_number_of_computed_egress_with_self" {
   type        = number
   default     = $number_of_computed_egress_with_self
 }
-
 EOF
 
     cat <<EOF > "modules/$group/README.md"
@@ -220,7 +218,7 @@ EOF
 \`\`\`hcl
 module "${group/-/_}_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/${group}"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   # omitted...
 }
