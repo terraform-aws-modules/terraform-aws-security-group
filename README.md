@@ -233,7 +233,7 @@ No modules.
 | <a name="input_ingress_with_ipv6_cidr_blocks"></a> [ingress\_with\_ipv6\_cidr\_blocks](#input\_ingress\_with\_ipv6\_cidr\_blocks) | List of ingress rules to create where 'ipv6\_cidr\_blocks' is used | `list(map(string))` | `[]` | no |
 | <a name="input_ingress_with_self"></a> [ingress\_with\_self](#input\_ingress\_with\_self) | List of ingress rules to create where 'self' is defined | `list(map(string))` | `[]` | no |
 | <a name="input_ingress_with_source_security_group_id"></a> [ingress\_with\_source\_security\_group\_id](#input\_ingress\_with\_source\_security\_group\_id) | List of ingress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
-| <a name="input_name"></a> [name](#input\_name) | Name of security group - not required if create\_group is false | `string` | `null` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of security group - not required if create\_sg is false | `string` | `null` | no |
 | <a name="input_number_of_computed_egress_rules"></a> [number\_of\_computed\_egress\_rules](#input\_number\_of\_computed\_egress\_rules) | Number of computed egress rules to create by name | `number` | `0` | no |
 | <a name="input_number_of_computed_egress_with_cidr_blocks"></a> [number\_of\_computed\_egress\_with\_cidr\_blocks](#input\_number\_of\_computed\_egress\_with\_cidr\_blocks) | Number of computed egress rules to create where 'cidr\_blocks' is used | `number` | `0` | no |
 | <a name="input_number_of_computed_egress_with_ipv6_cidr_blocks"></a> [number\_of\_computed\_egress\_with\_ipv6\_cidr\_blocks](#input\_number\_of\_computed\_egress\_with\_ipv6\_cidr\_blocks) | Number of computed egress rules to create where 'ipv6\_cidr\_blocks' is used | `number` | `0` | no |
