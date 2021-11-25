@@ -44,6 +44,9 @@ variable "rules" {
     # DNS
     dns-udp = [53, 53, "udp", "DNS"]
     dns-tcp = [53, 53, "tcp", "DNS"]
+    # Etcd
+    etcd-client-tcp = [2379, 2379, "tcp", "Etcd Client"]
+    etcd-peer-tcp   = [2380, 2380, "tcp", "Etcd Peer"]
     # NTP - Network Time Protocol
     ntp-udp = [123, 123, "udp", "NTP"]
     # Elasticsearch
@@ -217,6 +220,11 @@ variable "auto_groups" {
     }
     docker-swarm = {
       ingress_rules     = ["docker-swarm-mngmt-tcp", "docker-swarm-node-tcp", "docker-swarm-node-udp", "docker-swarm-overlay-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    etcd = {
+      ingress_rules     = ["etcd-client-tcp", "etcd-peer-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -442,4 +450,3 @@ variable "auto_groups" {
     }
   }
 }
-

@@ -19,20 +19,23 @@ Note that this example may create resources which cost money. Run `terraform des
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ |  |
-| <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ |  |
+| <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ | n/a |
+| <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ | n/a |
 
 ## Resources
 
