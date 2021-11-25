@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.6.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.6.0...v4.6.1) (2021-11-25)
+
+
+### Bug Fixes
+
+* Obsolete variable description ([#222](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/222)) ([71d01d6](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/71d01d69523f5bebef58be221e7f7731791979af))
+
 # [4.6.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.5.0...v4.6.0) (2021-11-25)
 
 
