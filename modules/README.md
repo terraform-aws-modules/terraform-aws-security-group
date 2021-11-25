@@ -9,6 +9,7 @@ List of Security Groups implemented as Terraform modules
 * [consul](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/consul)
 * [docker-swarm](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/docker-swarm)
 * [elasticsearch](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/elasticsearch)
+* [etcd](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/etcd)
 * [grafana](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/grafana)
 * [graphite-statsd](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/graphite-statsd)
 * [http-80](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/http-80)

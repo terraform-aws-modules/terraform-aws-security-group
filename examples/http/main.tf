@@ -105,4 +105,3 @@ module "http_with_egress_sg" {
   egress_cidr_blocks      = ["10.10.10.0/28"]
   egress_ipv6_cidr_blocks = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
 }
-

@@ -18,8 +18,8 @@ All automatic values **web module** is using are available [here](https://github
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.42 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
 
 ## Providers
 
@@ -29,7 +29,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_sg"></a> [sg](#module\_sg) | ../../ |  |
+| <a name="module_sg"></a> [sg](#module\_sg) | ../../ | n/a |
 
 ## Resources
 
