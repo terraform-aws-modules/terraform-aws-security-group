@@ -1,3 +1,19 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+# [4.6.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.5.0...v4.6.0) (2021-11-25)
+
+
+### Bug Fixes
+
+* update CI/CD process to enable auto-release workflow ([#233](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/233)) ([1dd6ae9](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/1dd6ae9d8f00c563157677456db8198dda0043bb))
+
+
+### Features
+
+* Added etcd ports (2379, 2380) ([#235](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/235)) ([8b26b16](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/8b26b166f9ee4ba2fbff9666ddff2fa0af32ffb2))
+
 <a name="v4.5.0"></a>
 ## [v4.5.0] - 2021-11-20
 
