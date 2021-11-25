@@ -44,8 +44,8 @@ variable "rules" {
     dns-udp = [53, 53, "udp", "DNS"]
     dns-tcp = [53, 53, "tcp", "DNS"]
     # Etcd
-    etcd-cliet-tcp = [2379, 2379, "tcp", "Etcd Client"]
-    etcd-peer-tcp = [2380, 2380, "tcp", "Etcd Peer"]
+    etcd-client-tcp = [2379, 2379, "tcp", "Etcd Client"]
+    etcd-peer-tcp   = [2380, 2380, "tcp", "Etcd Peer"]
     # NTP - Network Time Protocol
     ntp-udp = [123, 123, "udp", "NTP"]
     # Elasticsearch
