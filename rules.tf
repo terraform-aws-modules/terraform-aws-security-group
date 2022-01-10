@@ -124,6 +124,8 @@ variable "rules" {
     prometheus-pushgateway-http-tcp = [9091, 9091, "tcp", "Prometheus Pushgateway"]
     # Oracle Database
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
+    # Octopus Tentacles
+    octopus-tentacle-tcp = [10933, 10933, "tcp", "Octopus Tentacle"]
     # RabbitMQ
     rabbitmq-4369-tcp  = [4369, 4369, "tcp", "RabbitMQ epmd"]
     rabbitmq-5671-tcp  = [5671, 5671, "tcp", "RabbitMQ"]
