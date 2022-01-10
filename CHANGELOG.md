@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.8.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.7.0...v4.8.0) (2022-01-10)
+
+
+### Features
+
+* Add rule for octopus tentacles ([#236](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/236)) ([55b75b3](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/55b75b32af2867ba4c4bcb40edbc0e470b35134e))
+
 # [4.7.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.6.1...v4.7.0) (2021-11-25)
 
 
