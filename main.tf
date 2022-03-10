@@ -62,7 +62,7 @@ resource "aws_security_group" "this_name_prefix" {
 ###################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "ingress_rules" {
-  count = var.create ? length(var.ingress_rules) : 0
+  for_each = var.create ? toset(var.ingress_rules) : []
 
   security_group_id = local.this_sg_id
   type              = "ingress"
@@ -70,11 +70,11 @@ resource "aws_security_group_rule" "ingress_rules" {
   cidr_blocks      = var.ingress_cidr_blocks
   ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
   prefix_list_ids  = var.ingress_prefix_list_ids
-  description      = var.rules[var.ingress_rules[count.index]][3]
+  description      = var.rules[each.value][3]
 
-  from_port = var.rules[var.ingress_rules[count.index]][0]
-  to_port   = var.rules[var.ingress_rules[count.index]][1]
-  protocol  = var.rules[var.ingress_rules[count.index]][2]
+  from_port = var.rules[each.value][0]
+  to_port   = var.rules[each.value][1]
+  protocol  = var.rules[each.value][2]
 }
 
 # Computed - Security group rules with "cidr_blocks" and it uses list of rules names
@@ -438,7 +438,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
 ##################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "egress_rules" {
-  count = var.create ? length(var.egress_rules) : 0
+  for_each = var.create ? toset(var.egress_rules) : []
 
   security_group_id = local.this_sg_id
   type              = "egress"
@@ -446,11 +446,11 @@ resource "aws_security_group_rule" "egress_rules" {
   cidr_blocks      = var.egress_cidr_blocks
   ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
   prefix_list_ids  = var.egress_prefix_list_ids
-  description      = var.rules[var.egress_rules[count.index]][3]
+  description      = var.rules[each.value][3]
 
-  from_port = var.rules[var.egress_rules[count.index]][0]
-  to_port   = var.rules[var.egress_rules[count.index]][1]
-  protocol  = var.rules[var.egress_rules[count.index]][2]
+  from_port = var.rules[each.value][0]
+  to_port   = var.rules[each.value][1]
+  protocol  = var.rules[each.value][2]
 }
 
 # Computed - Security group rules with "cidr_blocks" and it uses list of rules names
