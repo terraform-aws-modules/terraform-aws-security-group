@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.9.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.8.0...v4.9.0) (2022-03-12)
+
+
+### Features
+
+* Made it clear that we stand with Ukraine ([5fb1af6](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/5fb1af6d24d76339d0dd119d26f881544b886b18))
+
 ## [4.8.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.7.0...v4.8.0) (2022-01-10)
 
 
