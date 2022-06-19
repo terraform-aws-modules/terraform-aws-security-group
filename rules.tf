@@ -162,6 +162,16 @@ variable "rules" {
     storm-nimbus-tcp     = [6627, 6627, "tcp", "Nimbus"]
     storm-ui-tcp         = [8080, 8080, "tcp", "Storm UI"]
     storm-supervisor-tcp = [6700, 6703, "tcp", "Supervisor"]
+    # Wazuh
+    wazuh-server-agent-connection-tcp = [1514, 1514, "tcp", "Agent connection service(TCP)"]
+    wazuh-server-agent-connection-udp = [1514, 1514, "udp", "Agent connection service(UDP)"]
+    wazuh-server-agent-enrollment     = [1515, 1515, "tcp", "Agent enrollment service"]
+    wazuh-server-agent-cluster-daemon = [1516, 1516, "tcp", "Wazuh cluster daemon"]
+    wazuh-server-syslog-collector-tcp = [514, 514, "tcp", "Wazuh Syslog collector(TCP)"]
+    wazuh-server-syslog-collector-udp = [514, 514, "udp", "Wazuh Syslog collector(UDP)"]
+    wazuh-server-restful-api          = [55000, 55000, "tcp", "Wazuh server RESTful API"]
+    wazuh-indexer-restful-api         = [9200, 9200, "tcp", "Wazuh indexer RESTful API"]
+    wazuh-dashboard                   = [443, 443, "tcp", "Wazuh web user interface"]
     # Web
     web-jmx-tcp = [1099, 1099, "tcp", "JMX"]
     # WinRM
@@ -427,6 +437,11 @@ variable "auto_groups" {
     }
     storm = {
       ingress_rules     = ["storm-nimbus-tcp", "storm-ui-tcp", "storm-supervisor-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    wazuh = {
+      ingress_rules     = ["wazuh-server-agent-connection-tcp", "wazuh-server-agent-connection-udp", "wazuh-server-agent-enrollment", "wazuh-server-agent-cluster-daemon", "wazuh-server-syslog-collector-tcp", "wazuh-server-syslog-collector-udp", "wazuh-server-restful-api", "wazuh-indexer-restful-api", "wazuh-dashboard", ]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
