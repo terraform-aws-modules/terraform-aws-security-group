@@ -49,8 +49,10 @@ List of Security Groups implemented as Terraform modules
 * [squid](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/squid)
 * [ssh](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/ssh)
 * [storm](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/storm)
+* [wazuh](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/wazuh)
 * [web](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/web)
 * [winrm](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/winrm)
 * [zipkin](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/zipkin)
 * [zookeeper](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/zookeeper)
 * [_templates](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/_templates) - Source templates for all other modules. Change carefully, test thoughtfully!
+
