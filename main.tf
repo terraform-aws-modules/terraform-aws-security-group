@@ -77,6 +77,10 @@ resource "aws_security_group_rule" "ingress_rules" {
   from_port = var.rules[var.ingress_rules[count.index]][0]
   to_port   = var.rules[var.ingress_rules[count.index]][1]
   protocol  = var.rules[var.ingress_rules[count.index]][2]
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "cidr_blocks" and it uses list of rules names
@@ -94,6 +98,10 @@ resource "aws_security_group_rule" "computed_ingress_rules" {
   from_port = var.rules[var.computed_ingress_rules[count.index]][0]
   to_port   = var.rules[var.computed_ingress_rules[count.index]][1]
   protocol  = var.rules[var.computed_ingress_rules[count.index]][2]
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 ##########################
@@ -141,6 +149,10 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
@@ -185,6 +197,10 @@ resource "aws_security_group_rule" "computed_ingress_with_source_security_group_
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
@@ -224,6 +240,10 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
     "protocol",
     var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
@@ -275,6 +295,10 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
@@ -314,6 +338,10 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
     "protocol",
     var.rules[lookup(var.ingress_with_ipv6_cidr_blocks[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
@@ -365,6 +393,10 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
@@ -397,6 +429,10 @@ resource "aws_security_group_rule" "ingress_with_self" {
     "protocol",
     var.rules[lookup(var.ingress_with_self[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
@@ -429,6 +465,10 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
     "protocol",
     var.rules[lookup(var.computed_ingress_with_self[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 #################
@@ -453,6 +493,10 @@ resource "aws_security_group_rule" "egress_rules" {
   from_port = var.rules[var.egress_rules[count.index]][0]
   to_port   = var.rules[var.egress_rules[count.index]][1]
   protocol  = var.rules[var.egress_rules[count.index]][2]
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "cidr_blocks" and it uses list of rules names
@@ -470,6 +514,10 @@ resource "aws_security_group_rule" "computed_egress_rules" {
   from_port = var.rules[var.computed_egress_rules[count.index]][0]
   to_port   = var.rules[var.computed_egress_rules[count.index]][1]
   protocol  = var.rules[var.computed_egress_rules[count.index]][2]
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 #########################
@@ -517,6 +565,10 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
@@ -561,6 +613,10 @@ resource "aws_security_group_rule" "computed_egress_with_source_security_group_i
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
@@ -600,6 +656,10 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
     "protocol",
     var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
@@ -651,6 +711,10 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
@@ -690,6 +754,10 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
     "protocol",
     var.rules[lookup(var.egress_with_ipv6_cidr_blocks[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
@@ -741,6 +809,10 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
       "_",
     )][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
@@ -773,6 +845,10 @@ resource "aws_security_group_rule" "egress_with_self" {
     "protocol",
     var.rules[lookup(var.egress_with_self[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Computed - Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
@@ -805,6 +881,10 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
     "protocol",
     var.rules[lookup(var.computed_egress_with_self[count.index], "rule", "_")][2],
   )
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 ################
