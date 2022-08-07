@@ -76,6 +76,8 @@ variable "rules" {
     # Kafka
     kafka-broker-tcp        = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
     kafka-broker-tls-tcp    = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    kafka-broker-sasl-tcp   = [9096, 9096, "tcp", "Kafka SASL/SCRAM enabled broker (MSK specific)"]
+    kafka-broker-iam-tcp    = [9098, 9098, "tcp", "Kafka IAM access control enabled (MSK specific)"]
     kafka-jmx-exporter-tcp  = [11001, 11001, "tcp", "Kafka JMX Exporter"]
     kafka-node-exporter-tcp = [11002, 11002, "tcp", "Kafka Node Exporter"]
     # Kibana
@@ -276,7 +278,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     kafka = {
-      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-sasl-tcp", "kafka-broker-iam-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
