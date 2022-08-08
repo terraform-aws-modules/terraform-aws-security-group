@@ -4,6 +4,7 @@ repos:
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
+        exclude: '^modules/_templates/[^/]+$'
       - id: terraform_docs
         args:
           - '--args=--lockfile=false'
