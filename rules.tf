@@ -76,8 +76,11 @@ variable "rules" {
     # Kafka
     kafka-broker-tcp            = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
     kafka-broker-tls-tcp        = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    kafka-broker-public-tls-tcp = [9198, 9198, "tcp", "Kafka public TLS enabled broker 0.8.2+"]
     kafka-broker-sasl-scram-tcp = [9096, 9096, "tcp", "Kafka SASL-SCRAM/TLS enabled broker 0.8.2+"]
     kafka-broker-iam-tcp        = [9098, 9098, "tcp", "Kafka IAM/TLS enabled broker 0.8.2+"]
+    zookeeper-node-tcp          = [2181, 2181, "tcp", "Zookeeper nodes 0.8.2+"]
+    zookeeper-node-tls-tcp      = [2182, 2182, "tcp", "Zookeeper nodes 0.8.2+"]
     kafka-jmx-exporter-tcp      = [11001, 11001, "tcp", "Kafka JMX Exporter"]
     kafka-node-exporter-tcp     = [11002, 11002, "tcp", "Kafka Node Exporter"]
     # Kibana
