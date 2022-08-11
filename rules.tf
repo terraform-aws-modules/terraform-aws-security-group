@@ -281,7 +281,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     kafka = {
-      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp",  "kafka-broker-sasl-scram-tcp",  "kafka-broker-iam-tcp","kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-iam-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
