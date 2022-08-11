@@ -74,10 +74,15 @@ variable "rules" {
     ipsec-500-udp  = [500, 500, "udp", "IPSEC ISAKMP"]
     ipsec-4500-udp = [4500, 4500, "udp", "IPSEC NAT-T"]
     # Kafka
-    kafka-broker-tcp        = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
-    kafka-broker-tls-tcp    = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
-    kafka-jmx-exporter-tcp  = [11001, 11001, "tcp", "Kafka JMX Exporter"]
-    kafka-node-exporter-tcp = [11002, 11002, "tcp", "Kafka Node Exporter"]
+    kafka-broker-tcp            = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
+    kafka-broker-tls-tcp        = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    kafka-broker-sasl-scram-tcp = [9096, 9096, "tcp", "Kafka SASL-SCRAM/TLS enabled broker 0.8.2+"]
+    kafka-broker-iam-tcp        = [9098, 9098, "tcp", "Kafka IAM Access Control/TLS enabled broker 0.8.2+"]
+    kafka-broker-public-iam-tcp = [9198, 9198, "tcp", "Kafka public IAM Access Control/TLS enabled broker 0.8.2+"]
+    zookeeper-nodes-tcp         = [2181, 2181, "tcp", "Zookeeper nodes 0.8.2+"]
+    zookeeper-nodes-tls-tcp     = [2182, 2182, "tcp", "Zookeeper TLS enabled nodes 0.8.2+"]
+    kafka-jmx-exporter-tcp      = [11001, 11001, "tcp", "Kafka JMX Exporter"]
+    kafka-node-exporter-tcp     = [11002, 11002, "tcp", "Kafka Node Exporter"]
     # Kibana
     kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
     # Kubernetes
@@ -276,7 +281,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     kafka = {
-      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-iam-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
