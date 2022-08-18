@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.11.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.10.0...v4.11.0) (2022-08-18)
+
+
+### Features
+
+* Add rules for Wazuh ([#243](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/243)) ([b23ca08](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/b23ca08653728b1645a9c96ee4adb5eb17839b70))
+
 ## [4.10.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.9.0...v4.10.0) (2022-08-16)
 
 
