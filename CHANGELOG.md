@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.10.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.9.0...v4.10.0) (2022-08-16)
+
+
+### Features
+
+* Add additional output security_group_arn ([#249](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/249)) ([44d8a25](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/44d8a25e2415c905824d0967621cfbd4311ed13d))
+
 ## [4.9.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.8.0...v4.9.0) (2022-03-12)
 
 
