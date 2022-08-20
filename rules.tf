@@ -74,12 +74,15 @@ variable "rules" {
     ipsec-500-udp  = [500, 500, "udp", "IPSEC ISAKMP"]
     ipsec-4500-udp = [4500, 4500, "udp", "IPSEC NAT-T"]
     # Kafka
-    kafka-broker-tcp        = [9092, 9092, "tcp", "Kafka broker 0.8.2+"]
-    kafka-broker-tls-tcp    = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
-    kafka-broker-sasl-tcp   = [9096, 9096, "tcp", "Kafka SASL/SCRAM enabled broker (MSK specific)"]
-    kafka-broker-iam-tcp    = [9098, 9098, "tcp", "Kafka IAM access control enabled (MSK specific)"]
-    kafka-jmx-exporter-tcp  = [11001, 11001, "tcp", "Kafka JMX Exporter"]
-    kafka-node-exporter-tcp = [11002, 11002, "tcp", "Kafka Node Exporter"]
+    kafka-broker-tcp                   = [9092, 9092, "tcp", "Kafka PLAINTEXT enable broker 0.8.2+"]
+    kafka-broker-tls-tcp               = [9094, 9094, "tcp", "Kafka TLS enabled broker 0.8.2+"]
+    kafka-broker-tls-public-tcp        = [9194, 9194, "tcp", "Kafka TLS Public enabled broker 0.8.2+ (MSK specific)"]
+    kafka-broker-sasl-scram-tcp        = [9096, 9096, "tcp", "Kafka SASL/SCRAM enabled broker (MSK specific)"]
+    kafka-broker-sasl-scram-public-tcp = [9196, 9196, "tcp", "Kafka SASL/SCRAM Public enabled broker (MSK specific)"]
+    kafka-broker-sasl-iam-tcp          = [9098, 9098, "tcp", "Kafka SASL/IAM access control enabled (MSK specific)"]
+    kafka-broker-sasl-iam-public-tcp   = [9198, 9198, "tcp", "Kafka SASL/IAM Public access control enabled (MSK specific)"]
+    kafka-jmx-exporter-tcp             = [11001, 11001, "tcp", "Kafka JMX Exporter"]
+    kafka-node-exporter-tcp            = [11002, 11002, "tcp", "Kafka Node Exporter"]
     # Kibana
     kibana-tcp = [5601, 5601, "tcp", "Kibana Web Interface"]
     # Kubernetes
@@ -176,10 +179,11 @@ variable "rules" {
     zipkin-query-tcp       = [9411, 9411, "tcp", "Zipkin query port"]
     zipkin-web-tcp         = [8080, 8080, "tcp", "Zipkin web port"]
     # Zookeeper
-    zookeeper-2181-tcp = [2181, 2181, "tcp", "Zookeeper"]
-    zookeeper-2888-tcp = [2888, 2888, "tcp", "Zookeeper"]
-    zookeeper-3888-tcp = [3888, 3888, "tcp", "Zookeeper"]
-    zookeeper-jmx-tcp  = [7199, 7199, "tcp", "JMX"]
+    zookeeper-2181-tcp     = [2181, 2181, "tcp", "Zookeeper"]
+    zookeeper-2182-tls-tcp = [2182, 2182, "tcp", "Zookeeper TLS (MSK specific)"]
+    zookeeper-2888-tcp     = [2888, 2888, "tcp", "Zookeeper"]
+    zookeeper-3888-tcp     = [3888, 3888, "tcp", "Zookeeper"]
+    zookeeper-jmx-tcp      = [7199, 7199, "tcp", "JMX"]
     # Open all ports & protocols
     all-all       = [-1, -1, "-1", "All protocols"]
     all-tcp       = [0, 65535, "tcp", "All TCP ports"]
@@ -278,7 +282,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     kafka = {
-      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-sasl-tcp", "kafka-broker-iam-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+      ingress_rules     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-tls-public-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-sasl-iam-tcp", "kafka-broker-sasl-iam-public-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -448,7 +452,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     zookeeper = {
-      ingress_rules     = ["zookeeper-2181-tcp", "zookeeper-2888-tcp", "zookeeper-3888-tcp", "zookeeper-jmx-tcp"]
+      ingress_rules     = ["zookeeper-2181-tcp", "zookeeper-2182-tls-tcp", "zookeeper-2888-tcp", "zookeeper-3888-tcp", "zookeeper-jmx-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
