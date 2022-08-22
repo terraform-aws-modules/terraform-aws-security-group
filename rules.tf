@@ -177,6 +177,10 @@ variable "rules" {
     # WinRM
     winrm-http-tcp  = [5985, 5985, "tcp", "WinRM HTTP"]
     winrm-https-tcp = [5986, 5986, "tcp", "WinRM HTTPS"]
+    # Zabbix
+    zabbix-server = [10051, "tcp", "Zabbix Server"]
+    zabbix-proxy  = [10051, "tcp", "Zabbix Proxy"]
+    zabbix-agent  = [10050, "tcp", "Zabbix Agent"]
     # Zipkin
     zipkin-admin-tcp       = [9990, 9990, "tcp", "Zipkin Admin port collector"]
     zipkin-admin-query-tcp = [9901, 9901, "tcp", "Zipkin Admin port query"]
@@ -452,6 +456,11 @@ variable "auto_groups" {
     }
     winrm = {
       ingress_rules     = ["winrm-http-tcp", "winrm-https-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    zabbix = {
+      ingress_rules     = ["zabbix-server", "zabbix-proxy", "zabbix-agent"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
