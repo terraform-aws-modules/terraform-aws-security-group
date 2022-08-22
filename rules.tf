@@ -179,8 +179,8 @@ variable "rules" {
     winrm-https-tcp = [5986, 5986, "tcp", "WinRM HTTPS"]
     # Zabbix
     zabbix-server = [10051, "tcp", "Zabbix Server"]
-    zabbix-proxy = [10051, "tcp", "Zabbix Proxy"]
-    zabbix-agent = [10050, "tcp", "Zabbix Agent"]
+    zabbix-proxy  = [10051, "tcp", "Zabbix Proxy"]
+    zabbix-agent  = [10050, "tcp", "Zabbix Agent"]
     # Zipkin
     zipkin-admin-tcp       = [9990, 9990, "tcp", "Zipkin Admin port collector"]
     zipkin-admin-query-tcp = [9901, 9901, "tcp", "Zipkin Admin port query"]
