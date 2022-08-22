@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.12.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.11.0...v4.12.0) (2022-08-22)
+
+
+### Features
+
+* Added Zabbix rules ([#255](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/255)) ([d29295c](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/d29295c97dfc4d8f07b5ee80d34b630c23cd79c9))
+
 ## [4.11.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.10.0...v4.11.0) (2022-08-18)
 
 
