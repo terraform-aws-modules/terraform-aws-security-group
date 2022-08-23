@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.13.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.12.0...v4.13.0) (2022-08-23)
+
+
+### Features
+
+* Add SASL/SCRAM and IAM access control TCP ports for Kafka / MSK ([#254](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/254)) ([c254255](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/c25425523e38284c5e454d1435510663db8dbff8))
+
 ## [4.12.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.11.0...v4.12.0) (2022-08-22)
 
 
