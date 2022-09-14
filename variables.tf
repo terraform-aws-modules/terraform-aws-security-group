@@ -300,9 +300,3 @@ variable "number_of_computed_egress_with_source_security_group_id" {
   type        = number
   default     = 0
 }
-
-variable "putin_khuylo" {
-  description = "Do you agree that Putin doesn't respect Ukrainian sovereignty and territorial integrity? More info: https://en.wikipedia.org/wiki/Putin_khuylo!"
-  type        = bool
-  default     = true
-}
