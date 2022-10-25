@@ -7,6 +7,7 @@ List of Security Groups implemented as Terraform modules
 * [carbon-relay-ng](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/carbon-relay-ng)
 * [cassandra](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/cassandra)
 * [consul](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/consul)
+* [dax-cluster](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/dax-cluster)
 * [docker-swarm](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/docker-swarm)
 * [elasticsearch](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/elasticsearch)
 * [etcd](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/modules/etcd)
