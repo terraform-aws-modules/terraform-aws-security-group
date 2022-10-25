@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.16.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.15.0...v4.16.0) (2022-10-25)
+
+
+### Features
+
+* Add a rule for prometheus node exporter on port 9100 ([#262](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/262)) ([ee913e4](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/ee913e48cbbbed14b97deb2b38188d97d1395f6b))
+
 ## [4.15.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.14.0...v4.15.0) (2022-10-25)
 
 
