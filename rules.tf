@@ -36,6 +36,9 @@ variable "rules" {
     consul-serf-lan-udp    = [8301, 8301, "udp", "Serf LAN"]
     consul-serf-wan-tcp    = [8302, 8302, "tcp", "Serf WAN"]
     consul-serf-wan-udp    = [8302, 8302, "udp", "Serf WAN"]
+    # DAX Cluster
+    dax-cluster-unencrypted-tcp = [8111, 8111, "tcp", "DAX Cluster unencrypted"]
+    dax-cluster-encrypted-tcp   = [9111, 9111, "tcp", "DAX Cluster encrypted"]
     # Docker Swarm
     docker-swarm-mngmt-tcp   = [2377, 2377, "tcp", "Docker Swarm cluster management"]
     docker-swarm-node-tcp    = [7946, 7946, "tcp", "Docker Swarm node"]
@@ -239,6 +242,11 @@ variable "auto_groups" {
     }
     consul = {
       ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    dax-cluster = {
+      ingress_rules     = ["dax-cluster-unencrypted-tcp", "dax-cluster-encrypted-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }

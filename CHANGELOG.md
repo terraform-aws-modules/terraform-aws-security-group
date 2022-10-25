@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.14.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.13.1...v4.14.0) (2022-10-25)
+
+
+### Features
+
+* Added DAX Cluster rules ([#259](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/259)) ([0da7667](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/0da7667766bbf0aa02b2c087bc4c48ae2845a384))
+
 ### [4.13.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.13.0...v4.13.1) (2022-09-26)
 
 
