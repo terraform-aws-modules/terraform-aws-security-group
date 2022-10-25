@@ -36,6 +36,9 @@ variable "rules" {
     consul-serf-lan-udp    = [8301, 8301, "udp", "Serf LAN"]
     consul-serf-wan-tcp    = [8302, 8302, "tcp", "Serf WAN"]
     consul-serf-wan-udp    = [8302, 8302, "udp", "Serf WAN"]
+    # DAX Cluster
+    dax-cluster-unencrypted-tcp = [8111, 8111, "tcp", "DAX Cluster unencrypted"]
+    dax-cluster-encrypted-tcp   = [9111, 9111, "tcp", "DAX Cluster encrypted"]
     # Docker Swarm
     docker-swarm-mngmt-tcp   = [2377, 2377, "tcp", "Docker Swarm cluster management"]
     docker-swarm-node-tcp    = [7946, 7946, "tcp", "Docker Swarm node"]
@@ -168,6 +171,8 @@ variable "rules" {
     storm-nimbus-tcp     = [6627, 6627, "tcp", "Nimbus"]
     storm-ui-tcp         = [8080, 8080, "tcp", "Storm UI"]
     storm-supervisor-tcp = [6700, 6703, "tcp", "Supervisor"]
+    # Vault
+    vault-tcp = [8200, 8200, "tcp", "Vault"]
     # Wazuh
     wazuh-server-agent-connection-tcp = [1514, 1514, "tcp", "Agent connection service(TCP)"]
     wazuh-server-agent-connection-udp = [1514, 1514, "udp", "Agent connection service(UDP)"]
@@ -238,6 +243,11 @@ variable "auto_groups" {
     }
     consul = {
       ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    dax-cluster = {
+      ingress_rules     = ["dax-cluster-unencrypted-tcp", "dax-cluster-encrypted-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
@@ -448,6 +458,11 @@ variable "auto_groups" {
     }
     storm = {
       ingress_rules     = ["storm-nimbus-tcp", "storm-ui-tcp", "storm-supervisor-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    vault = {
+      ingress_rules     = ["vault-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
