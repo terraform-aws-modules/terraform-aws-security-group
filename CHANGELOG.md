@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.15.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.14.0...v4.15.0) (2022-10-25)
+
+
+### Features
+
+* Added Vault rule ([#260](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/260)) ([5ae4f94](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/5ae4f9454ea099a092628139b055985eb087fe0b))
+
 ## [4.14.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.13.1...v4.14.0) (2022-10-25)
 
 
