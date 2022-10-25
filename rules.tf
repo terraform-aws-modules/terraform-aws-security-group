@@ -127,6 +127,7 @@ variable "rules" {
     # Prometheus
     prometheus-http-tcp             = [9090, 9090, "tcp", "Prometheus"]
     prometheus-pushgateway-http-tcp = [9091, 9091, "tcp", "Prometheus Pushgateway"]
+    prometheus-node-exporter-http-tcp = [9100, 9100, "tcp", "Prometheus Node Exporter"]
     # Oracle Database
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # Octopus Tentacles
