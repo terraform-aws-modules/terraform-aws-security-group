@@ -170,6 +170,8 @@ variable "rules" {
     storm-nimbus-tcp     = [6627, 6627, "tcp", "Nimbus"]
     storm-ui-tcp         = [8080, 8080, "tcp", "Storm UI"]
     storm-supervisor-tcp = [6700, 6703, "tcp", "Supervisor"]
+    # Vault
+    vault-tcp = [8200, 8200, "tcp", "Vault"]
     # Wazuh
     wazuh-server-agent-connection-tcp = [1514, 1514, "tcp", "Agent connection service(TCP)"]
     wazuh-server-agent-connection-udp = [1514, 1514, "udp", "Agent connection service(UDP)"]
@@ -455,6 +457,11 @@ variable "auto_groups" {
     }
     storm = {
       ingress_rules     = ["storm-nimbus-tcp", "storm-ui-tcp", "storm-supervisor-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    vault = {
+      ingress_rules     = ["vault-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
