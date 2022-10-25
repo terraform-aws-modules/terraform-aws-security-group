@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = list(string)
-  default     = ["prometheus-http-tcp", "prometheus-pushgateway-http-tcp"]
+  default     = ["prometheus-http-tcp", "prometheus-pushgateway-http-tcp", "prometheus-node-exporter-http-tcp"]
 }
 
 variable "auto_ingress_with_self" {
