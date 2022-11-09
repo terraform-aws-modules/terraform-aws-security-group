@@ -40,6 +40,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_main_sg"></a> [main\_sg](#module\_main\_sg) | ../../ | n/a |
 | <a name="module_only_rules"></a> [only\_rules](#module\_only\_rules) | ../../ | n/a |
 | <a name="module_prefix_list"></a> [prefix\_list](#module\_prefix\_list) | ../../ | n/a |
+| <a name="module_prefix_list_sg"></a> [prefix\_list\_sg](#module\_prefix\_list\_sg) | ../../ | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
 
 ## Resources
@@ -48,6 +49,7 @@ Note that this example may create resources which cost money. Run `terraform des
 |------|------|
 | [aws_prefix_list.dynamodb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
 | [aws_prefix_list.s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
+| [aws_ec2_managed_prefix_list.prefix_list_sg_example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
 | [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
