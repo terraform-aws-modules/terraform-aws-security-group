@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.16.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.0...v4.16.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* Update CI configuration files to use latest version ([#263](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/263)) ([bf115ff](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/bf115ff2fd33da35d16ea993fbd2a62efa4364e7))
+
 ## [4.16.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.15.0...v4.16.0) (2022-10-25)
 
 
