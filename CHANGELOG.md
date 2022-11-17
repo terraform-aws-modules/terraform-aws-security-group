@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.16.2](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.1...v4.16.2) (2022-11-17)
+
+
+### Bug Fixes
+
+* Fixed hcl2json call in update_groups.sh ([1e33b5f](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/1e33b5f2d9a57c017293bf57bf30f72be941a404))
+
 ### [4.16.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.0...v4.16.1) (2022-11-14)
 
 
