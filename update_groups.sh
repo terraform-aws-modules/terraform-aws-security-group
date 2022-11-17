@@ -30,7 +30,7 @@ check_dependencies() {
 }
 
 auto_groups_data() {
-  hcl2json rules.tf | jq -r '..|.auto_groups?|values|.default'
+  hcl2json rules.tf | jq -r '..|.auto_groups?|values|.[0].default'
 }
 
 auto_groups_keys() {
