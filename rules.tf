@@ -96,6 +96,9 @@ variable "rules" {
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
     # Logstash
     logstash-tcp = [5044, 5044, "tcp", "Logstash"]
+    # Loki
+    loki-tcp          = [3100, 3100, "tcp", "Loki"]
+    loki-promtail-tcp = [9080, 9080, "tcp", "Loki Promtail"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
     # MinIO
@@ -333,6 +336,11 @@ variable "auto_groups" {
     }
     logstash = {
       ingress_rules     = ["logstash-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    loki = {
+      ingress_rules     = ["lok-tcp", "loki-promtail-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
