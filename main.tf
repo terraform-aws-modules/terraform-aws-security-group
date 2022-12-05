@@ -194,14 +194,17 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  cidr_blocks = split(
-    ",",
-    lookup(
-      var.ingress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.ingress_cidr_blocks),
+  cidr_blocks = (
+    length(lookup(var.ingress_with_cidr_blocks[count.index],"cidr_blocks","")) + 
+    length(var.ingress_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.ingress_with_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.ingress_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.ingress_with_cidr_blocks[count.index],
@@ -233,14 +236,17 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  cidr_blocks = split(
-    ",",
-    lookup(
-      var.computed_ingress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.ingress_cidr_blocks),
+  cidr_blocks = (
+    length(lookup(var.computed_ingress_with_cidr_blocks[count.index],"cidr_blocks","")) + 
+    length(var.ingress_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.computed_ingress_with_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.ingress_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.computed_ingress_with_cidr_blocks[count.index],
@@ -284,14 +290,17 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  ipv6_cidr_blocks = split(
-    ",",
-    lookup(
-      var.ingress_with_ipv6_cidr_blocks[count.index],
-      "ipv6_cidr_blocks",
-      join(",", var.ingress_ipv6_cidr_blocks),
+  ipv6_cidr_blocks = (
+    length(lookup(var.ingress_with_ipv6_cidr_blocks[count.index],"ipv6_cidr_blocks","")) + 
+    length(var.ingress_ipv6_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.ingress_with_ipv6_cidr_blocks[count.index],
+        "ipv6_cidr_blocks",
+        join(",", var.ingress_ipv6_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.ingress_with_ipv6_cidr_blocks[count.index],
@@ -323,14 +332,17 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  ipv6_cidr_blocks = split(
-    ",",
-    lookup(
-      var.computed_ingress_with_ipv6_cidr_blocks[count.index],
-      "ipv6_cidr_blocks",
-      join(",", var.ingress_ipv6_cidr_blocks),
+  ipv6_cidr_blocks = (
+    length(lookup(var.computed_ingress_with_ipv6_cidr_blocks[count.index],"ipv6_cidr_blocks","")) + 
+    length(var.ingress_ipv6_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.computed_ingress_with_ipv6_cidr_blocks[count.index],
+        "ipv6_cidr_blocks",
+        join(",", var.ingress_ipv6_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.ingress_prefix_list_ids
   description = lookup(
     var.computed_ingress_with_ipv6_cidr_blocks[count.index],
@@ -570,14 +582,17 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  cidr_blocks = split(
-    ",",
-    lookup(
-      var.egress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.egress_cidr_blocks),
+  cidr_blocks = (
+    length(lookup(var.egress_with_cidr_blocks[count.index],"cidr_blocks","")) + 
+    length(var.egress_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.egress_with_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.egress_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.egress_with_cidr_blocks[count.index],
@@ -609,14 +624,17 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  cidr_blocks = split(
-    ",",
-    lookup(
-      var.computed_egress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.egress_cidr_blocks),
+  cidr_blocks = (
+    length(lookup(var.computed_egress_with_cidr_blocks[count.index],"cidr_blocks","")) + 
+    length(var.egress_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.computed_egress_with_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.egress_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.computed_egress_with_cidr_blocks[count.index],
@@ -660,14 +678,17 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  ipv6_cidr_blocks = split(
-    ",",
-    lookup(
-      var.egress_with_ipv6_cidr_blocks[count.index],
-      "ipv6_cidr_blocks",
-      join(",", var.egress_ipv6_cidr_blocks),
+  ipv6_cidr_blocks = (
+    length(lookup(var.egress_with_ipv6_cidr_blocks[count.index],"ipv6_cidr_blocks","")) + 
+    length(var.egress_ipv6_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.egress_with_ipv6_cidr_blocks[count.index],
+        "ipv6_cidr_blocks",
+        join(",", var.egress_ipv6_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.egress_with_ipv6_cidr_blocks[count.index],
@@ -699,14 +720,17 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  ipv6_cidr_blocks = split(
-    ",",
-    lookup(
-      var.computed_egress_with_ipv6_cidr_blocks[count.index],
-      "ipv6_cidr_blocks",
-      join(",", var.egress_ipv6_cidr_blocks),
+  ipv6_cidr_blocks = (
+    length(lookup(var.computed_egress_with_ipv6_cidr_blocks[count.index],"ipv6_cidr_blocks","")) + 
+    length(var.egress_ipv6_cidr_blocks)
+    ) > 0 ? split(
+      ",",
+      lookup(
+        var.computed_egress_with_ipv6_cidr_blocks[count.index],
+        "ipv6_cidr_blocks",
+        join(",", var.egress_ipv6_cidr_blocks),
     ),
-  )
+  ) : []
   prefix_list_ids = var.egress_prefix_list_ids
   description = lookup(
     var.computed_egress_with_ipv6_cidr_blocks[count.index],
