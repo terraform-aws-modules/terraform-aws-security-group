@@ -36,6 +36,8 @@ variable "rules" {
     consul-serf-lan-udp    = [8301, 8301, "udp", "Serf LAN"]
     consul-serf-wan-tcp    = [8302, 8302, "tcp", "Serf WAN"]
     consul-serf-wan-udp    = [8302, 8302, "udp", "Serf WAN"]
+    # CyberArk PAM
+    cyberark-vault-tcp    = [1858, 1858, "tcp", "CyberArk Vault"]
     # DAX Cluster
     dax-cluster-unencrypted-tcp = [8111, 8111, "tcp", "DAX Cluster unencrypted"]
     dax-cluster-encrypted-tcp   = [9111, 9111, "tcp", "DAX Cluster encrypted"]
@@ -243,6 +245,11 @@ variable "auto_groups" {
     }
     consul = {
       ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    cyberark = {
+      ingress_rules     = ["cyberark-vault-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
