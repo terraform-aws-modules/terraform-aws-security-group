@@ -205,11 +205,11 @@ variable "rules" {
     zookeeper-3888-tcp     = [3888, 3888, "tcp", "Zookeeper"]
     zookeeper-jmx-tcp      = [7199, 7199, "tcp", "JMX"]
     # Open all ports & protocols
-    all-all       = [-1, -1, "-1", "All protocols"]
+    all-all       = [0, 0, "-1", "All protocols"]
     all-tcp       = [0, 65535, "tcp", "All TCP ports"]
     all-udp       = [0, 65535, "udp", "All UDP ports"]
-    all-icmp      = [-1, -1, "icmp", "All IPV4 ICMP"]
-    all-ipv6-icmp = [-1, -1, 58, "All IPV6 ICMP"]
+    all-icmp      = [0, 0, "icmp", "All IPV4 ICMP"]
+    all-ipv6-icmp = [0, 0, 58, "All IPV6 ICMP"]
     # This is a fallback rule to pass to lookup() as default. It does not open anything, because it should never be used.
     _ = ["", "", ""]
   }
