@@ -97,7 +97,7 @@ variable "rules" {
     # Logstash
     logstash-tcp = [5044, 5044, "tcp", "Logstash"]
     # Loki
-    loki-grafana = [3100, 3100, "tcp", "Grafana Loki enpoint"]
+    loki-grafana      = [3100, 3100, "tcp", "Grafana Loki enpoint"]
     loki-grafana-grpc = [9096, 9096, "tcp", "Grafana Loki GRPC"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
