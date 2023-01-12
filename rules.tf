@@ -97,8 +97,8 @@ variable "rules" {
     # Logstash
     logstash-tcp = [5044, 5044, "tcp", "Logstash"]
     # Loki
-    grafana-loki = [3100, 3100, "tcp", "Grafana Loki enpoint"]
-    grafana-loki-grpc = [9096, 9096, "tcp", "Grafana Loki GRPC"]
+    loki-grafana = [3100, 3100, "tcp", "Grafana Loki enpoint"]
+    loki-grafana-grpc = [9096, 9096, "tcp", "Grafana Loki GRPC"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
     # MinIO
@@ -135,7 +135,7 @@ variable "rules" {
     prometheus-pushgateway-http-tcp   = [9091, 9091, "tcp", "Prometheus Pushgateway"]
     prometheus-node-exporter-http-tcp = [9100, 9100, "tcp", "Prometheus Node Exporter"]
     # Promtail
-    promtail = [9200, 9200, "tcp", "Promtail endpoint"]
+    promtail-http = [9200, 9200, "tcp", "Promtail endpoint"]
     # Oracle Database
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # Octopus Tentacles
@@ -341,6 +341,11 @@ variable "auto_groups" {
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
+    loki = {
+      ingress_rules     = ["loki-grafana", "loki-grafana-grpc"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
     memcached = {
       ingress_rules     = ["memcached-tcp"]
       ingress_with_self = ["all-all"]
@@ -403,6 +408,11 @@ variable "auto_groups" {
     }
     prometheus = {
       ingress_rules     = ["prometheus-http-tcp", "prometheus-pushgateway-http-tcp", "prometheus-node-exporter-http-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+    promtail = {
+      ingress_rules     = ["promtail-http"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
