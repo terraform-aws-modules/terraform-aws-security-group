@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.0...v4.17.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* Fixed SG with prefix lists ([#271](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/271)) ([fdd67cd](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/fdd67cdd46bc472e8a0009589e129b1868cd0f2b))
+
 ## [4.17.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.2...v4.17.0) (2023-01-13)
 
 
