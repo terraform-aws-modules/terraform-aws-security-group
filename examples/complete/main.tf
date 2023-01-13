@@ -66,7 +66,8 @@ module "complete_sg" {
   ingress_ipv6_cidr_blocks = ["2001:db8::/64"]
 
   # Prefix list ids to use in all ingress rules in this module.
-  # ingress_prefix_list_ids = ["pl-123456"]
+  # ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
+
   # Open for all CIDRs defined in ingress_cidr_blocks
   ingress_rules = ["https-443-tcp"]
 
@@ -396,6 +397,43 @@ module "only_rules" {
       description              = "http from service one"
       rule                     = "http-80-tcp"
       source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+}
+
+###################################
+# Security group with prefix lists
+###################################
+
+data "aws_prefix_list" "s3" {
+  filter {
+    name   = "prefix-list-name"
+    values = ["com.amazonaws.eu-west-1.s3"]
+  }
+}
+
+data "aws_prefix_list" "dynamodb" {
+  filter {
+    name   = "prefix-list-name"
+    values = ["com.amazonaws.eu-west-1.dynamodb"]
+  }
+}
+
+module "prefix_list" {
+  source = "../../"
+
+  name        = "pl-sg"
+  description = "Security group with prefix list"
+  vpc_id      = data.aws_vpc.default.id
+
+  ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
+  ingress_with_cidr_blocks = [
+    {
+      from_port       = 9100
+      to_port         = 9100
+      protocol        = 6 # "tcp"
+      description     = "Arbitrary TCP port"
+      prefix_list_ids = join(",", [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id])
     },
   ]
 }
