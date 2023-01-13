@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.17.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.2...v4.17.0) (2023-01-13)
+
+
+### Features
+
+* Add rules for Promtail and Loki ([#277](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/277)) ([b0d41e2](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/b0d41e29277ca088d6580545e82c82d20bcf4a40))
+
 ### [4.16.2](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.16.1...v4.16.2) (2022-11-17)
 
 
