@@ -15,7 +15,9 @@ All notable changes to this project will be documented in this file.
 * ingress_with_custom_blocks variable added
 * egress_with_custom_blocks variable added
 * computed_ingress_with_custom_blocks variable added
+* number_of_computed_ingress_with_custom_blocks variable added
 * computed_egress_with_custom_blocks variable added
+* number_of_computed_egress_with_custom_blocks variable added
 
 ### Removed
 
@@ -27,8 +29,6 @@ All notable changes to this project will be documented in this file.
 * egress_with_cidr_blocks variable
 * ingress_with_ipv6_cidr_blocks variable
 * egress_with_ipv6_cidr_blocks variable
-* ingress_with_prefix_list_ids variable
-* egress_with_prefix_list_ids variable
 * computed_ingress_with_self variable
 * computed_egress_with_self variable
 * computed_ingress_with_source_security_group_id variable
@@ -37,9 +37,10 @@ All notable changes to this project will be documented in this file.
 * computed_egress_with_cidr_blocks variable
 * computed_ingress_with_ipv6_cidr_blocks variable
 * computed_egress_with_ipv6_cidr_blocks variable
-* computed_ingress_with_prefix_list_ids variable
-* computed_egress_with_prefix_list_ids variable
-
+* number_of_computed_egress_with_self variable
+* number_of_computed_egress_with_cidr_blocks
+* number_of_computed_egress_with_ipv6_cidr_blocks
+* number_of_computed_egress_with_source_security_group_id
 
 ### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.0...v4.17.1) (2023-01-13)
 
