@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "eu-west-3"
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
@@ -75,66 +75,33 @@ module "complete_sg" {
   computed_ingress_rules           = ["ssh-tcp"]
   number_of_computed_ingress_rules = 1
 
-  # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
-  ingress_with_cidr_blocks = [
+  # Open to custom blocks (rule or from_port+to_port+protocol+description and cidr_blocks/ipv6_cidr_blocks/source_security_group_id/self or prefix_list_ids)
+  ingress_with_custom_blocks = [
     {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "0.0.0.0/0,2.2.2.2/32"
+      rule = "postgresql-tcp"
+      cidr_blocks = [
+        "0.0.0.0/0",
+        "2.2.2.2/32"
+      ]
     },
     {
       rule        = "postgresql-tcp"
-      cidr_blocks = "30.30.30.30/32"
+      cidr_blocks = ["30.30.30.30/32"]
     },
     {
       from_port   = 10
       to_port     = 20
       protocol    = 6
       description = "Service name"
-      cidr_blocks = "10.10.0.0/20"
+      cidr_blocks = ["10.10.0.0/20"]
     },
-  ]
-
-  computed_ingress_with_cidr_blocks = [
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "3.3.3.3/32,${module.vpc.vpc_cidr_block}"
-    },
-    {
-      from_port   = 15
-      to_port     = 25
-      protocol    = 6
-      description = "Service name with vpc cidr"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_ingress_with_cidr_blocks = 2
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  ingress_with_ipv6_cidr_blocks = [
     {
       from_port        = 300
       to_port          = 400
       protocol         = "tcp"
       description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
     },
-  ]
-
-  computed_ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 350
-      to_port          = 450
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID = ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_ingress_with_ipv6_cidr_blocks = 1
-
-  # Open for security group id (rule or from_port+to_port+protocol+description)
-  ingress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
       source_security_group_id = data.aws_security_group.default.id
@@ -146,28 +113,9 @@ module "complete_sg" {
       description              = "Service name"
       source_security_group_id = data.aws_security_group.default.id
     },
-  ]
-
-  computed_ingress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-    {
-      from_port                = 23
-      to_port                  = 23
-      protocol                 = 6
-      description              = "Service name"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_ingress_with_source_security_group_id = 2
-
-  # Open for self (rule or from_port+to_port+protocol+description)
-  ingress_with_self = [
     {
       rule = "all-all"
+      self = true
     },
     {
       from_port   = 30
@@ -184,7 +132,36 @@ module "complete_sg" {
     },
   ]
 
-  computed_ingress_with_self = [
+  computed_ingress_with_custom_blocks = [
+    {
+      rule        = "postgresql-tcp"
+      cidr_blocks = ["3.3.3.3/32", module.vpc.vpc_cidr_block]
+    },
+    {
+      from_port   = 15
+      to_port     = 25
+      protocol    = 6
+      description = "Service name with vpc cidr"
+      cidr_blocks = [module.vpc.vpc_cidr_block]
+    },
+    {
+      from_port        = 350
+      to_port          = 450
+      protocol         = "tcp"
+      description      = "Service ports (ipv6). VPC ID = ${module.vpc.vpc_id}"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
+    },
+    {
+      rule                     = "postgresql-tcp"
+      source_security_group_id = module.main_sg.security_group_id
+    },
+    {
+      from_port                = 23
+      to_port                  = 23
+      protocol                 = 6
+      description              = "Service name"
+      source_security_group_id = module.main_sg.security_group_id
+    },
     {
       from_port   = 32
       to_port     = 43
@@ -194,7 +171,7 @@ module "complete_sg" {
     },
   ]
 
-  number_of_computed_ingress_with_self = 1
+  number_of_computed_ingress_with_custom_blocks = 6
 
   # Default CIDR blocks, which will be used for all egress rules in this module. Typically these are CIDR blocks of the VPC.
   # If this is not specified then no CIDR blocks will be used.
@@ -211,58 +188,29 @@ module "complete_sg" {
   number_of_computed_egress_rules = 1
 
   # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
-  egress_with_cidr_blocks = [
+  egress_with_custom_blocks = [
     {
       rule        = "postgresql-tcp"
-      cidr_blocks = "0.0.0.0/0,2.2.2.2/32"
+      cidr_blocks = ["0.0.0.0/0", "2.2.2.2/32"]
     },
     {
       rule        = "https-443-tcp"
-      cidr_blocks = "30.30.30.30/32"
+      cidr_blocks = ["30.30.30.30/32"]
     },
     {
       from_port   = 10
       to_port     = 20
       protocol    = 6
       description = "Service name"
-      cidr_blocks = "10.10.0.0/20"
+      cidr_blocks = ["10.10.0.0/20"]
     },
-  ]
-
-  computed_egress_with_cidr_blocks = [
-    {
-      rule        = "https-443-tcp"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_egress_with_cidr_blocks = 1
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  egress_with_ipv6_cidr_blocks = [
     {
       from_port        = 300
       to_port          = 400
       protocol         = "tcp"
       description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
     },
-  ]
-
-  computed_egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 55
-      to_port          = 66
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID: ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_egress_with_ipv6_cidr_blocks = 1
-
-  # Open for security group id (rule or from_port+to_port+protocol+description)
-  egress_with_source_security_group_id = [
     {
       rule                     = "mysql-tcp"
       source_security_group_id = data.aws_security_group.default.id
@@ -274,21 +222,9 @@ module "complete_sg" {
       description              = "Service name"
       source_security_group_id = data.aws_security_group.default.id
     },
-  ]
-
-  computed_egress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_egress_with_source_security_group_id = 1
-
-  # Open for self (rule or from_port+to_port+protocol+description)
-  egress_with_self = [
     {
       rule = "all-all"
+      self = true
     },
     {
       from_port   = 30
@@ -305,13 +241,29 @@ module "complete_sg" {
     },
   ]
 
-  computed_egress_with_self = [
+  computed_egress_with_custom_blocks = [
+    {
+      rule        = "https-443-tcp"
+      cidr_blocks = [module.vpc.vpc_cidr_block]
+    },
+    {
+      from_port        = 55
+      to_port          = 66
+      protocol         = "tcp"
+      description      = "Service ports (ipv6). VPC ID: ${module.vpc.vpc_id}"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
+    },
+    {
+      rule                     = "postgresql-tcp"
+      source_security_group_id = module.main_sg.security_group_id
+    },
     {
       rule = "https-443-tcp"
+      self = true
     },
   ]
 
-  number_of_computed_egress_with_self = 1
+  number_of_computed_egress_with_custom_blocks = 4
 
   create_timeout = "15m"
   delete_timeout = "45m"
@@ -327,43 +279,38 @@ module "ipv4_ipv6_example" {
   description = "IPv4 and IPv6 example"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_with_cidr_blocks = [
+
+  ingress_with_custom_blocks = [
     {
       from_port   = 8080
       to_port     = 8090
       protocol    = "tcp"
       description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = ["0.0.0.0/0"]
     },
-  ]
-
-  ingress_with_ipv6_cidr_blocks = [
     {
       from_port        = 8080
       to_port          = 8090
       protocol         = "tcp"
       description      = "User-service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
     },
   ]
 
-  egress_with_cidr_blocks = [
+  egress_with_custom_blocks = [
     {
       from_port   = 8090
       to_port     = 8100
       protocol    = "tcp"
       description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = ["0.0.0.0/0"]
     },
-  ]
-
-  egress_with_ipv6_cidr_blocks = [
     {
       from_port        = 8090
       to_port          = 8100
       protocol         = "tcp"
       description      = "User-service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
+      ipv6_cidr_blocks = ["2001:db8::/64"]
     },
   ]
 }
@@ -392,7 +339,7 @@ module "only_rules" {
 
   create_sg         = false
   security_group_id = module.complete_sg.security_group_id
-  ingress_with_source_security_group_id = [
+  ingress_with_custom_blocks = [
     {
       description              = "http from service one"
       rule                     = "http-80-tcp"
@@ -408,14 +355,14 @@ module "only_rules" {
 data "aws_prefix_list" "s3" {
   filter {
     name   = "prefix-list-name"
-    values = ["com.amazonaws.eu-west-1.s3"]
+    values = ["com.amazonaws.eu-west-3.s3"]
   }
 }
 
 data "aws_prefix_list" "dynamodb" {
   filter {
     name   = "prefix-list-name"
-    values = ["com.amazonaws.eu-west-1.dynamodb"]
+    values = ["com.amazonaws.eu-west-3.dynamodb"]
   }
 }
 
@@ -426,14 +373,20 @@ module "prefix_list" {
   description = "Security group with prefix list"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
-  ingress_with_cidr_blocks = [
+  ingress_with_custom_blocks = [
     {
       from_port       = 9100
       to_port         = 9100
       protocol        = 6 # "tcp"
       description     = "Arbitrary TCP port"
-      prefix_list_ids = join(",", [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id])
+      prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
+    },
+    {
+      from_port       = 9103
+      to_port         = 9103
+      protocol        = 6 # "tcp"
+      description     = "Arbitrary TCP port"
+      prefix_list_ids = [data.aws_prefix_list.s3.id]
     },
   ]
 }

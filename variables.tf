@@ -76,28 +76,36 @@ variable "ingress_rules" {
   default     = []
 }
 
-variable "ingress_with_self" {
-  description = "List of ingress rules to create where 'self' is defined"
-  type        = list(map(string))
-  default     = []
-}
+variable "ingress_with_custom_blocks" {
+  description = "List of ingress rules to create with specific cidr_blocks, prefix_list_ids, self, source_security_group_id or ipv6_cidr_blocks"
 
-variable "ingress_with_cidr_blocks" {
-  description = "List of ingress rules to create where 'cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  type = list(object({
+    description              = optional(string, "Ingress Rule")
+    from_port                = optional(number)
+    rule                     = optional(string, "_")
+    to_port                  = optional(number)
+    protocol                 = optional(string)
+    cidr_blocks              = optional(list(string))
+    ipv6_cidr_blocks         = optional(list(string))
+    prefix_list_ids          = optional(list(string))
+    self                     = optional(bool)
+    source_security_group_id = optional(string)
+  }))
 
-variable "ingress_with_ipv6_cidr_blocks" {
-  description = "List of ingress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  default = []
 
-variable "ingress_with_source_security_group_id" {
-  description = "List of ingress rules to create where 'source_security_group_id' is used"
-  type        = list(map(string))
-  default     = []
+  validation {
+    condition = alltrue([
+      for rule in var.ingress_with_custom_blocks : (
+        rule.cidr_blocks != null ||
+        rule.ipv6_cidr_blocks != null ||
+        rule.prefix_list_ids != null ||
+        rule.self != null ||
+        rule.source_security_group_id != null
+      )
+    ])
+    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+  }
 }
 
 variable "ingress_cidr_blocks" {
@@ -127,28 +135,36 @@ variable "computed_ingress_rules" {
   default     = []
 }
 
-variable "computed_ingress_with_self" {
-  description = "List of computed ingress rules to create where 'self' is defined"
-  type        = list(map(string))
-  default     = []
-}
+variable "computed_ingress_with_custom_blocks" {
+  description = "List of computed ingress rules to create where cidr_blocks, prefix_list_ids, self, source_security_group_id or ipv6_cidr_blocks is defined"
 
-variable "computed_ingress_with_cidr_blocks" {
-  description = "List of computed ingress rules to create where 'cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  type = list(object({
+    description              = optional(string, "Computed Ingress Rule")
+    from_port                = optional(number)
+    rule                     = optional(string, "_")
+    to_port                  = optional(number)
+    protocol                 = optional(string)
+    cidr_blocks              = optional(list(string))
+    ipv6_cidr_blocks         = optional(list(string))
+    prefix_list_ids          = optional(list(string))
+    self                     = optional(bool)
+    source_security_group_id = optional(string)
+  }))
 
-variable "computed_ingress_with_ipv6_cidr_blocks" {
-  description = "List of computed ingress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  default = []
 
-variable "computed_ingress_with_source_security_group_id" {
-  description = "List of computed ingress rules to create where 'source_security_group_id' is used"
-  type        = list(map(string))
-  default     = []
+  validation {
+    condition = alltrue([
+      for rule in var.computed_ingress_with_custom_blocks : (
+        rule.cidr_blocks != null ||
+        rule.ipv6_cidr_blocks != null ||
+        rule.prefix_list_ids != null ||
+        rule.self != null ||
+        rule.source_security_group_id != null
+      )
+    ])
+    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+  }
 }
 
 ###################################
@@ -160,26 +176,8 @@ variable "number_of_computed_ingress_rules" {
   default     = 0
 }
 
-variable "number_of_computed_ingress_with_self" {
-  description = "Number of computed ingress rules to create where 'self' is defined"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_ingress_with_cidr_blocks" {
-  description = "Number of computed ingress rules to create where 'cidr_blocks' is used"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_ingress_with_ipv6_cidr_blocks" {
-  description = "Number of computed ingress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_ingress_with_source_security_group_id" {
-  description = "Number of computed ingress rules to create where 'source_security_group_id' is used"
+variable "number_of_computed_ingress_with_custom_blocks" {
+  description = "Number of computed ingress rules to create where cidr_blocks, prefix_list_ids, self, source_security_group_id or ipv6_cidr_blocks is defined"
   type        = number
   default     = 0
 }
@@ -193,28 +191,36 @@ variable "egress_rules" {
   default     = []
 }
 
-variable "egress_with_self" {
-  description = "List of egress rules to create where 'self' is defined"
-  type        = list(map(string))
-  default     = []
-}
+variable "egress_with_custom_blocks" {
+  description = "List of egress rules to create with specific cidr_blocks, prefix_list_ids, self, source_security_group_id or ipv6_cidr_blocks"
 
-variable "egress_with_cidr_blocks" {
-  description = "List of egress rules to create where 'cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  type = list(object({
+    description              = optional(string, "Egress Rule")
+    from_port                = optional(number)
+    rule                     = optional(string, "_")
+    to_port                  = optional(number)
+    protocol                 = optional(string)
+    cidr_blocks              = optional(list(string))
+    ipv6_cidr_blocks         = optional(list(string))
+    prefix_list_ids          = optional(list(string))
+    self                     = optional(bool)
+    source_security_group_id = optional(string)
+  }))
 
-variable "egress_with_ipv6_cidr_blocks" {
-  description = "List of egress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  default = []
 
-variable "egress_with_source_security_group_id" {
-  description = "List of egress rules to create where 'source_security_group_id' is used"
-  type        = list(map(string))
-  default     = []
+  validation {
+    condition = alltrue([
+      for rule in var.egress_with_custom_blocks : (
+        rule.cidr_blocks != null ||
+        rule.ipv6_cidr_blocks != null ||
+        rule.prefix_list_ids != null ||
+        rule.self != null ||
+        rule.source_security_group_id != null
+      )
+    ])
+    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+  }
 }
 
 variable "egress_cidr_blocks" {
@@ -244,28 +250,36 @@ variable "computed_egress_rules" {
   default     = []
 }
 
-variable "computed_egress_with_self" {
-  description = "List of computed egress rules to create where 'self' is defined"
-  type        = list(map(string))
-  default     = []
-}
+variable "computed_egress_with_custom_blocks" {
+  description = "List of computed egress rules to create with specific cidr_blocks, prefix_list_ids, self, source_security_group_id or ipv6_cidr_blocks"
 
-variable "computed_egress_with_cidr_blocks" {
-  description = "List of computed egress rules to create where 'cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  type = list(object({
+    description              = optional(string, "Computed Egress Rule")
+    from_port                = optional(number)
+    rule                     = optional(string, "_")
+    to_port                  = optional(number)
+    protocol                 = optional(string)
+    cidr_blocks              = optional(list(string))
+    ipv6_cidr_blocks         = optional(list(string))
+    prefix_list_ids          = optional(list(string))
+    self                     = optional(bool)
+    source_security_group_id = optional(string)
+  }))
 
-variable "computed_egress_with_ipv6_cidr_blocks" {
-  description = "List of computed egress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
-}
+  default = []
 
-variable "computed_egress_with_source_security_group_id" {
-  description = "List of computed egress rules to create where 'source_security_group_id' is used"
-  type        = list(map(string))
-  default     = []
+  validation {
+    condition = alltrue([
+      for rule in var.computed_egress_with_custom_blocks : (
+        rule.cidr_blocks != null ||
+        rule.ipv6_cidr_blocks != null ||
+        rule.prefix_list_ids != null ||
+        rule.self != null ||
+        rule.source_security_group_id != null
+      )
+    ])
+    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+  }
 }
 
 ##################################
@@ -277,26 +291,8 @@ variable "number_of_computed_egress_rules" {
   default     = 0
 }
 
-variable "number_of_computed_egress_with_self" {
-  description = "Number of computed egress rules to create where 'self' is defined"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_egress_with_cidr_blocks" {
-  description = "Number of computed egress rules to create where 'cidr_blocks' is used"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_egress_with_ipv6_cidr_blocks" {
-  description = "Number of computed egress rules to create where 'ipv6_cidr_blocks' is used"
-  type        = number
-  default     = 0
-}
-
-variable "number_of_computed_egress_with_source_security_group_id" {
-  description = "Number of computed egress rules to create where 'source_security_group_id' is used"
+variable "number_of_computed_egress_with_custom_blocks" {
+  description = "Number of computed egress rules to create where cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id is defined"
   type        = number
   default     = 0
 }

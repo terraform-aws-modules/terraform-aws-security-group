@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.1...v5.0.0) (2023-03-31)
+
+### Bug Fixes
+
+* Rule map now use the prefix list given in each rule
+
+### Features
+
+* Rewrite rules using rule map to avoid code duplication
+* Moving `lookup` `default` logic to `optional` `coalesce`
+* ingress_with_custom_blocks variable added
+* egress_with_custom_blocks variable added
+* computed_ingress_with_custom_blocks variable added
+* computed_egress_with_custom_blocks variable added
+
+### Removed
+
+* ingress_with_self variable
+* egress_with_self variable
+* ingress_with_source_security_group_id variable
+* egress_with_source_security_group_id variable
+* ingress_with_cidr_blocks variable
+* egress_with_cidr_blocks variable
+* ingress_with_ipv6_cidr_blocks variable
+* egress_with_ipv6_cidr_blocks variable
+* ingress_with_prefix_list_ids variable
+* egress_with_prefix_list_ids variable
+* computed_ingress_with_self variable
+* computed_egress_with_self variable
+* computed_ingress_with_source_security_group_id variable
+* computed_egress_with_source_security_group_id variable
+* computed_ingress_with_cidr_blocks variable
+* computed_egress_with_cidr_blocks variable
+* computed_ingress_with_ipv6_cidr_blocks variable
+* computed_egress_with_ipv6_cidr_blocks variable
+* computed_ingress_with_prefix_list_ids variable
+* computed_egress_with_prefix_list_ids variable
+
+
 ### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.0...v4.17.1) (2023-01-13)
 
 
