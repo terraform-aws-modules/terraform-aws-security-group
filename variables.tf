@@ -163,7 +163,7 @@ variable "computed_ingress_with_custom_blocks" {
         rule.source_security_group_id != null
       )
     ])
-    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+    error_message = "Computed ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
   }
 }
 
@@ -219,7 +219,7 @@ variable "egress_with_custom_blocks" {
         rule.source_security_group_id != null
       )
     ])
-    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+    error_message = "Egress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
   }
 }
 
@@ -278,7 +278,7 @@ variable "computed_egress_with_custom_blocks" {
         rule.source_security_group_id != null
       )
     ])
-    error_message = "Ingress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
+    error_message = "Computed egress rule must have at least one of cidr_blocks, ipv6_cidr_blocks, prefix_list_ids, self or source_security_group_id defined."
   }
 }
 
