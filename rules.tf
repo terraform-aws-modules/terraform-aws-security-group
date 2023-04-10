@@ -97,8 +97,8 @@ variable "rules" {
     # Logstash
     logstash-tcp = [5044, 5044, "tcp", "Logstash"]
     # Loki
-    loki-grafana      = [3100, 3100, "tcp", "Grafana Loki enpoint"]
-    loki-grafana-grpc = [9096, 9096, "tcp", "Grafana Loki GRPC"]
+    loki-grafana      = [3100, 3100, "tcp", "Grafana Loki endpoint"]
+    loki-grafana-grpc = [9095, 9095, "tcp", "Grafana Loki GRPC"]
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
     # MinIO
@@ -135,7 +135,7 @@ variable "rules" {
     prometheus-pushgateway-http-tcp   = [9091, 9091, "tcp", "Prometheus Pushgateway"]
     prometheus-node-exporter-http-tcp = [9100, 9100, "tcp", "Prometheus Node Exporter"]
     # Promtail
-    promtail-http = [9200, 9200, "tcp", "Promtail endpoint"]
+    promtail-http = [9080, 9080, "tcp", "Promtail endpoint"]
     # Oracle Database
     oracle-db-tcp = [1521, 1521, "tcp", "Oracle"]
     # Octopus Tentacles
