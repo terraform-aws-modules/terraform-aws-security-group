@@ -40,7 +40,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_main_sg"></a> [main\_sg](#module\_main\_sg) | ../../ | n/a |
 | <a name="module_only_rules"></a> [only\_rules](#module\_only\_rules) | ../../ | n/a |
 | <a name="module_prefix_list"></a> [prefix\_list](#module\_prefix\_list) | ../../ | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
 
 ## Resources
 
