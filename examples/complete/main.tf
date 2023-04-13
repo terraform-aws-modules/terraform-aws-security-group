@@ -3,7 +3,6 @@ provider "aws" {
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
-  skip_get_ec2_platforms      = true
   skip_metadata_api_check     = true
   skip_region_validation      = true
 }
@@ -24,7 +23,8 @@ data "aws_security_group" "default" {
 # VPC which is used as an argument in complete-sg
 ##################################################
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.0"
 
   name = "complete-sg-demo-vpc"
   cidr = "10.20.0.0/20"
