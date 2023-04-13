@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.17.2](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.1...v4.17.2) (2023-04-13)
+
+
+### Bug Fixes
+
+* Updated ports in Loki and Promtail ([#283](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/283)) ([6392643](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/639264314132771f025c92cb2639a6fe14ece3ac))
+
 ### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.0...v4.17.1) (2023-01-13)
 
 
