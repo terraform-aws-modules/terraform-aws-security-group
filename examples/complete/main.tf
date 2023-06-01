@@ -456,11 +456,22 @@ module "prefix_list_sg" {
   source = "../../"
 
   name        = "prefix-list-sg"
-  description = "Security group using prefix list"
+  description = "Security group using prefix list and custom ingress rules"
   vpc_id      = data.aws_vpc.default.id
 
   use_name_prefix = false
 
   ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.prefix_list_sg_example.id]
-  ingress_rules           = ["https-443-tcp"]
+  ingress_with_prefix_list_ids = [
+    {
+      from_port = 80
+      to_port   = 80
+      protocol  = "tcp"
+    },
+    {
+      from_port = 443
+      to_port   = 443
+      protocol  = "tcp"
+    },
+  ]
 }
