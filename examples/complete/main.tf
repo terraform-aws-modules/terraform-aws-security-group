@@ -24,7 +24,7 @@ data "aws_security_group" "default" {
 ##################################################
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.0"
 
   name = "complete-sg-demo-vpc"
   cidr = "10.20.0.0/20"

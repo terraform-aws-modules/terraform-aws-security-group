@@ -28,6 +28,7 @@ variable "rules" {
     # Consul
     consul-tcp             = [8300, 8300, "tcp", "Consul server"]
     consul-grpc-tcp        = [8502, 8502, "tcp", "Consul gRPC"]
+    consul-grpc-tcp-tls    = [8503, 8503, "tcp", "Consul gRPC TLS"]
     consul-webui-http-tcp  = [8500, 8500, "tcp", "Consul web UI HTTP"]
     consul-webui-https-tcp = [8501, 8501, "tcp", "Consul web UI HTTPS"]
     consul-dns-tcp         = [8600, 8600, "tcp", "Consul DNS"]
@@ -247,7 +248,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     consul = {
-      ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
+      ingress_rules     = ["consul-tcp", "consul-grpc-tcp", "consul-grpc-tcp-tls", "consul-webui-http-tcp", "consul-webui-https-tcp", "consul-dns-tcp", "consul-dns-udp", "consul-serf-lan-tcp", "consul-serf-lan-udp", "consul-serf-wan-tcp", "consul-serf-wan-udp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }

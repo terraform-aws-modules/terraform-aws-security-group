@@ -21,7 +21,7 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
 
 ## Providers
@@ -41,7 +41,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_only_rules"></a> [only\_rules](#module\_only\_rules) | ../../ | n/a |
 | <a name="module_prefix_list"></a> [prefix\_list](#module\_prefix\_list) | ../../ | n/a |
 | <a name="module_prefix_list_sg"></a> [prefix\_list\_sg](#module\_prefix\_list\_sg) | ../../ | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
 ## Resources
 
