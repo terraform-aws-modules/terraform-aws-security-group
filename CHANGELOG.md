@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.2...v5.0.0) (2023-06-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgraded version of Terraform, AWS Provider, and added gRPC_tls port for Consul v1.14.x (#284)
+
+### Features
+
+* Upgraded version of Terraform, AWS Provider, and added gRPC_tls port for Consul v1.14.x ([#284](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/284)) ([0093dca](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/0093dcae5a918a44676ef3a2d7596b794fda11c0))
+
 ### [4.17.2](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.1...v4.17.2) (2023-04-13)
 
 
