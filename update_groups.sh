@@ -218,7 +218,7 @@ EOF
 \`\`\`hcl
 module "${group/-/_}_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/${group}"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   # omitted...
 }
