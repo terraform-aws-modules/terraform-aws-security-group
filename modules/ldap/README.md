@@ -5,7 +5,7 @@
 ```hcl
 module "ldap_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/ldap"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   # omitted...
 }
@@ -18,7 +18,7 @@ All automatic values **ldap module** is using are available [here](https://githu
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
 
 ## Providers
