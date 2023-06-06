@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.0.0...v5.1.0) (2023-06-06)
+
+
+### Features
+
+* Implement ingress and egress with prefix lists ([#258](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/258)) ([2e1cbcb](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/2e1cbcb84be913812de056d6458c1f6c5bad7739))
+
 ## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v4.17.2...v5.0.0) (2023-06-01)
 
 
