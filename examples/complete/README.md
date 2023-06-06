@@ -47,9 +47,9 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Type |
 |------|------|
+| [aws_ec2_managed_prefix_list.prefix_list_sg_example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
 | [aws_prefix_list.dynamodb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
 | [aws_prefix_list.s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
-| [aws_ec2_managed_prefix_list.prefix_list_sg_example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
 | [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 

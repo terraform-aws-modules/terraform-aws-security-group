@@ -24,7 +24,7 @@ resource "aws_ec2_managed_prefix_list" "example" {
   max_entries    = 1
 
   entry {
-    cidr        = aws_vpc.default.cidr_block
+    cidr        = data.aws_vpc.default.cidr_block
     description = "Default VPC CIDR"
   }
 }
@@ -56,8 +56,8 @@ module "http_with_ingress_prefix_list_ids_sg" {
   description = "Security group with HTTP ports open within current VPC, egress ports are all world open"
   vpc_id      = data.aws_vpc.default.id
 
-  # Allow ingress rules to be accessed only within specifc prefix list IDs
-  ingress_prefix_list_ids      = [aws_ec2_managed_prefix_list.example.id]
+  # Allow ingress rules to be accessed only within specific prefix list IDs
+  ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.example.id]
 }
 
 #####################

@@ -39,11 +39,13 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_http_sg"></a> [http\_sg](#module\_http\_sg) | ../../modules/http-80 | n/a |
 | <a name="module_http_with_egress_minimal_sg"></a> [http\_with\_egress\_minimal\_sg](#module\_http\_with\_egress\_minimal\_sg) | ../../modules/http-80 | n/a |
 | <a name="module_http_with_egress_sg"></a> [http\_with\_egress\_sg](#module\_http\_with\_egress\_sg) | ../../modules/http-80 | n/a |
+| <a name="module_http_with_ingress_prefix_list_ids_sg"></a> [http\_with\_ingress\_prefix\_list\_ids\_sg](#module\_http\_with\_ingress\_prefix\_list\_ids\_sg) | ../../modules/http-80 | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [aws_ec2_managed_prefix_list.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
 | [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
