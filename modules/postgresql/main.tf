@@ -27,6 +27,9 @@ module "sg" {
   # Open for security group id
   ingress_with_source_security_group_id = var.ingress_with_source_security_group_id
 
+  # Open for prefix list id
+  ingress_with_prefix_list_ids = var.ingress_with_prefix_list_ids
+
   # Default ingress CIDR blocks
   ingress_cidr_blocks      = var.ingress_cidr_blocks
   ingress_ipv6_cidr_blocks = var.ingress_ipv6_cidr_blocks
@@ -52,6 +55,9 @@ module "sg" {
   # Open for security group id
   computed_ingress_with_source_security_group_id = var.computed_ingress_with_source_security_group_id
 
+  # Open for prefix list id
+  computed_ingress_with_prefix_list_ids = var.computed_ingress_with_prefix_list_ids
+
   #############################
   # Number of computed ingress
   #############################
@@ -60,6 +66,7 @@ module "sg" {
   number_of_computed_ingress_with_cidr_blocks              = var.number_of_computed_ingress_with_cidr_blocks
   number_of_computed_ingress_with_ipv6_cidr_blocks         = var.number_of_computed_ingress_with_ipv6_cidr_blocks
   number_of_computed_ingress_with_source_security_group_id = var.number_of_computed_ingress_with_source_security_group_id
+  number_of_computed_ingress_with_prefix_list_ids          = var.number_of_computed_ingress_with_prefix_list_ids
 
   #########
   # Egress
@@ -78,6 +85,9 @@ module "sg" {
 
   # Open for security group id
   egress_with_source_security_group_id = var.egress_with_source_security_group_id
+
+  # Open for prefix list id
+  egress_with_prefix_list_ids = var.egress_with_prefix_list_ids
 
   # Default egress CIDR blocks
   egress_cidr_blocks      = var.egress_cidr_blocks
@@ -104,6 +114,9 @@ module "sg" {
   # Open for security group id
   computed_egress_with_source_security_group_id = var.computed_egress_with_source_security_group_id
 
+  # Open for prefix list id
+  computed_egress_with_prefix_list_ids = var.computed_egress_with_prefix_list_ids
+
   #############################
   # Number of computed egress
   #############################
@@ -112,4 +125,5 @@ module "sg" {
   number_of_computed_egress_with_cidr_blocks              = var.number_of_computed_egress_with_cidr_blocks
   number_of_computed_egress_with_ipv6_cidr_blocks         = var.number_of_computed_egress_with_ipv6_cidr_blocks
   number_of_computed_egress_with_source_security_group_id = var.number_of_computed_egress_with_source_security_group_id
+  number_of_computed_egress_with_prefix_list_ids          = var.number_of_computed_egress_with_prefix_list_ids
 }
