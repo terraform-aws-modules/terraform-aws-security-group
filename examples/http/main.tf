@@ -14,6 +14,21 @@ data "aws_security_group" "default" {
   vpc_id = data.aws_vpc.default.id
 }
 
+###########################################
+# Prefix list allowing VPC CIDR for example
+###########################################
+
+resource "aws_ec2_managed_prefix_list" "example" {
+  name           = "All VPC CIDRs"
+  address_family = "IPv4"
+  max_entries    = 1
+
+  entry {
+    cidr        = data.aws_vpc.default.cidr_block
+    description = "Default VPC CIDR"
+  }
+}
+
 ###########################
 # Security groups examples
 ###########################
@@ -29,6 +44,20 @@ module "http_sg" {
   vpc_id      = data.aws_vpc.default.id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
+}
+
+###################################
+# HTTP with ingress prefix list ids
+###################################
+module "http_with_ingress_prefix_list_ids_sg" {
+  source = "../../modules/http-80"
+
+  name        = "http-with-ingress-prefix-list-ids"
+  description = "Security group with HTTP ports open within current VPC, egress ports are all world open"
+  vpc_id      = data.aws_vpc.default.id
+
+  # Allow ingress rules to be accessed only within specific prefix list IDs
+  ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.example.id]
 }
 
 #####################

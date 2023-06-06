@@ -437,3 +437,41 @@ module "prefix_list" {
     },
   ]
 }
+
+#################################
+# Security group using prefix list
+#################################
+resource "aws_ec2_managed_prefix_list" "prefix_list_sg_example" {
+  address_family = "IPv4"
+  max_entries    = 1
+  name           = "prefix-list-sg-example"
+
+  entry {
+    cidr        = module.vpc.vpc_cidr_block
+    description = "VPC CIDR"
+  }
+}
+
+module "prefix_list_sg" {
+  source = "../../"
+
+  name        = "prefix-list-sg"
+  description = "Security group using prefix list and custom ingress rules"
+  vpc_id      = data.aws_vpc.default.id
+
+  use_name_prefix = false
+
+  ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.prefix_list_sg_example.id]
+  ingress_with_prefix_list_ids = [
+    {
+      from_port = 80
+      to_port   = 80
+      protocol  = "tcp"
+    },
+    {
+      from_port = 443
+      to_port   = 443
+      protocol  = "tcp"
+    },
+  ]
+}
