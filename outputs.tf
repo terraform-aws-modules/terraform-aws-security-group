@@ -19,11 +19,11 @@ output "security_group_owner_id" {
 }
 
 output "security_group_name" {
-  description = "The name of the security group"
+  description = "The name of the security groups"
   value       = try(aws_security_group.this[0].name, aws_security_group.this_name_prefix[0].name, "")
 }
 
 output "security_group_description" {
-  description = "The description of the security group"
+  description = "The description of the security groups"
   value       = try(aws_security_group.this[0].description, aws_security_group.this_name_prefix[0].description, "")
 }
