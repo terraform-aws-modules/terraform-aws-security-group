@@ -120,8 +120,14 @@ variable "ingress_prefix_list_ids" {
 
 variable "ingress_with_prefix_list_ids" {
   description = "List of ingress rules to create where 'prefix_list_ids' is used only"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    prefix_list_ids = optional(list(string))
+    description     = optional(string)
+    from_port       = string
+    to_port         = string
+    protocol        = string
+  }))
+  default = []
 }
 
 ###################
@@ -159,8 +165,14 @@ variable "computed_ingress_with_source_security_group_id" {
 
 variable "computed_ingress_with_prefix_list_ids" {
   description = "List of computed ingress rules to create where 'prefix_list_ids' is used"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    prefix_list_ids = optional(list(string))
+    description     = optional(string)
+    from_port       = string
+    to_port         = string
+    protocol        = string
+  }))
+  default = []
 }
 
 ###################################
@@ -237,8 +249,14 @@ variable "egress_with_source_security_group_id" {
 
 variable "egress_with_prefix_list_ids" {
   description = "List of egress rules to create where 'prefix_list_ids' is used only"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    prefix_list_ids = optional(list(string))
+    description     = optional(string)
+    from_port       = string
+    to_port         = string
+    protocol        = string
+  }))
+  default = []
 }
 
 variable "egress_cidr_blocks" {
@@ -294,8 +312,14 @@ variable "computed_egress_with_source_security_group_id" {
 
 variable "computed_egress_with_prefix_list_ids" {
   description = "List of computed egress rules to create where 'prefix_list_ids' is used only"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    prefix_list_ids = optional(list(string))
+    description     = optional(string)
+    from_port       = string
+    to_port         = string
+    protocol        = string
+  }))
+  default = []
 }
 
 ##################################

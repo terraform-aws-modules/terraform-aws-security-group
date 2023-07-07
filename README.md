@@ -159,7 +159,7 @@ No issue is creating limit on this module.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
 
 ## Providers
@@ -211,13 +211,13 @@ No modules.
 | <a name="input_computed_egress_rules"></a> [computed\_egress\_rules](#input\_computed\_egress\_rules) | List of computed egress rules to create by name | `list(string)` | `[]` | no |
 | <a name="input_computed_egress_with_cidr_blocks"></a> [computed\_egress\_with\_cidr\_blocks](#input\_computed\_egress\_with\_cidr\_blocks) | List of computed egress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
 | <a name="input_computed_egress_with_ipv6_cidr_blocks"></a> [computed\_egress\_with\_ipv6\_cidr\_blocks](#input\_computed\_egress\_with\_ipv6\_cidr\_blocks) | List of computed egress rules to create where 'ipv6\_cidr\_blocks' is used | `list(map(string))` | `[]` | no |
-| <a name="input_computed_egress_with_prefix_list_ids"></a> [computed\_egress\_with\_prefix\_list\_ids](#input\_computed\_egress\_with\_prefix\_list\_ids) | List of computed egress rules to create where 'prefix\_list\_ids' is used only | `list(map(string))` | `[]` | no |
+| <a name="input_computed_egress_with_prefix_list_ids"></a> [computed\_egress\_with\_prefix\_list\_ids](#input\_computed\_egress\_with\_prefix\_list\_ids) | List of computed egress rules to create where 'prefix\_list\_ids' is used only | <pre>list(object({<br>    prefix_list_ids = optional(list(string))<br>    description     = optional(string)<br>    from_port       = string<br>    to_port         = string<br>    protocol        = string<br>  }))</pre> | `[]` | no |
 | <a name="input_computed_egress_with_self"></a> [computed\_egress\_with\_self](#input\_computed\_egress\_with\_self) | List of computed egress rules to create where 'self' is defined | `list(map(string))` | `[]` | no |
 | <a name="input_computed_egress_with_source_security_group_id"></a> [computed\_egress\_with\_source\_security\_group\_id](#input\_computed\_egress\_with\_source\_security\_group\_id) | List of computed egress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
 | <a name="input_computed_ingress_rules"></a> [computed\_ingress\_rules](#input\_computed\_ingress\_rules) | List of computed ingress rules to create by name | `list(string)` | `[]` | no |
 | <a name="input_computed_ingress_with_cidr_blocks"></a> [computed\_ingress\_with\_cidr\_blocks](#input\_computed\_ingress\_with\_cidr\_blocks) | List of computed ingress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
 | <a name="input_computed_ingress_with_ipv6_cidr_blocks"></a> [computed\_ingress\_with\_ipv6\_cidr\_blocks](#input\_computed\_ingress\_with\_ipv6\_cidr\_blocks) | List of computed ingress rules to create where 'ipv6\_cidr\_blocks' is used | `list(map(string))` | `[]` | no |
-| <a name="input_computed_ingress_with_prefix_list_ids"></a> [computed\_ingress\_with\_prefix\_list\_ids](#input\_computed\_ingress\_with\_prefix\_list\_ids) | List of computed ingress rules to create where 'prefix\_list\_ids' is used | `list(map(string))` | `[]` | no |
+| <a name="input_computed_ingress_with_prefix_list_ids"></a> [computed\_ingress\_with\_prefix\_list\_ids](#input\_computed\_ingress\_with\_prefix\_list\_ids) | List of computed ingress rules to create where 'prefix\_list\_ids' is used | <pre>list(object({<br>    prefix_list_ids = optional(list(string))<br>    description     = optional(string)<br>    from_port       = string<br>    to_port         = string<br>    protocol        = string<br>  }))</pre> | `[]` | no |
 | <a name="input_computed_ingress_with_self"></a> [computed\_ingress\_with\_self](#input\_computed\_ingress\_with\_self) | List of computed ingress rules to create where 'self' is defined | `list(map(string))` | `[]` | no |
 | <a name="input_computed_ingress_with_source_security_group_id"></a> [computed\_ingress\_with\_source\_security\_group\_id](#input\_computed\_ingress\_with\_source\_security\_group\_id) | List of computed ingress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
 | <a name="input_create"></a> [create](#input\_create) | Whether to create security group and all rules | `bool` | `true` | no |
@@ -231,7 +231,7 @@ No modules.
 | <a name="input_egress_rules"></a> [egress\_rules](#input\_egress\_rules) | List of egress rules to create by name | `list(string)` | `[]` | no |
 | <a name="input_egress_with_cidr_blocks"></a> [egress\_with\_cidr\_blocks](#input\_egress\_with\_cidr\_blocks) | List of egress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
 | <a name="input_egress_with_ipv6_cidr_blocks"></a> [egress\_with\_ipv6\_cidr\_blocks](#input\_egress\_with\_ipv6\_cidr\_blocks) | List of egress rules to create where 'ipv6\_cidr\_blocks' is used | `list(map(string))` | `[]` | no |
-| <a name="input_egress_with_prefix_list_ids"></a> [egress\_with\_prefix\_list\_ids](#input\_egress\_with\_prefix\_list\_ids) | List of egress rules to create where 'prefix\_list\_ids' is used only | `list(map(string))` | `[]` | no |
+| <a name="input_egress_with_prefix_list_ids"></a> [egress\_with\_prefix\_list\_ids](#input\_egress\_with\_prefix\_list\_ids) | List of egress rules to create where 'prefix\_list\_ids' is used only | <pre>list(object({<br>    prefix_list_ids = optional(list(string))<br>    description     = optional(string)<br>    from_port       = string<br>    to_port         = string<br>    protocol        = string<br>  }))</pre> | `[]` | no |
 | <a name="input_egress_with_self"></a> [egress\_with\_self](#input\_egress\_with\_self) | List of egress rules to create where 'self' is defined | `list(map(string))` | `[]` | no |
 | <a name="input_egress_with_source_security_group_id"></a> [egress\_with\_source\_security\_group\_id](#input\_egress\_with\_source\_security\_group\_id) | List of egress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
 | <a name="input_ingress_cidr_blocks"></a> [ingress\_cidr\_blocks](#input\_ingress\_cidr\_blocks) | List of IPv4 CIDR ranges to use on all ingress rules | `list(string)` | `[]` | no |
@@ -240,7 +240,7 @@ No modules.
 | <a name="input_ingress_rules"></a> [ingress\_rules](#input\_ingress\_rules) | List of ingress rules to create by name | `list(string)` | `[]` | no |
 | <a name="input_ingress_with_cidr_blocks"></a> [ingress\_with\_cidr\_blocks](#input\_ingress\_with\_cidr\_blocks) | List of ingress rules to create where 'cidr\_blocks' is used | `list(map(string))` | `[]` | no |
 | <a name="input_ingress_with_ipv6_cidr_blocks"></a> [ingress\_with\_ipv6\_cidr\_blocks](#input\_ingress\_with\_ipv6\_cidr\_blocks) | List of ingress rules to create where 'ipv6\_cidr\_blocks' is used | `list(map(string))` | `[]` | no |
-| <a name="input_ingress_with_prefix_list_ids"></a> [ingress\_with\_prefix\_list\_ids](#input\_ingress\_with\_prefix\_list\_ids) | List of ingress rules to create where 'prefix\_list\_ids' is used only | `list(map(string))` | `[]` | no |
+| <a name="input_ingress_with_prefix_list_ids"></a> [ingress\_with\_prefix\_list\_ids](#input\_ingress\_with\_prefix\_list\_ids) | List of ingress rules to create where 'prefix\_list\_ids' is used only | <pre>list(object({<br>    prefix_list_ids = optional(list(string))<br>    description     = optional(string)<br>    from_port       = string<br>    to_port         = string<br>    protocol        = string<br>  }))</pre> | `[]` | no |
 | <a name="input_ingress_with_self"></a> [ingress\_with\_self](#input\_ingress\_with\_self) | List of ingress rules to create where 'self' is defined | `list(map(string))` | `[]` | no |
 | <a name="input_ingress_with_source_security_group_id"></a> [ingress\_with\_source\_security\_group\_id](#input\_ingress\_with\_source\_security\_group\_id) | List of ingress rules to create where 'source\_security\_group\_id' is used | `list(map(string))` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of security group - not required if create\_sg is false | `string` | `null` | no |
