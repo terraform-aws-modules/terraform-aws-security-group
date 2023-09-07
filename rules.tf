@@ -161,7 +161,7 @@ variable "rules" {
     smtp-submission-587-tcp  = [587, 587, "tcp", "SMTP Submission"]
     smtp-submission-2587-tcp = [2587, 2587, "tcp", "SMTP Submission"]
     smtps-465-tcp            = [465, 465, "tcp", "SMTPS"]
-    smtps-2456-tcp           = [2465, 2465, "tcp", "SMTPS"]
+    smtps-2465-tcp           = [2465, 2465, "tcp", "SMTPS"]
     # Solr
     solr-tcp = [8983, 8987, "tcp", "Solr"]
     # Splunk
