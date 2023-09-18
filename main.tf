@@ -4,7 +4,8 @@
 locals {
   create = var.create && var.putin_khuylo
 
-  this_sg_id = var.create_sg ? concat(aws_security_group.this.*.id, aws_security_group.this_name_prefix.*.id, [""])[0] : var.security_group_id
+  this_sg_id                 = var.create_sg ? concat(aws_security_group.this.*.id, aws_security_group.this_name_prefix.*.id, [""])[0] : var.security_group_id
+  create_simple_ingress_rule = concat(var.ingress_cidr_blocks, var.ingress_ipv6_cidr_blocks, ingress_prefix_list_ids) != [""]
 }
 
 ##########################
@@ -64,7 +65,7 @@ resource "aws_security_group" "this_name_prefix" {
 ###################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "ingress_rules" {
-  count = local.create ? length(var.ingress_rules) : 0
+  count = local.create && local.create_simple_ingress_rule ? length(var.ingress_rules) : 0
 
   security_group_id = local.this_sg_id
   type              = "ingress"
