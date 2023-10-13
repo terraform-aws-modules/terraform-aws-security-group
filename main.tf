@@ -5,7 +5,7 @@ locals {
   create = var.create && var.putin_khuylo
 
   this_sg_id                 = var.create_sg ? concat(aws_security_group.this.*.id, aws_security_group.this_name_prefix.*.id, [""])[0] : var.security_group_id
-  create_simple_ingress_rule = concat(var.ingress_cidr_blocks, var.ingress_ipv6_cidr_blocks, ingress_prefix_list_ids) != [""]
+  create_simple_ingress_rule = concat(var.ingress_cidr_blocks, var.ingress_ipv6_cidr_blocks, var.ingress_prefix_list_ids) != [""]
 }
 
 ##########################
