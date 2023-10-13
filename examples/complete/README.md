@@ -39,6 +39,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_ipv4_ipv6_example"></a> [ipv4\_ipv6\_example](#module\_ipv4\_ipv6\_example) | ../../ | n/a |
 | <a name="module_main_sg"></a> [main\_sg](#module\_main\_sg) | ../../ | n/a |
 | <a name="module_only_rules"></a> [only\_rules](#module\_only\_rules) | ../../ | n/a |
+| <a name="module_only_rules_with_auto_ingress_rules"></a> [only\_rules\_with\_auto\_ingress\_rules](#module\_only\_rules\_with\_auto\_ingress\_rules) | ../../ | n/a |
 | <a name="module_prefix_list"></a> [prefix\_list](#module\_prefix\_list) | ../../ | n/a |
 | <a name="module_prefix_list_sg"></a> [prefix\_list\_sg](#module\_prefix\_list\_sg) | ../../ | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
