@@ -401,6 +401,24 @@ module "only_rules" {
   ]
 }
 
+###################################################
+# Only security group rules with auto ingress rules
+###################################################
+module "only_rules_with_auto_ingress_rules" {
+  source = "../../"
+
+  create_sg         = false
+  security_group_id = module.complete_sg.security_group_id
+  ingress_rules     = ["redis-tcp"]
+  ingress_with_source_security_group_id = [
+    {
+      description              = "http from service one"
+      rule                     = "redis-tcp"
+      source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+}
+
 ###################################
 # Security group with prefix lists
 ###################################
