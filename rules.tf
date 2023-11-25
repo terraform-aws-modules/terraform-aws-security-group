@@ -458,7 +458,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     splunk = {
-      ingress_rules     = ["splunk-indexer-tcp", "splunk-clients-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp"]
+      ingress_rules     = ["splunk-indexer-tcp", "splunk-web-tcp", "splunk-splunkd-tcp", "splunk-hec-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
