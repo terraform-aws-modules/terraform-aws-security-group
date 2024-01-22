@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.1.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.1.0...v5.1.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* Fixed Splunk rule names ([#301](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/301)) ([af350fe](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/af350fe85e43451e4fd68716ff60136aa66960d9))
+
 ## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.0.0...v5.1.0) (2023-06-06)
 
 
