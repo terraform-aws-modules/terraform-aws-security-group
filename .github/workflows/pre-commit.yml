@@ -90,6 +90,10 @@ jobs:
         id: minMax
         uses: clowdhaus/terraform-min-max@v1.3.0
 
+      # Special to this repo, we don't want to check this dir
+      - name: Hide template dir
+        run: rm -rf modules/_templates
+
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.9.0
         with:
