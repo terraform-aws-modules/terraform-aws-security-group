@@ -211,7 +211,7 @@ variable "rules" {
     zookeeper-3888-tcp     = [3888, 3888, "tcp", "Zookeeper"]
     zookeeper-jmx-tcp      = [7199, 7199, "tcp", "JMX"]
     # Open all ports & protocols
-    all-all       = [-1, -1, "-1", "All protocols"]
+    all-all       = [0, 0, "-1", "All protocols"]
     all-tcp       = [0, 65535, "tcp", "All TCP ports"]
     all-udp       = [0, 65535, "udp", "All UDP ports"]
     all-icmp      = [-1, -1, "icmp", "All IPV4 ICMP"]
