@@ -437,7 +437,12 @@ resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = lookup(
+    var.ingress_with_prefix_list_ids[count.index], "include_base_prefix_list_ids", true
+    ) ? concat(
+    var.ingress_prefix_list_ids, lookup(var.ingress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+  ) : lookup(var.ingress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+
   description = lookup(
     var.ingress_with_prefix_list_ids[count.index],
     "description",
@@ -468,7 +473,12 @@ resource "aws_security_group_rule" "computed_ingress_with_prefix_list_ids" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = lookup(
+    var.ingress_with_prefix_list_ids[count.index], "include_base_prefix_list_ids", true
+    ) ? concat(
+    var.ingress_prefix_list_ids, lookup(var.ingress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+  ) : lookup(var.ingress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+
   description = lookup(
     var.ingress_with_prefix_list_ids[count.index],
     "description",
@@ -875,7 +885,12 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = lookup(
+    var.egress_with_prefix_list_ids[count.index], "include_base_prefix_list_ids", true
+    ) ? concat(
+    var.egress_prefix_list_ids, lookup(var.egress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+  ) : lookup(var.egress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+
   description = lookup(
     var.egress_with_prefix_list_ids[count.index],
     "description",
@@ -911,15 +926,19 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
   )
 }
 
-# Computed - Security group rules with "source_security_group_id", but without "cidr_blocks", "self" or "source_security_group_id"
+# Computed - Security group rules with "egress_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
 resource "aws_security_group_rule" "computed_egress_with_prefix_list_ids" {
   count = var.create ? var.number_of_computed_egress_with_prefix_list_ids : 0
 
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  source_security_group_id = var.computed_egress_with_prefix_list_ids[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.egress_prefix_list_ids
+  prefix_list_ids = lookup(
+    var.egress_with_prefix_list_ids[count.index], "include_base_prefix_list_ids", true
+    ) ? concat(
+    var.egress_prefix_list_ids, lookup(var.egress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+  ) : lookup(var.egress_with_prefix_list_ids[count.index]["prefix_list_ids"], [])
+
   description = lookup(
     var.computed_egress_with_prefix_list_ids[count.index],
     "description",
