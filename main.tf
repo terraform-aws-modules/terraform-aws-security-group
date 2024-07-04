@@ -374,8 +374,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  self            = lookup(var.ingress_with_self[count.index], "self", true)
-  prefix_list_ids = var.ingress_prefix_list_ids
+  self = lookup(var.ingress_with_self[count.index], "self", true)
   description = lookup(
     var.ingress_with_self[count.index],
     "description",
@@ -406,8 +405,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  self            = lookup(var.computed_ingress_with_self[count.index], "self", true)
-  prefix_list_ids = var.ingress_prefix_list_ids
+  self = lookup(var.computed_ingress_with_self[count.index], "self", true)
   description = lookup(
     var.computed_ingress_with_self[count.index],
     "description",
@@ -811,8 +809,7 @@ resource "aws_security_group_rule" "egress_with_self" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  self            = lookup(var.egress_with_self[count.index], "self", true)
-  prefix_list_ids = var.egress_prefix_list_ids
+  self = lookup(var.egress_with_self[count.index], "self", true)
   description = lookup(
     var.egress_with_self[count.index],
     "description",
@@ -843,8 +840,7 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  self            = lookup(var.computed_egress_with_self[count.index], "self", true)
-  prefix_list_ids = var.egress_prefix_list_ids
+  self = lookup(var.computed_egress_with_self[count.index], "self", true)
   description = lookup(
     var.computed_egress_with_self[count.index],
     "description",
