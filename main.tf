@@ -202,7 +202,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
       join(",", var.ingress_cidr_blocks),
     ),
   ))
-  prefix_list_ids = var.ingress_prefix_list_ids
+
   description = lookup(
     var.ingress_with_cidr_blocks[count.index],
     "description",
@@ -214,11 +214,13 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
     "from_port",
     var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][0],
   )
+
   to_port = lookup(
     var.ingress_with_cidr_blocks[count.index],
     "to_port",
     var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][1],
   )
+
   protocol = lookup(
     var.ingress_with_cidr_blocks[count.index],
     "protocol",
@@ -241,7 +243,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
       join(",", var.ingress_cidr_blocks),
     ),
   ))
-  prefix_list_ids = var.ingress_prefix_list_ids
+
   description = lookup(
     var.computed_ingress_with_cidr_blocks[count.index],
     "description",
@@ -257,6 +259,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
       "_",
     )][0],
   )
+
   to_port = lookup(
     var.computed_ingress_with_cidr_blocks[count.index],
     "to_port",
@@ -266,6 +269,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
       "_",
     )][1],
   )
+
   protocol = lookup(
     var.computed_ingress_with_cidr_blocks[count.index],
     "protocol",
@@ -639,7 +643,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
       join(",", var.egress_cidr_blocks),
     ),
   ))
-  prefix_list_ids = var.egress_prefix_list_ids
+
   description = lookup(
     var.egress_with_cidr_blocks[count.index],
     "description",
@@ -651,11 +655,13 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
     "from_port",
     var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][0],
   )
+
   to_port = lookup(
     var.egress_with_cidr_blocks[count.index],
     "to_port",
     var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][1],
   )
+
   protocol = lookup(
     var.egress_with_cidr_blocks[count.index],
     "protocol",
@@ -678,7 +684,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
       join(",", var.egress_cidr_blocks),
     ),
   ))
-  prefix_list_ids = var.egress_prefix_list_ids
+
   description = lookup(
     var.computed_egress_with_cidr_blocks[count.index],
     "description",
@@ -694,6 +700,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
       "_",
     )][0],
   )
+
   to_port = lookup(
     var.computed_egress_with_cidr_blocks[count.index],
     "to_port",
@@ -703,6 +710,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
       "_",
     )][1],
   )
+
   protocol = lookup(
     var.computed_egress_with_cidr_blocks[count.index],
     "protocol",
