@@ -94,35 +94,11 @@ main() {
     egress_rules=$(get_auto_value "$auto_groups_data" "$group" "egress_rules")
     egress_with_self=$(get_auto_value "$auto_groups_data" "$group" "egress_with_self")
 
-    # Computed values
-    computed_ingress_rules=$(get_auto_value "$auto_groups_data" "$group" "computed_ingress_rules")
-    computed_ingress_with_self=$(get_auto_value "$auto_groups_data" "$group" "computed_ingress_with_self")
-    computed_egress_rules=$(get_auto_value "$auto_groups_data" "$group" "computed_egress_rules")
-    computed_egress_with_self=$(get_auto_value "$auto_groups_data" "$group" "computed_egress_with_self")
-
-    # Number of computed values
-    number_of_computed_ingress_rules=$(get_auto_value "$auto_groups_data" "$group" "number_of_computed_ingress_rules")
-    number_of_computed_ingress_with_self=$(get_auto_value "$auto_groups_data" "$group" "number_of_computed_ingress_with_self")
-    number_of_computed_egress_rules=$(get_auto_value "$auto_groups_data" "$group" "number_of_computed_egress_rules")
-    number_of_computed_egress_with_self=$(get_auto_value "$auto_groups_data" "$group" "number_of_computed_egress_with_self")
-
     # Set to empty lists, if no value was specified
     ingress_rules=$(set_list_if_null "$ingress_rules")
     ingress_with_self=$(set_list_if_null "$ingress_with_self")
     egress_rules=$(set_list_if_null "$egress_rules")
     egress_with_self=$(set_list_if_null "$egress_with_self")
-
-    # Set to empty lists, if no computed value was specified
-    computed_ingress_rules=$(set_list_if_null "$computed_ingress_rules")
-    computed_ingress_with_self=$(set_list_if_null "$computed_ingress_with_self")
-    computed_egress_rules=$(set_list_if_null "$computed_egress_rules")
-    computed_egress_with_self=$(set_list_if_null "$computed_egress_with_self")
-
-    # Set to zero, if no value was specified
-    number_of_computed_ingress_rules=$(set_zero_if_null "$number_of_computed_ingress_rules")
-    number_of_computed_ingress_with_self=$(set_zero_if_null "$number_of_computed_ingress_with_self")
-    number_of_computed_egress_rules=$(set_zero_if_null "$number_of_computed_egress_rules")
-    number_of_computed_egress_with_self=$(set_zero_if_null "$number_of_computed_egress_with_self")
 
     # ingress_with_self and egress_with_self are stored as simple lists (like this - ["all-all","all-tcp"]),
     # so we make map (like this - [{"rule"="all-all"},{"rule"="all-tcp"}])
@@ -158,56 +134,6 @@ variable "auto_egress_with_self" {
   type        = list(map(string))
   default     = $egress_with_self
 }
-
-# Computed
-variable "auto_computed_ingress_rules" {
-  description = "List of ingress rules to add automatically"
-  type        = list(string)
-  default     = $computed_ingress_rules
-}
-
-variable "auto_computed_ingress_with_self" {
-  description = "List of maps defining computed ingress rules with self to add automatically"
-  type        = list(map(string))
-  default     = $computed_ingress_with_self
-}
-
-variable "auto_computed_egress_rules" {
-  description = "List of computed egress rules to add automatically"
-  type        = list(string)
-  default     = $computed_egress_rules
-}
-
-variable "auto_computed_egress_with_self" {
-  description = "List of maps defining computed egress rules with self to add automatically"
-  type        = list(map(string))
-  default     = $computed_egress_with_self
-}
-
-# Number of computed rules
-variable "auto_number_of_computed_ingress_rules" {
-  description = "Number of computed ingress rules to create by name"
-  type        = number
-  default     = $number_of_computed_ingress_rules
-}
-
-variable "auto_number_of_computed_ingress_with_self" {
-  description = "Number of computed ingress rules to create where 'self' is defined"
-  type        = number
-  default     = $number_of_computed_ingress_with_self
-}
-
-variable "auto_number_of_computed_egress_rules" {
-  description = "Number of computed egress rules to create by name"
-  type        = number
-  default     = $number_of_computed_egress_rules
-}
-
-variable "auto_number_of_computed_egress_with_self" {
-  description = "Number of computed egress rules to create where 'self' is defined"
-  type        = number
-  default     = $number_of_computed_egress_with_self
-}
 EOF
 
     cat <<EOF > "modules/$group/README.md"
@@ -218,7 +144,7 @@ EOF
 \`\`\`hcl
 module "${group/-/_}_security_group" {
   source  = "terraform-aws-modules/security-group/aws//modules/${group}"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   # omitted...
 }

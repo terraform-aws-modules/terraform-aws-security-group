@@ -21,11 +21,7 @@ If there is a missing feature or a bug - [open an issue](https://github.com/terr
 
 ## Terraform versions
 
-For Terraform 0.13 or later use any version from `v4.5.0` of this module or newer.
-
-For Terraform 0.12 use any version from `v3.*` to `v4.4.0`.
-
-If you are using Terraform 0.11 you can use versions `v2.*`.
+For Terraform 1.x or later use any version from `v4.5.0` of this module or newer.
 
 ## Usage
 
@@ -76,67 +72,6 @@ module "vote_service_sg" {
 }
 ```
 
-### Note about "value of 'count' cannot be computed"
-
-Terraform 0.11 has a limitation which does not allow **computed** values inside `count` attribute on resources (issues: [#16712](https://github.com/hashicorp/terraform/issues/16712), [#18015](https://github.com/hashicorp/terraform/issues/18015), ...)
-
-Computed values are values provided as outputs from `module`. Non-computed values are all others - static values, values referenced as `variable` and from data-sources.
-
-When you need to specify computed value inside security group rule argument you need to specify it using an argument which starts with `computed_` and provide a number of elements in the argument which starts with `number_of_computed_`. See these examples:
-
-```hcl
-module "http_sg" {
-  source = "terraform-aws-modules/security-group/aws"
-  # omitted for brevity
-}
-
-module "db_computed_source_sg" {
-  # omitted for brevity
-
-  vpc_id = "vpc-12345678" # these are valid values also - `module.vpc.vpc_id` and `local.vpc_id`
-
-  computed_ingress_with_source_security_group_id = [
-    {
-      rule                     = "mysql-tcp"
-      source_security_group_id = module.http_sg.security_group_id
-    }
-  ]
-  number_of_computed_ingress_with_source_security_group_id = 1
-}
-
-module "db_computed_sg" {
-  # omitted for brevity
-
-  ingress_cidr_blocks = ["10.10.0.0/16", data.aws_security_group.default.id]
-
-  computed_ingress_cidr_blocks           = [module.vpc.vpc_cidr_block]
-  number_of_computed_ingress_cidr_blocks = 1
-}
-
-module "db_computed_merged_sg" {
-  # omitted for brevity
-
-  computed_ingress_cidr_blocks           = ["10.10.0.0/16", module.vpc.vpc_cidr_block]
-  number_of_computed_ingress_cidr_blocks = 2
-}
-```
-
-Note that `db_computed_sg` and `db_computed_merged_sg` are equal, because it is possible to put both computed and non-computed values in arguments starting with `computed_`.
-
-## Conditional creation
-
-Sometimes you need a way to conditionally create a security group. If you're using Terraform < 0.13 which lacks module support for [count](https://www.terraform.io/docs/language/meta-arguments/count.html), you can instead specify the argument `create`.
-
-```hcl
-# This security group will not be created
-module "vote_service_sg" {
-  source = "terraform-aws-modules/security-group/aws"
-
-  create = false
-  # ... omitted
-}
-```
-
 ## Examples
 
 * [Complete Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) shows all available parameters to configure security group.
@@ -144,7 +79,6 @@ module "vote_service_sg" {
 * [HTTP Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
 * [Disable creation of Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
 * [Dynamic values inside Security Group rules example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/dynamic) shows how to specify values inside security group rules (data-sources and variables are allowed).
-* [Computed values inside Security Group rules example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/computed) shows how to specify computed values inside security group rules (solution for `value of 'count' cannot be computed` problem).
 
 ## How to add/update rules/groups?
 
@@ -160,13 +94,13 @@ No issue is creating limit on this module.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.63 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.29 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.63 |
 
 ## Modules
 
@@ -178,18 +112,6 @@ No modules.
 |------|------|
 | [aws_security_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.this_name_prefix](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group_rule.computed_egress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_egress_with_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_egress_with_ipv6_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_egress_with_prefix_list_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_egress_with_self](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_egress_with_source_security_group_id](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_with_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_with_ipv6_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_with_prefix_list_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_with_self](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.computed_ingress_with_source_security_group_id](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.egress_rules](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.egress_with_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_security_group_rule.egress_with_ipv6_cidr_blocks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
