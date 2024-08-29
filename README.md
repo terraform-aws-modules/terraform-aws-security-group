@@ -21,7 +21,11 @@ If there is a missing feature or a bug - [open an issue](https://github.com/terr
 
 ## Terraform versions
 
-For Terraform 1.x or later use any version from `v4.5.0` of this module or newer.
+For Terraform 0.13 or later use any version from `v4.5.0` of this module or newer.
+
+For Terraform 0.12 use any version from `v3.*` to `v4.4.0`.
+
+If you are using Terraform 0.11 you can use versions `v2.*`.
 
 ## Usage
 
