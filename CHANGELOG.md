@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.2.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.1.2...v5.2.0) (2024-08-31)
+
+
+### Features
+
+* Remove prefix_list_ids attribute from _with_cidr_blocks & specific prefix list for each rules on _with_prefix_list_ids ([#325](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/325)) ([7ffb2c8](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/7ffb2c85a9fe0dc9d57c1f764cc9325d20fe3fa2))
+
 ## [5.1.2](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.1.1...v5.1.2) (2024-03-12)
 
 
