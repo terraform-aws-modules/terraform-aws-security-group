@@ -286,7 +286,7 @@ module "prefix_list" {
   vpc_id      = data.aws_vpc.default.id
 
   ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
-  ingress_with_cidr_blocks = [
+  ingress_with_prefix_list_ids = [
     {
       from_port       = 9100
       to_port         = 9100

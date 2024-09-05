@@ -209,7 +209,15 @@ resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
   security_group_id = local.this_sg_id
   type              = "ingress"
 
-  prefix_list_ids = var.ingress_prefix_list_ids
+  prefix_list_ids = compact(split(
+    ",",
+    lookup(
+      var.ingress_with_prefix_list_ids[count.index],
+      "prefix_list_ids",
+      join(",", var.ingress_prefix_list_ids)
+    )
+  ))
+
   description = lookup(
     each.value,
     "description",
@@ -221,11 +229,13 @@ resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
     "from_port",
     var.rules[lookup(each.value, "rule", "_")][0],
   )
+
   to_port = lookup(
     each.value,
     "to_port",
     var.rules[lookup(each.value, "rule", "_")][1],
   )
+
   protocol = lookup(
     each.value,
     "protocol",
@@ -409,7 +419,15 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
   security_group_id = local.this_sg_id
   type              = "egress"
 
-  prefix_list_ids = var.egress_prefix_list_ids
+  prefix_list_ids = compact(split(
+    ",",
+    lookup(
+      var.egress_with_prefix_list_ids[count.index],
+      "prefix_list_ids",
+      join(",", var.egress_prefix_list_ids)
+    ))
+  )
+
   description = lookup(
     each.value,
     "description",
@@ -425,6 +443,7 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
       "_",
     )][0],
   )
+
   to_port = lookup(
     each.value,
     "to_port",
@@ -434,6 +453,7 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
       "_",
     )][1],
   )
+
   protocol = lookup(
     each.value,
     "protocol",
