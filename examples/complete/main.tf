@@ -71,10 +71,6 @@ module "complete_sg" {
   # Open for all CIDRs defined in ingress_cidr_blocks
   ingress_rules = ["https-443-tcp"]
 
-  # Use computed value here (eg, `${module...}`). Plain string is not a real use-case for this argument.
-  computed_ingress_rules           = ["ssh-tcp"]
-  number_of_computed_ingress_rules = 1
-
   # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
   ingress_with_cidr_blocks = [
     {
@@ -94,45 +90,6 @@ module "complete_sg" {
     },
   ]
 
-  computed_ingress_with_cidr_blocks = [
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "3.3.3.3/32,${module.vpc.vpc_cidr_block}"
-    },
-    {
-      from_port   = 15
-      to_port     = 25
-      protocol    = 6
-      description = "Service name with vpc cidr"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_ingress_with_cidr_blocks = 2
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 300
-      to_port          = 400
-      protocol         = "tcp"
-      description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  computed_ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 350
-      to_port          = 450
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID = ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_ingress_with_ipv6_cidr_blocks = 1
-
   # Open for security group id (rule or from_port+to_port+protocol+description)
   ingress_with_source_security_group_id = [
     {
@@ -147,22 +104,6 @@ module "complete_sg" {
       source_security_group_id = data.aws_security_group.default.id
     },
   ]
-
-  computed_ingress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-    {
-      from_port                = 23
-      to_port                  = 23
-      protocol                 = 6
-      description              = "Service name"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_ingress_with_source_security_group_id = 2
 
   # Open for self (rule or from_port+to_port+protocol+description)
   ingress_with_self = [
@@ -184,18 +125,6 @@ module "complete_sg" {
     },
   ]
 
-  computed_ingress_with_self = [
-    {
-      from_port   = 32
-      to_port     = 43
-      protocol    = 6
-      description = "Service name. VPC ID: ${module.vpc.vpc_id}"
-      self        = true
-    },
-  ]
-
-  number_of_computed_ingress_with_self = 1
-
   # Default CIDR blocks, which will be used for all egress rules in this module. Typically these are CIDR blocks of the VPC.
   # If this is not specified then no CIDR blocks will be used.
   egress_cidr_blocks = ["10.10.0.0/16"]
@@ -206,9 +135,6 @@ module "complete_sg" {
   # egress_prefix_list_ids = ["pl-123456"]
   # Open for all CIDRs defined in egress_cidr_blocks
   egress_rules = ["http-80-tcp"]
-
-  computed_egress_rules           = ["ssh-tcp"]
-  number_of_computed_egress_rules = 1
 
   # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
   egress_with_cidr_blocks = [
@@ -229,38 +155,6 @@ module "complete_sg" {
     },
   ]
 
-  computed_egress_with_cidr_blocks = [
-    {
-      rule        = "https-443-tcp"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_egress_with_cidr_blocks = 1
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 300
-      to_port          = 400
-      protocol         = "tcp"
-      description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  computed_egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 55
-      to_port          = 66
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID: ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_egress_with_ipv6_cidr_blocks = 1
-
   # Open for security group id (rule or from_port+to_port+protocol+description)
   egress_with_source_security_group_id = [
     {
@@ -275,15 +169,6 @@ module "complete_sg" {
       source_security_group_id = data.aws_security_group.default.id
     },
   ]
-
-  computed_egress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_egress_with_source_security_group_id = 1
 
   # Open for self (rule or from_port+to_port+protocol+description)
   egress_with_self = [
@@ -305,14 +190,6 @@ module "complete_sg" {
     },
   ]
 
-  computed_egress_with_self = [
-    {
-      rule = "https-443-tcp"
-    },
-  ]
-
-  number_of_computed_egress_with_self = 1
-
   create_timeout = "15m"
   delete_timeout = "45m"
 }
@@ -329,40 +206,22 @@ module "ipv4_ipv6_example" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port   = 8080
-      to_port     = 8090
-      protocol    = "tcp"
-      description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-
-  ingress_with_ipv6_cidr_blocks = [
-    {
       from_port        = 8080
       to_port          = 8090
       protocol         = "tcp"
-      description      = "User-service ports (ipv6)"
+      description      = "User-service ports"
+      cidr_blocks      = "0.0.0.0/0"
       ipv6_cidr_blocks = "2001:db8::/64"
     },
   ]
 
   egress_with_cidr_blocks = [
     {
-      from_port   = 8090
-      to_port     = 8100
-      protocol    = "tcp"
-      description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-
-  egress_with_ipv6_cidr_blocks = [
-    {
       from_port        = 8090
       to_port          = 8100
       protocol         = "tcp"
-      description      = "User-service ports (ipv6)"
+      description      = "User-service ports"
+      cidr_blocks      = "0.0.0.0/0"
       ipv6_cidr_blocks = "2001:db8::/64"
     },
   ]
