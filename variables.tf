@@ -157,6 +157,7 @@ variable "computed_ingress_with_source_security_group_id" {
   default     = []
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "computed_ingress_with_prefix_list_ids" {
   description = "List of computed ingress rules to create where 'prefix_list_ids' is used"
   type        = list(map(string))

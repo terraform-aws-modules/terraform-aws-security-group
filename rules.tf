@@ -221,6 +221,8 @@ variable "rules" {
   }
 }
 
+
+# tflint-ignore: terraform_unused_declarations
 variable "auto_groups" {
   description = "Map of groups of security group rules to use to generate modules (see update_groups.sh)"
   type        = map(map(list(string)))
