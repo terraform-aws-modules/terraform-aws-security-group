@@ -7,8 +7,8 @@ on:
       - master
 
 env:
-  TERRAFORM_DOCS_VERSION: v0.16.0
-  TFLINT_VERSION: v0.50.3
+  TERRAFORM_DOCS_VERSION: v0.19.0
+  TFLINT_VERSION: v0.53.0
 
 jobs:
   collectInputs:
@@ -45,14 +45,14 @@ jobs:
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v1.3.0
+        uses: clowdhaus/terraform-min-max@v1.3.1
         with:
           directory: ${{ matrix.directory }}
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory !=  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.9.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.11.1
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
@@ -61,7 +61,7 @@ jobs:
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory ==  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.9.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.11.1
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
@@ -92,7 +92,7 @@ jobs:
           sudo apt-get -qq remove -y 'postgresql-.*'
           sudo apt-get -qq remove -y 'php.*'
           sudo apt-get -qq remove -y 'temurin-.*'
-          sudo apt-get -qq remove -y kubectl firefox powershell mono-devel
+          sudo apt-get -qq remove -y kubectl firefox mono-devel
           sudo apt-get -qq autoremove -y
           sudo apt-get -qq clean
           df -h
@@ -105,14 +105,14 @@ jobs:
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v1.3.0
+        uses: clowdhaus/terraform-min-max@v1.3.1
 
       # Special to this repo, we don't want to check this dir
       - name: Hide template dir
         run: rm -rf modules/_templates
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.9.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.11.1
         with:
           terraform-version: ${{ steps.minMax.outputs.maxVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
