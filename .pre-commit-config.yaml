@@ -3,14 +3,17 @@ repos:
     rev: v1.96.1
     hooks:
       - id: terraform_fmt
+      - id: terraform_wrapper_module_for_each
       - id: terraform_docs
         args:
           - '--args=--lockfile=false'
       - id: terraform_validate
-        exclude: '^modules/_templates/[^/]+$'
+        exclude: '^modules/_templates/[^/]+$|^wrappers/.+$'
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
       - id: check-merge-conflict
       - id: end-of-file-fixer
       - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
