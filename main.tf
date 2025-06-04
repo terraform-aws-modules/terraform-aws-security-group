@@ -25,6 +25,10 @@ resource "aws_security_group" "this" {
     var.tags,
   )
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   timeouts {
     create = var.create_timeout
     delete = var.delete_timeout
