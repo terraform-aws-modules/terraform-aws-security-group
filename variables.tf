@@ -100,13 +100,13 @@ variable "ingress_with_source_security_group_id" {
   default     = []
 }
 
-variable "ingress_cidr_blocks" {
+variable "ingress_cidr_ipv4" {
   description = "List of IPv4 CIDR ranges to use on all ingress rules"
   type        = list(string)
   default     = []
 }
 
-variable "ingress_ipv6_cidr_blocks" {
+variable "ingress_cidr_ipv6" {
   description = "List of IPv6 CIDR ranges to use on all ingress rules"
   type        = list(string)
   default     = []
