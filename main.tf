@@ -165,47 +165,47 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_rules_prefix_li
 # Ingress - Maps of rules
 ##########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
-resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
-  count = local.create ? length(var.ingress_with_source_security_group_id) : 0
+resource "aws_vpc_security_group_ingress_rule" "ingress_with_referenced_security_group_id" {
+  count = local.create ? length(var.ingress_with_referenced_security_group_id) : 0
 
   security_group_id = local.this_sg_id
-  type              = "ingress"
 
-  source_security_group_id = var.ingress_with_source_security_group_id[count.index]["source_security_group_id"]
-  prefix_list_ids          = var.ingress_prefix_list_ids
+  referenced_security_group_id = var.ingress_with_referenced_security_group_id[count.index]["referenced_security_group_id"]
   description = lookup(
-    var.ingress_with_source_security_group_id[count.index],
+    var.ingress_with_referenced_security_group_id[count.index],
     "description",
     "Ingress Rule",
   )
 
   from_port = lookup(
-    var.ingress_with_source_security_group_id[count.index],
+    var.ingress_with_referenced_security_group_id[count.index],
     "from_port",
     var.rules[lookup(
-      var.ingress_with_source_security_group_id[count.index],
+      var.ingress_with_referenced_security_group_id[count.index],
       "rule",
       "_",
     )][0],
   )
   to_port = lookup(
-    var.ingress_with_source_security_group_id[count.index],
+    var.ingress_with_referenced_security_group_id[count.index],
     "to_port",
     var.rules[lookup(
-      var.ingress_with_source_security_group_id[count.index],
+      var.ingress_with_referenced_security_group_id[count.index],
       "rule",
       "_",
     )][1],
   )
-  protocol = lookup(
-    var.ingress_with_source_security_group_id[count.index],
-    "protocol",
+  ip_protocol = lookup(
+    var.ingress_with_referenced_security_group_id[count.index],
+    "ip_protocol",
     var.rules[lookup(
-      var.ingress_with_source_security_group_id[count.index],
+      var.ingress_with_referenced_security_group_id[count.index],
       "rule",
       "_",
     )][2],
   )
+
+  tags = var.tags
 }
 
 # Computed - Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"

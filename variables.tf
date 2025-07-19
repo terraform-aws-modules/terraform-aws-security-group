@@ -94,8 +94,8 @@ variable "ingress_with_ipv6_cidr_blocks" {
   default     = []
 }
 
-variable "ingress_with_source_security_group_id" {
-  description = "List of ingress rules to create where 'source_security_group_id' is used"
+variable "ingress_with_referenced_security_group_id" {
+  description = "List of ingress rules to create where 'referenced_security_group_id' is used"
   type        = list(map(string))
   default     = []
 }
