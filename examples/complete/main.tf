@@ -3,7 +3,6 @@ provider "aws" {
 
   skip_credentials_validation = true
   skip_requesting_account_id  = true
-  skip_get_ec2_platforms      = true
   skip_metadata_api_check     = true
   skip_region_validation      = true
 }
@@ -24,7 +23,8 @@ data "aws_security_group" "default" {
 # VPC which is used as an argument in complete-sg
 ##################################################
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"
 
   name = "complete-sg-demo-vpc"
   cidr = "10.20.0.0/20"
@@ -66,7 +66,8 @@ module "complete_sg" {
   ingress_ipv6_cidr_blocks = ["2001:db8::/64"]
 
   # Prefix list ids to use in all ingress rules in this module.
-  # ingress_prefix_list_ids = ["pl-123456"]
+  # ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
+
   # Open for all CIDRs defined in ingress_cidr_blocks
   ingress_rules = ["https-443-tcp"]
 
@@ -396,6 +397,81 @@ module "only_rules" {
       description              = "http from service one"
       rule                     = "http-80-tcp"
       source_security_group_id = data.aws_security_group.default.id
+    },
+  ]
+}
+
+###################################
+# Security group with prefix lists
+###################################
+
+data "aws_prefix_list" "s3" {
+  filter {
+    name   = "prefix-list-name"
+    values = ["com.amazonaws.eu-west-1.s3"]
+  }
+}
+
+data "aws_prefix_list" "dynamodb" {
+  filter {
+    name   = "prefix-list-name"
+    values = ["com.amazonaws.eu-west-1.dynamodb"]
+  }
+}
+
+module "prefix_list" {
+  source = "../../"
+
+  name        = "pl-sg"
+  description = "Security group with prefix list"
+  vpc_id      = data.aws_vpc.default.id
+
+  ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
+  ingress_with_prefix_list_ids = [
+    {
+      from_port       = 9100
+      to_port         = 9100
+      protocol        = 6 # "tcp"
+      description     = "Arbitrary TCP port"
+      prefix_list_ids = join(",", [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id])
+    },
+  ]
+}
+
+#################################
+# Security group using prefix list
+#################################
+resource "aws_ec2_managed_prefix_list" "prefix_list_sg_example" {
+  address_family = "IPv4"
+  max_entries    = 1
+  name           = "prefix-list-sg-example"
+
+  entry {
+    cidr        = module.vpc.vpc_cidr_block
+    description = "VPC CIDR"
+  }
+}
+
+module "prefix_list_sg" {
+  source = "../../"
+
+  name        = "prefix-list-sg"
+  description = "Security group using prefix list and custom ingress rules"
+  vpc_id      = data.aws_vpc.default.id
+
+  use_name_prefix = false
+
+  ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.prefix_list_sg_example.id]
+  ingress_with_prefix_list_ids = [
+    {
+      from_port = 80
+      to_port   = 80
+      protocol  = "tcp"
+    },
+    {
+      from_port = 443
+      to_port   = 443
+      protocol  = "tcp"
     },
   ]
 }

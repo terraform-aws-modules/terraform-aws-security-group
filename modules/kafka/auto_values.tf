@@ -6,7 +6,7 @@
 variable "auto_ingress_rules" {
   description = "List of ingress rules to add automatically"
   type        = list(string)
-  default     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
+  default     = ["kafka-broker-tcp", "kafka-broker-tls-tcp", "kafka-broker-tls-public-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-sasl-scram-tcp", "kafka-broker-sasl-iam-tcp", "kafka-broker-sasl-iam-public-tcp", "kafka-jmx-exporter-tcp", "kafka-node-exporter-tcp"]
 }
 
 variable "auto_ingress_with_self" {

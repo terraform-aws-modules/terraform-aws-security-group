@@ -16,19 +16,19 @@ $ terraform apply
 
 Note that this example may create resources which cost money. Run `terraform destroy` when you don't need these resources.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.29 |
 
 ## Modules
 
@@ -54,6 +54,8 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_service_one_security_group_arn"></a> [service\_one\_security\_group\_arn](#output\_service\_one\_security\_group\_arn) | The ARN of the security group for service one |
 | <a name="output_service_one_security_group_id"></a> [service\_one\_security\_group\_id](#output\_service\_one\_security\_group\_id) | The ID of the security group for service one |
+| <a name="output_service_tow_security_group_arn"></a> [service\_tow\_security\_group\_arn](#output\_service\_tow\_security\_group\_arn) | The ARN of the security group for service two |
 | <a name="output_service_two_security_group_id"></a> [service\_two\_security\_group\_id](#output\_service\_two\_security\_group\_id) | The ID of the security group for service two |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
