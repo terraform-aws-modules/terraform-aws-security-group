@@ -252,6 +252,50 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_referenced
   tags = var.tags
 }
 
+# Security group rules allow ingress from allowed all ingress_prefix_list_ids
+resource "aws_vpc_security_group_ingress_rule" "ingress_with_referenced_security_group_id_prefix_list" {
+  count = local.create ? length(var.ingress_with_referenced_security_group_id) * length(var.ingress_prefix_list_ids) : 0
+
+  security_group_id = local.this_sg_id
+
+  prefix_list_id = var.ingress_prefix_list_ids[floor(count.index / length(var.ingress_with_referenced_security_group_id))]
+  description = lookup(
+    var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+    "description",
+    "Ingress Rule",
+  )
+
+  from_port = lookup(
+    var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+    "from_port",
+    var.rules[lookup(
+      var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+      "rule",
+      "_",
+    )][0],
+  )
+  to_port = lookup(
+    var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+    "to_port",
+    var.rules[lookup(
+      var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+      "rule",
+      "_",
+    )][1],
+  )
+  ip_protocol = lookup(
+    var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+    "ip_protocol",
+    var.rules[lookup(
+      var.ingress_with_referenced_security_group_id[count.index % length(var.ingress_with_referenced_security_group_id)],
+      "rule",
+      "_",
+    )][2],
+  )
+
+  tags = var.tags
+}
+
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   count = local.create ? length(var.ingress_with_cidr_blocks) : 0
