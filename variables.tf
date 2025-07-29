@@ -82,8 +82,8 @@ variable "ingress_with_self" {
   default     = []
 }
 
-variable "ingress_with_cidr_blocks" {
-  description = "List of ingress rules to create where 'cidr_blocks' is used"
+variable "ingress_with_cidr_ipv4" {
+  description = "List of ingress rules to create where 'cidr_ipv4' is used"
   type        = list(map(string))
   default     = []
 }

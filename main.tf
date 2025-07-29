@@ -296,45 +296,39 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_referenced_security
   tags = var.tags
 }
 
-# Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
-resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
-  count = local.create ? length(var.ingress_with_cidr_blocks) : 0
+# Security group rules with "cidr_ipv4"
+resource "aws_vpc_security_group_ingress_rule" "ingress_with_cidr_ipv4" {
+  count = local.create ? length(var.ingress_with_cidr_ipv4) : 0
 
   security_group_id = local.this_sg_id
-  type              = "ingress"
 
-  cidr_blocks = compact(split(
-    ",",
-    lookup(
-      var.ingress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.ingress_cidr_blocks),
-    ),
-  ))
+  cidr_ipv4 = var.ingress_with_cidr_ipv4[count.index]["cidr_ipv4"]
 
   description = lookup(
-    var.ingress_with_cidr_blocks[count.index],
+    var.ingress_with_cidr_ipv4[count.index],
     "description",
     "Ingress Rule",
   )
 
   from_port = lookup(
-    var.ingress_with_cidr_blocks[count.index],
+    var.ingress_with_cidr_ipv4[count.index],
     "from_port",
-    var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][0],
+    var.rules[lookup(var.ingress_with_cidr_ipv4[count.index], "rule", "_")][0],
   )
 
   to_port = lookup(
-    var.ingress_with_cidr_blocks[count.index],
+    var.ingress_with_cidr_ipv4[count.index],
     "to_port",
-    var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][1],
+    var.rules[lookup(var.ingress_with_cidr_ipv4[count.index], "rule", "_")][1],
   )
 
-  protocol = lookup(
-    var.ingress_with_cidr_blocks[count.index],
-    "protocol",
-    var.rules[lookup(var.ingress_with_cidr_blocks[count.index], "rule", "_")][2],
+  ip_protocol = lookup(
+    var.ingress_with_cidr_ipv4[count.index],
+    "ip_protocol",
+    var.rules[lookup(var.ingress_with_cidr_ipv4[count.index], "rule", "_")][2],
   )
+
+  tags = var.tags
 }
 
 # Computed - Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
