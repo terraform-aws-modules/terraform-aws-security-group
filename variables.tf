@@ -139,7 +139,7 @@ variable "computed_ingress_with_self" {
   default     = []
 }
 
-variable "computed_ingress_with_cidr_blocks" {
+variable "computed_ingress_with_cidr_ipv4" {
   description = "List of computed ingress rules to create where 'cidr_blocks' is used"
   type        = list(map(string))
   default     = []
@@ -178,8 +178,8 @@ variable "number_of_computed_ingress_with_self" {
   default     = 0
 }
 
-variable "number_of_computed_ingress_with_cidr_blocks" {
-  description = "Number of computed ingress rules to create where 'cidr_blocks' is used"
+variable "number_of_computed_ingress_with_cidr_ipv4" {
+  description = "Number of computed ingress rules to create where 'cidr_ipv4' is used"
   type        = number
   default     = 0
 }
