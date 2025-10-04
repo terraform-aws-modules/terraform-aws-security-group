@@ -9,6 +9,10 @@ locals {
   ingress_rules_ipv4            = setproduct(var.ingress_rules, var.ingress_cidr_ipv4)
   ingress_rules_ipv6            = setproduct(var.ingress_rules, var.ingress_cidr_ipv6)
   ingress_rules_prefix_list_ids = setproduct(var.ingress_rules, var.ingress_prefix_list_ids)
+
+  egress_rules_ipv4            = setproduct(var.egress_rules, var.egress_cidr_ipv4)
+  egress_rules_ipv6            = setproduct(var.egress_rules, var.egress_cidr_ipv6)
+  egress_rules_prefix_list_ids = setproduct(var.egress_rules, var.egress_prefix_list_ids)
 }
 
 ##########################
@@ -774,38 +778,100 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_prefix_lis
 ##################################
 # Egress - List of rules (simple)
 ##################################
-# Security group rules with "cidr_blocks" and it uses list of rules names
-resource "aws_security_group_rule" "egress_rules" {
-  count = local.create ? length(var.egress_rules) : 0
+# Security group rules with "cidr_ipv4" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "egress_rules_ipv4" {
+  count = local.create ? length(local.egress_rules_ipv4) : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  cidr_blocks      = var.egress_cidr_blocks
-  ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
-  description      = var.rules[var.egress_rules[count.index]][3]
+  cidr_ipv4   = local.egress_rules_ipv4[count.index][1]
+  description = var.rules[local.egress_rules_ipv4[count.index][0]][3]
 
-  from_port = var.rules[var.egress_rules[count.index]][0]
-  to_port   = var.rules[var.egress_rules[count.index]][1]
-  protocol  = var.rules[var.egress_rules[count.index]][2]
+  from_port   = var.rules[local.egress_rules_ipv4[count.index][0]][0]
+  to_port     = var.rules[local.egress_rules_ipv4[count.index][0]][1]
+  ip_protocol = var.rules[local.egress_rules_ipv4[count.index][0]][2]
+
+  tags = var.tags
 }
 
-# Computed - Security group rules with "cidr_blocks" and it uses list of rules names
-resource "aws_security_group_rule" "computed_egress_rules" {
-  count = local.create ? var.number_of_computed_egress_rules : 0
+# Security group rules with "cidr_ipv6" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "egress_rules_ipv6" {
+  count = local.create ? length(local.egress_rules_ipv6) : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  cidr_blocks      = var.egress_cidr_blocks
-  ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-  prefix_list_ids  = var.egress_prefix_list_ids
-  description      = var.rules[var.computed_egress_rules[count.index]][3]
+  cidr_ipv6   = local.egress_rules_ipv6[count.index][1]
+  description = var.rules[local.egress_rules_ipv6[count.index][0]][3]
 
-  from_port = var.rules[var.computed_egress_rules[count.index]][0]
-  to_port   = var.rules[var.computed_egress_rules[count.index]][1]
-  protocol  = var.rules[var.computed_egress_rules[count.index]][2]
+  from_port   = var.rules[local.egress_rules_ipv6[count.index][0]][0]
+  to_port     = var.rules[local.egress_rules_ipv6[count.index][0]][1]
+  ip_protocol = var.rules[local.egress_rules_ipv6[count.index][0]][2]
+
+  tags = var.tags
+}
+
+# Security group rules with "prefix_list_id" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "egress_rules_prefix_list_ids" {
+  count = local.create ? length(local.egress_rules_prefix_list_ids) : 0
+
+  security_group_id = local.this_sg_id
+
+  prefix_list_id = local.egress_rules_prefix_list_ids[count.index][1]
+  description    = var.rules[local.egress_rules_prefix_list_ids[count.index][0]][3]
+
+  from_port   = var.rules[local.egress_rules_prefix_list_ids[count.index][0]][0]
+  to_port     = var.rules[local.egress_rules_prefix_list_ids[count.index][0]][1]
+  ip_protocol = var.rules[local.egress_rules_prefix_list_ids[count.index][0]][2]
+
+  tags = var.tags
+}
+
+# Computed - Security group rules with "cidr_ipv4" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "computed_egress_rules_ipv4" {
+  count = local.create ? var.number_of_computed_egress_rules * length(var.egress_cidr_ipv4) : 0
+
+  security_group_id = local.this_sg_id
+
+  cidr_ipv4   = var.egress_cidr_ipv4[floor(count.index / var.number_of_computed_egress_rules)]
+  description = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][3]
+
+  from_port   = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][0]
+  to_port     = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][1]
+  ip_protocol = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][2]
+
+  tags = var.tags
+}
+
+# Computed - Security group rules with "cidr_ipv6" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "computed_egress_rules_ipv6" {
+  count = local.create ? var.number_of_computed_egress_rules * length(var.egress_cidr_ipv6) : 0
+
+  security_group_id = local.this_sg_id
+
+  cidr_ipv6   = var.egress_cidr_ipv6[floor(count.index / var.number_of_computed_egress_rules)]
+  description = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][3]
+
+  from_port   = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][0]
+  to_port     = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][1]
+  ip_protocol = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][2]
+
+  tags = var.tags
+}
+
+# Computed - Security group rules with "prefix_list_id" and it uses list of rules names
+resource "aws_vpc_security_group_egress_rule" "computed_egress_rules_prefix_list_ids" {
+  count = local.create ? var.number_of_computed_egress_rules * length(var.egress_prefix_list_ids) : 0
+
+  security_group_id = local.this_sg_id
+
+  prefix_list_id = var.egress_prefix_list_ids[floor(count.index / var.number_of_computed_egress_rules)]
+  description    = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][3]
+
+  from_port   = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][0]
+  to_port     = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][1]
+  ip_protocol = var.rules[var.computed_egress_rules[count.index % var.number_of_computed_egress_rules]][2]
+
+  tags = var.tags
 }
 
 #########################
