@@ -37,7 +37,7 @@ module "rules_one" {
 
   create_sg         = false
   security_group_id = aws_security_group.service_one.id
-  ingress_with_source_security_group_id = [
+  ingress_with_referenced_security_group_id = [
     {
       description              = "http from service two"
       rule                     = "http-80-tcp"
@@ -51,7 +51,7 @@ module "rules_two" {
 
   create_sg         = false
   security_group_id = aws_security_group.service_two.id
-  ingress_with_source_security_group_id = [
+  ingress_with_referenced_security_group_id = [
     {
       description              = "http from service one"
       rule                     = "http-80-tcp"

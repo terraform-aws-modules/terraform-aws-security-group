@@ -70,7 +70,7 @@ resource "aws_security_group" "this_name_prefix" {
 ###################################
 # Ingress - List of rules (simple)
 ###################################
-# Security group rules with "cidr_blocks" and it uses list of rules names
+# Security group rules with "cidr_ipv4" and it uses list of rules names
 resource "aws_vpc_security_group_ingress_rule" "ingress_rules_ipv4" {
   count = local.create ? length(local.ingress_rules_ipv4) : 0
 
@@ -116,7 +116,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_rules_prefix_list_ids" {
   tags = var.tags
 }
 
-# Computed - Security group rules with "cidr_blocks" and it uses list of rules names
+# Computed - Security group rules with "cidr_ipv4" and it uses list of rules names
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_rules_ipv4" {
   count = local.create ? var.number_of_computed_ingress_rules * length(var.ingress_cidr_ipv4) : 0
 
@@ -168,7 +168,7 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_rules_prefix_li
 ##########################
 # Ingress - Maps of rules
 ##########################
-# Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
+# Security group rules with "source_security_group_id", but without "cidr_ipv4" and "self"
 resource "aws_vpc_security_group_ingress_rule" "ingress_with_referenced_security_group_id" {
   count = local.create ? length(var.ingress_with_referenced_security_group_id) : 0
 
@@ -212,7 +212,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_referenced_security
   tags = var.tags
 }
 
-# Computed - Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
+# Computed - Security group rules with "source_security_group_id", but without "cidr_ipv4" and "self"
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_referenced_security_group_id" {
   count = local.create ? var.number_of_computed_ingress_with_referenced_security_group_id : 0
 
@@ -335,7 +335,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_cidr_ipv4" {
   tags = var.tags
 }
 
-# Computed - Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
+# Computed - Security group rules with "cidr_ipv4", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_cidr_ipv4" {
   count = local.create ? var.number_of_computed_ingress_with_cidr_ipv4 : 0
 
@@ -382,7 +382,7 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_cidr_ipv4"
   tags = var.tags
 }
 
-# Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
+# Security group rules with "ipv6_cidr_blocks", but without "cidr_ipv4", "source_security_group_id" and "self"
 resource "aws_vpc_security_group_ingress_rule" "ingress_with_cidr_ipv6" {
   count = local.create ? length(var.ingress_with_cidr_ipv6) : 0
 
@@ -415,7 +415,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_cidr_ipv6" {
   tags = var.tags
 }
 
-# Computed - Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
+# Computed - Security group rules with "ipv6_cidr_blocks", but without "cidr_ipv4", "source_security_group_id" and "self"
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_cidr_ipv6" {
   count = local.create ? var.number_of_computed_ingress_with_cidr_ipv6 : 0
 
@@ -460,7 +460,7 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_cidr_ipv6"
   tags = var.tags
 }
 
-# Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
+# Security group rules with "self", but without "cidr_ipv4" and "source_security_group_id"
 resource "aws_vpc_security_group_ingress_rule" "ingress_with_self" {
   count = local.create ? length(var.ingress_with_self) : 0
 
@@ -536,7 +536,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_self_prefix_list_id
   tags = var.tags
 }
 
-# Computed - Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
+# Computed - Security group rules with "self", but without "cidr_ipv4" and "source_security_group_id"
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_self" {
   count = local.create ? var.number_of_computed_ingress_with_self : 0
 
@@ -612,7 +612,7 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_self_prefi
   tags = var.tags
 }
 
-# Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_ingress_rule" "ingress_with_prefix_list_id" {
   count = var.create ? length(var.ingress_with_prefix_list_id) : 0
 
@@ -648,7 +648,7 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_prefix_list_id" {
 }
 
 
-# Security group rules with "ingress_prefix_list_ids" for "ingress_with_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "ingress_prefix_list_ids" for "ingress_with_prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_ingress_rule" "ingress_with_prefix_list_id_default_prefix_list_id" {
   count = local.create ? length(var.ingress_with_prefix_list_id) * length(var.ingress_prefix_list_ids) : 0
 
@@ -692,8 +692,8 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_with_prefix_list_id_defa
   tags = var.tags
 }
 
-# Computed - Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
-resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_prefix_list_ids" {
+# Computed - Security group rules with "prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_prefix_list_id" {
   count = var.create ? var.number_of_computed_ingress_with_prefix_list_id : 0
 
   security_group_id = local.this_sg_id
@@ -727,7 +727,7 @@ resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_prefix_lis
   tags = var.tags
 }
 
-# Security group rules with "ingress_prefix_list_ids" for "computed_ingress_with_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "ingress_prefix_list_ids" for "computed_ingress_with_prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_ingress_rule" "computed_ingress_with_prefix_list_ids_prefix_list_ids" {
   count = local.create ? var.number_of_computed_ingress_with_prefix_list_id * length(var.ingress_prefix_list_ids) : 0
 
@@ -877,7 +877,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_rules_prefix_list
 #########################
 # Egress - Maps of rules
 #########################
-# Security group rules with "referenced_security_group_id", but without "cidr_blocks" and "self"
+# Security group rules with "referenced_security_group_id", but without "cidr_ipv4" and "self"
 resource "aws_vpc_security_group_egress_rule" "egress_with_referenced_security_group_id" {
   count = local.create ? length(var.egress_with_referenced_security_group_id) : 0
 
@@ -965,7 +965,7 @@ resource "aws_vpc_security_group_egress_rule" "egress_with_referenced_security_g
   tags = var.tags
 }
 
-# Computed - Security group rules with "referenced_security_group_id", but without "cidr_blocks" and "self"
+# Computed - Security group rules with "referenced_security_group_id", but without "cidr_ipv4" and "self"
 resource "aws_vpc_security_group_egress_rule" "computed_egress_with_referenced_security_group_id" {
   count = local.create ? var.number_of_computed_egress_with_referenced_security_group_id : 0
 
@@ -1134,7 +1134,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_cidr_ipv4" {
   tags = var.tags
 }
 
-# Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
+# Security group rules with "ipv6_cidr_blocks", but without "cidr_ipv4", "source_security_group_id" and "self"
 resource "aws_vpc_security_group_egress_rule" "egress_with_cidr_ipv6" {
   count = local.create ? length(var.egress_with_cidr_ipv6) : 0
 
@@ -1167,7 +1167,7 @@ resource "aws_vpc_security_group_egress_rule" "egress_with_cidr_ipv6" {
   tags = var.tags
 }
 
-# Computed - Security group rules with "cidr_ipv6", but without "cidr_blocks", "source_security_group_id" and "self"
+# Computed - Security group rules with "cidr_ipv6", but without "cidr_ipv4", "source_security_group_id" and "self"
 
 resource "aws_vpc_security_group_egress_rule" "computed_egress_with_cidr_ipv6" {
   count = local.create ? var.number_of_computed_egress_with_cidr_ipv6 : 0
@@ -1213,7 +1213,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_cidr_ipv6" {
   tags = var.tags
 }
 
-# Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
+# Security group rules with "self", but without "cidr_ipv4" and "source_security_group_id"
 resource "aws_vpc_security_group_egress_rule" "egress_with_self" {
   count = local.create ? length(var.egress_with_self) : 0
 
@@ -1289,7 +1289,7 @@ resource "aws_vpc_security_group_egress_rule" "egress_with_self_prefix_list_ids"
   tags = var.tags
 }
 
-# Computed - Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
+# Computed - Security group rules with "self", but without "cidr_ipv4" and "source_security_group_id"
 resource "aws_vpc_security_group_egress_rule" "computed_egress_with_self" {
   count = local.create ? var.number_of_computed_egress_with_self : 0
 
@@ -1365,7 +1365,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_self_prefix_
   tags = var.tags
 }
 
-# Security group rules with "prefix_list_id", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id" {
   count = var.create ? length(var.egress_with_prefix_list_id) : 0
 
@@ -1401,7 +1401,7 @@ resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id" {
 }
 
 
-# Security group rules with "egress_prefix_list_ids" for "egress_with_prefix_list_id", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "egress_prefix_list_ids" for "egress_with_prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id_default_prefix_list_id" {
   count = local.create ? length(var.egress_with_prefix_list_id) * length(var.egress_prefix_list_ids) : 0
 
@@ -1445,8 +1445,8 @@ resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id_defaul
   tags = var.tags
 }
 
-# Computed - Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
-resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_ids" {
+# Computed - Security group rules with "prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_id" {
   count = var.create ? var.number_of_computed_egress_with_prefix_list_id : 0
 
   security_group_id = local.this_sg_id
@@ -1480,7 +1480,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_
   tags = var.tags
 }
 
-# Security group rules with "egress_prefix_list_ids" for "computed_egress_with_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+# Security group rules with "egress_prefix_list_ids" for "computed_egress_with_prefix_list_id", but without "cidr_ipv4", "self" or "source_security_group_id"
 resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_ids_prefix_list_ids" {
   count = local.create ? var.number_of_computed_egress_with_prefix_list_id * length(var.egress_prefix_list_ids) : 0
 

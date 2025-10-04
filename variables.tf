@@ -140,7 +140,7 @@ variable "computed_ingress_with_self" {
 }
 
 variable "computed_ingress_with_cidr_ipv4" {
-  description = "List of computed ingress rules to create where 'cidr_blocks' is used"
+  description = "List of computed ingress rules to create where 'cidr_ipv4' is used"
   type        = list(map(string))
   default     = []
 }
@@ -158,7 +158,7 @@ variable "computed_ingress_with_referenced_security_group_id" {
 }
 
 variable "computed_ingress_with_prefix_list_id" {
-  description = "List of computed ingress rules to create where 'prefix_list_ids' is used"
+  description = "List of computed ingress rules to create where 'prefix_list_id' is used"
   type        = list(map(string))
   default     = []
 }
@@ -197,7 +197,7 @@ variable "number_of_computed_ingress_with_referenced_security_group_id" {
 }
 
 variable "number_of_computed_ingress_with_prefix_list_id" {
-  description = "Number of computed ingress rules to create where 'prefix_list_ids' is used"
+  description = "Number of computed ingress rules to create where 'prefix_list_id' is used"
   type        = number
   default     = 0
 }
