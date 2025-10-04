@@ -118,8 +118,8 @@ variable "ingress_prefix_list_ids" {
   default     = []
 }
 
-variable "ingress_with_prefix_list_ids" {
-  description = "List of ingress rules to create where 'prefix_list_ids' is used only"
+variable "ingress_with_prefix_list_id" {
+  description = "List of ingress rules to create where 'prefix_list_id' is used only"
   type        = list(map(string))
   default     = []
 }
@@ -157,7 +157,7 @@ variable "computed_ingress_with_referenced_security_group_id" {
   default     = []
 }
 
-variable "computed_ingress_with_prefix_list_ids" {
+variable "computed_ingress_with_prefix_list_id" {
   description = "List of computed ingress rules to create where 'prefix_list_ids' is used"
   type        = list(map(string))
   default     = []
@@ -196,7 +196,7 @@ variable "number_of_computed_ingress_with_referenced_security_group_id" {
   default     = 0
 }
 
-variable "number_of_computed_ingress_with_prefix_list_ids" {
+variable "number_of_computed_ingress_with_prefix_list_id" {
   description = "Number of computed ingress rules to create where 'prefix_list_ids' is used"
   type        = number
   default     = 0
