@@ -223,8 +223,8 @@ variable "egress_with_cidr_ipv4" {
   default     = []
 }
 
-variable "egress_with_ipv6_cidr_blocks" {
-  description = "List of egress rules to create where 'ipv6_cidr_blocks' is used"
+variable "egress_with_cidr_ipv6" {
+  description = "List of egress rules to create where 'cidr_ipv6' is used"
   type        = list(map(string))
   default     = []
 }
@@ -280,8 +280,8 @@ variable "computed_egress_with_cidr_ipv4" {
   default     = []
 }
 
-variable "computed_egress_with_ipv6_cidr_blocks" {
-  description = "List of computed egress rules to create where 'ipv6_cidr_blocks' is used"
+variable "computed_egress_with_cidr_ipv6" {
+  description = "List of computed egress rules to create where 'cidr_ipv6' is used"
   type        = list(map(string))
   default     = []
 }
@@ -319,8 +319,8 @@ variable "number_of_computed_egress_with_cidr_ipv4" {
   default     = 0
 }
 
-variable "number_of_computed_egress_with_ipv6_cidr_blocks" {
-  description = "Number of computed egress rules to create where 'ipv6_cidr_blocks' is used"
+variable "number_of_computed_egress_with_cidr_ipv6" {
+  description = "Number of computed egress rules to create where 'cidr_ipv6' is used"
   type        = number
   default     = 0
 }
