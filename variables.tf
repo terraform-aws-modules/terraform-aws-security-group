@@ -235,8 +235,8 @@ variable "egress_with_referenced_security_group_id" {
   default     = []
 }
 
-variable "egress_with_prefix_list_ids" {
-  description = "List of egress rules to create where 'prefix_list_ids' is used only"
+variable "egress_with_prefix_list_id" {
+  description = "List of egress rules to create where 'prefix_list_id' is used only"
   type        = list(map(string))
   default     = []
 }
@@ -292,8 +292,8 @@ variable "computed_egress_with_referenced_security_group_id" {
   default     = []
 }
 
-variable "computed_egress_with_prefix_list_ids" {
-  description = "List of computed egress rules to create where 'prefix_list_ids' is used only"
+variable "computed_egress_with_prefix_list_id" {
+  description = "List of computed egress rules to create where 'prefix_list_id' is used only"
   type        = list(map(string))
   default     = []
 }
@@ -331,8 +331,8 @@ variable "number_of_computed_egress_with_referenced_security_group_id" {
   default     = 0
 }
 
-variable "number_of_computed_egress_with_prefix_list_ids" {
-  description = "Number of computed egress rules to create where 'prefix_list_ids' is used only"
+variable "number_of_computed_egress_with_prefix_list_id" {
+  description = "Number of computed egress rules to create where 'prefix_list_id' is used only"
   type        = number
   default     = 0
 }

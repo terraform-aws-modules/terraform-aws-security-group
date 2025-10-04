@@ -1321,7 +1321,7 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_self" {
   tags = var.tags
 }
 
-# Security group rules allow ingress from allowed all egress_prefix_list_ids for computed_egress_with_self
+# Security group rules allow egress from allowed all egress_prefix_list_ids for computed_egress_with_self
 resource "aws_vpc_security_group_egress_rule" "computed_egress_with_self_prefix_list_ids" {
   count = local.create ? var.number_of_computed_egress_with_self * length(var.egress_prefix_list_ids) : 0
 
@@ -1365,113 +1365,163 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_self_prefix_
   tags = var.tags
 }
 
-
-# Security group rules with "egress_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
-resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
-  count = var.create ? length(var.egress_with_prefix_list_ids) : 0
+# Security group rules with "prefix_list_id", but without "cidr_blocks", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id" {
+  count = var.create ? length(var.egress_with_prefix_list_id) : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  prefix_list_ids = compact(split(
-    ",",
-    lookup(
-      var.egress_with_prefix_list_ids[count.index],
-      "prefix_list_ids",
-      join(",", var.egress_prefix_list_ids)
-    ))
-  )
+  prefix_list_id = var.egress_with_prefix_list_id[count.index]["prefix_list_id"]
 
   description = lookup(
-    var.egress_with_prefix_list_ids[count.index],
+    var.egress_with_prefix_list_id[count.index],
     "description",
     "Egress Rule",
   )
 
   from_port = lookup(
-    var.egress_with_prefix_list_ids[count.index],
+    var.egress_with_prefix_list_id[count.index],
     "from_port",
-    var.rules[lookup(
-      var.egress_with_prefix_list_ids[count.index],
-      "rule",
-      "_",
-    )][0],
+    var.rules[lookup(var.egress_with_prefix_list_id[count.index], "rule", "_")][0],
   )
 
   to_port = lookup(
-    var.egress_with_prefix_list_ids[count.index],
+    var.egress_with_prefix_list_id[count.index],
     "to_port",
-    var.rules[lookup(
-      var.egress_with_prefix_list_ids[count.index],
-      "rule",
-      "_",
-    )][1],
+    var.rules[lookup(var.egress_with_prefix_list_id[count.index], "rule", "_")][1],
   )
 
-  protocol = lookup(
-    var.egress_with_prefix_list_ids[count.index],
-    "protocol",
-    var.rules[lookup(
-      var.egress_with_prefix_list_ids[count.index],
-      "rule",
-      "_",
-    )][2],
+  ip_protocol = lookup(
+    var.egress_with_prefix_list_id[count.index],
+    "ip_protocol",
+    var.rules[lookup(var.egress_with_prefix_list_id[count.index], "rule", "_")][2],
   )
+
+  tags = var.tags
 }
 
-# Computed - Security group rules with "source_security_group_id", but without "cidr_blocks", "self" or "source_security_group_id"
-resource "aws_security_group_rule" "computed_egress_with_prefix_list_ids" {
-  count = var.create ? var.number_of_computed_egress_with_prefix_list_ids : 0
+
+# Security group rules with "egress_prefix_list_ids" for "egress_with_prefix_list_id", but without "cidr_blocks", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_egress_rule" "egress_with_prefix_list_id_default_prefix_list_id" {
+  count = local.create ? length(var.egress_with_prefix_list_id) * length(var.egress_prefix_list_ids) : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  source_security_group_id = var.computed_egress_with_prefix_list_ids[count.index]["source_security_group_id"]
+  prefix_list_id = var.egress_prefix_list_ids[floor(count.index / length(var.egress_with_prefix_list_id))]
+  description = lookup(
+    var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+    "description",
+    "egress Rule",
+  )
 
-  prefix_list_ids = compact(split(
-    ",",
-    lookup(
-      var.computed_egress_with_prefix_list_ids[count.index],
-      "prefix_list_ids",
-      join(",", var.egress_prefix_list_ids)
-    )
-  ))
+  from_port = lookup(
+    var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+    "from_port",
+    var.rules[lookup(
+      var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+      "rule",
+      "_",
+    )][0],
+  )
+  to_port = lookup(
+    var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+    "to_port",
+    var.rules[lookup(
+      var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+      "rule",
+      "_",
+    )][1],
+  )
+  ip_protocol = lookup(
+    var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+    "ip_protocol",
+    var.rules[lookup(
+      var.egress_with_prefix_list_id[count.index % length(var.egress_with_prefix_list_id)],
+      "rule",
+      "_",
+    )][2],
+  )
+
+  tags = var.tags
+}
+
+# Computed - Security group rules with "prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_ids" {
+  count = var.create ? var.number_of_computed_egress_with_prefix_list_id : 0
+
+  security_group_id = local.this_sg_id
+
+  prefix_list_id = var.computed_egress_with_prefix_list_id[count.index]["prefix_list_id"]
 
   description = lookup(
-    var.computed_egress_with_prefix_list_ids[count.index],
+    var.computed_egress_with_prefix_list_id[count.index],
+    "description",
+    "egress Rule",
+  )
+
+  from_port = lookup(
+    var.computed_egress_with_prefix_list_id[count.index],
+    "from_port",
+    var.rules[lookup(var.computed_egress_with_prefix_list_id[count.index], "rule", "_")][0],
+  )
+
+  to_port = lookup(
+    var.computed_egress_with_prefix_list_id[count.index],
+    "to_port",
+    var.rules[lookup(var.computed_egress_with_prefix_list_id[count.index], "rule", "_")][1],
+  )
+
+  ip_protocol = lookup(
+    var.computed_egress_with_prefix_list_id[count.index],
+    "ip_protocol",
+    var.rules[lookup(var.computed_egress_with_prefix_list_id[count.index], "rule", "_")][2],
+  )
+
+  tags = var.tags
+}
+
+# Security group rules with "egress_prefix_list_ids" for "computed_egress_with_prefix_list_ids", but without "cidr_blocks", "self" or "source_security_group_id"
+resource "aws_vpc_security_group_egress_rule" "computed_egress_with_prefix_list_ids_prefix_list_ids" {
+  count = local.create ? var.number_of_computed_egress_with_prefix_list_id * length(var.egress_prefix_list_ids) : 0
+
+  security_group_id = local.this_sg_id
+
+  prefix_list_id = var.egress_prefix_list_ids[floor(count.index / var.number_of_computed_egress_with_prefix_list_id)]
+  description = lookup(
+    var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
     "description",
     "Egress Rule",
   )
 
   from_port = lookup(
-    var.computed_egress_with_prefix_list_ids[count.index],
+    var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
     "from_port",
     var.rules[lookup(
-      var.computed_egress_with_prefix_list_ids[count.index],
+      var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
       "rule",
       "_",
     )][0],
   )
-
   to_port = lookup(
-    var.computed_egress_with_prefix_list_ids[count.index],
+    var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
     "to_port",
     var.rules[lookup(
-      var.computed_egress_with_prefix_list_ids[count.index],
+      var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
       "rule",
       "_",
     )][1],
   )
-
-  protocol = lookup(
-    var.computed_egress_with_prefix_list_ids[count.index],
-    "protocol",
+  ip_protocol = lookup(
+    var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
+    "ip_protocol",
     var.rules[lookup(
-      var.computed_egress_with_prefix_list_ids[count.index],
+      var.computed_egress_with_prefix_list_id[count.index % var.number_of_computed_egress_with_prefix_list_id],
       "rule",
       "_",
     )][2],
   )
+
+  tags = var.tags
 }
 
 ################
