@@ -1053,98 +1053,85 @@ resource "aws_vpc_security_group_egress_rule" "computed_egress_with_referenced_s
   tags = var.tags
 }
 
-# Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
-resource "aws_security_group_rule" "egress_with_cidr_blocks" {
-  count = local.create ? length(var.egress_with_cidr_blocks) : 0
+# Security group rules with "cidr_ipv4"
+resource "aws_vpc_security_group_egress_rule" "egress_with_cidr_ipv4" {
+  count = local.create ? length(var.egress_with_cidr_ipv4) : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  cidr_blocks = compact(split(
-    ",",
-    lookup(
-      var.egress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.egress_cidr_blocks),
-    ),
-  ))
+  cidr_ipv4 = var.egress_with_cidr_ipv4[count.index]["cidr_ipv4"]
 
   description = lookup(
-    var.egress_with_cidr_blocks[count.index],
+    var.egress_with_cidr_ipv4[count.index],
     "description",
     "Egress Rule",
   )
 
   from_port = lookup(
-    var.egress_with_cidr_blocks[count.index],
+    var.egress_with_cidr_ipv4[count.index],
     "from_port",
-    var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][0],
+    var.rules[lookup(var.egress_with_cidr_ipv4[count.index], "rule", "_")][0],
   )
 
   to_port = lookup(
-    var.egress_with_cidr_blocks[count.index],
+    var.egress_with_cidr_ipv4[count.index],
     "to_port",
-    var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][1],
+    var.rules[lookup(var.egress_with_cidr_ipv4[count.index], "rule", "_")][1],
   )
 
-  protocol = lookup(
-    var.egress_with_cidr_blocks[count.index],
-    "protocol",
-    var.rules[lookup(var.egress_with_cidr_blocks[count.index], "rule", "_")][2],
+  ip_protocol = lookup(
+    var.egress_with_cidr_ipv4[count.index],
+    "ip_protocol",
+    var.rules[lookup(var.egress_with_cidr_ipv4[count.index], "rule", "_")][2],
   )
+
+  tags = var.tags
 }
 
-# Computed - Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
-resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
-  count = local.create ? var.number_of_computed_egress_with_cidr_blocks : 0
+resource "aws_vpc_security_group_egress_rule" "computed_egress_with_cidr_ipv4" {
+  count = local.create ? var.number_of_computed_egress_with_cidr_ipv4 : 0
 
   security_group_id = local.this_sg_id
-  type              = "egress"
 
-  cidr_blocks = compact(split(
-    ",",
-    lookup(
-      var.computed_egress_with_cidr_blocks[count.index],
-      "cidr_blocks",
-      join(",", var.egress_cidr_blocks),
-    ),
-  ))
+  cidr_ipv4 = var.computed_egress_with_cidr_ipv4[count.index]["cidr_ipv4"]
 
   description = lookup(
-    var.computed_egress_with_cidr_blocks[count.index],
+    var.computed_egress_with_cidr_ipv4[count.index],
     "description",
     "Egress Rule",
   )
 
   from_port = lookup(
-    var.computed_egress_with_cidr_blocks[count.index],
+    var.computed_egress_with_cidr_ipv4[count.index],
     "from_port",
     var.rules[lookup(
-      var.computed_egress_with_cidr_blocks[count.index],
+      var.computed_egress_with_cidr_ipv4[count.index],
       "rule",
       "_",
     )][0],
   )
 
   to_port = lookup(
-    var.computed_egress_with_cidr_blocks[count.index],
+    var.computed_egress_with_cidr_ipv4[count.index],
     "to_port",
     var.rules[lookup(
-      var.computed_egress_with_cidr_blocks[count.index],
+      var.computed_egress_with_cidr_ipv4[count.index],
       "rule",
       "_",
     )][1],
   )
 
-  protocol = lookup(
-    var.computed_egress_with_cidr_blocks[count.index],
-    "protocol",
+  ip_protocol = lookup(
+    var.computed_egress_with_cidr_ipv4[count.index],
+    "ip_protocol",
     var.rules[lookup(
-      var.computed_egress_with_cidr_blocks[count.index],
+      var.computed_egress_with_cidr_ipv4[count.index],
       "rule",
       "_",
     )][2],
   )
+
+  tags = var.tags
 }
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"

@@ -217,8 +217,8 @@ variable "egress_with_self" {
   default     = []
 }
 
-variable "egress_with_cidr_blocks" {
-  description = "List of egress rules to create where 'cidr_blocks' is used"
+variable "egress_with_cidr_ipv4" {
+  description = "List of egress rules to create where 'cidr_ipv4' is used"
   type        = list(map(string))
   default     = []
 }
@@ -274,8 +274,8 @@ variable "computed_egress_with_self" {
   default     = []
 }
 
-variable "computed_egress_with_cidr_blocks" {
-  description = "List of computed egress rules to create where 'cidr_blocks' is used"
+variable "computed_egress_with_cidr_ipv4" {
+  description = "List of computed egress rules to create where 'cidr_ipv4' is used"
   type        = list(map(string))
   default     = []
 }
@@ -313,8 +313,8 @@ variable "number_of_computed_egress_with_self" {
   default     = 0
 }
 
-variable "number_of_computed_egress_with_cidr_blocks" {
-  description = "Number of computed egress rules to create where 'cidr_blocks' is used"
+variable "number_of_computed_egress_with_cidr_ipv4" {
+  description = "Number of computed egress rules to create where 'cidr_ipv4' is used"
   type        = number
   default     = 0
 }
