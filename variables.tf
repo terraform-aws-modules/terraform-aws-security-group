@@ -229,8 +229,8 @@ variable "egress_with_ipv6_cidr_blocks" {
   default     = []
 }
 
-variable "egress_with_source_security_group_id" {
-  description = "List of egress rules to create where 'source_security_group_id' is used"
+variable "egress_with_referenced_security_group_id" {
+  description = "List of egress rules to create where 'referenced_security_group_id' is used"
   type        = list(map(string))
   default     = []
 }
@@ -286,8 +286,8 @@ variable "computed_egress_with_ipv6_cidr_blocks" {
   default     = []
 }
 
-variable "computed_egress_with_source_security_group_id" {
-  description = "List of computed egress rules to create where 'source_security_group_id' is used"
+variable "computed_egress_with_referenced_security_group_id" {
+  description = "List of computed egress rules to create where 'referenced_security_group_id' is used"
   type        = list(map(string))
   default     = []
 }
@@ -325,7 +325,7 @@ variable "number_of_computed_egress_with_ipv6_cidr_blocks" {
   default     = 0
 }
 
-variable "number_of_computed_egress_with_source_security_group_id" {
+variable "number_of_computed_egress_with_referenced_security_group_id" {
   description = "Number of computed egress rules to create where 'source_security_group_id' is used"
   type        = number
   default     = 0
