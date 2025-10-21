@@ -43,7 +43,7 @@ module "http_sg" {
   description = "Security group with HTTP ports open for everybody (IPv4 CIDR), egress ports are all world open"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_ipv4 = ["0.0.0.0/0"]
 }
 
 ###################################
@@ -72,7 +72,7 @@ module "http_mysql_1_sg" {
   description = "Security group with HTTP and MySQL ports open for everybody (IPv4 CIDR)"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_ipv4 = ["0.0.0.0/0"]
 
   # Add MySQL rules
   ingress_rules = ["mysql-tcp"]
@@ -92,8 +92,8 @@ module "http_mysql_2_sg" {
   ingress_rules = ["mysql-tcp"]
 
   # Allow ingress rules to be accessed only within current VPC
-  ingress_cidr_blocks      = [data.aws_vpc.default.cidr_block]
-  ingress_ipv6_cidr_blocks = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
+  ingress_cidr_ipv4 = [data.aws_vpc.default.cidr_block]
+  ingress_cidr_ipv6 = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
 }
 
 ###########################
@@ -107,7 +107,7 @@ module "http_with_egress_minimal_sg" {
   vpc_id      = data.aws_vpc.default.id
 
   # Allow ingress rules to be accessed only within current VPC
-  ingress_cidr_blocks = [data.aws_vpc.default.cidr_block]
+  ingress_cidr_ipv4 = [data.aws_vpc.default.cidr_block]
 
   # Allow all rules for all protocols
   egress_rules = ["http-80-tcp"]
@@ -127,10 +127,10 @@ module "http_with_egress_sg" {
   ingress_rules = ["mysql-tcp"]
 
   # Allow ingress rules to be accessed only within current VPC
-  ingress_cidr_blocks      = [data.aws_vpc.default.cidr_block]
-  ingress_ipv6_cidr_blocks = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
+  ingress_cidr_ipv4 = [data.aws_vpc.default.cidr_block]
+  ingress_cidr_ipv6 = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
 
   # Allow egress rules to access anything (empty list means everything)
-  egress_cidr_blocks      = ["10.10.10.0/28"]
-  egress_ipv6_cidr_blocks = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
+  egress_cidr_ipv4 = ["10.10.10.0/28"]
+  egress_cidr_ipv6 = [] # Not all VPCs have IPv6 enabled, but if you have it enabled, then this will work - ["${data.aws_vpc.default.ipv6_cidr_block}"]
 }

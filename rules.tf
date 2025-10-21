@@ -1,5 +1,5 @@
 variable "rules" {
-  description = "Map of known security group rules (define as 'name' = ['from port', 'to port', 'protocol', 'description'])"
+  description = "Map of known security group rules (define as 'name' = ['from port', 'to port', 'ip_protocol', 'description'])"
   type        = map(list(any))
 
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):

@@ -25,7 +25,7 @@ module "complete_sg_disabled" {
   description = "Security group with all available arguments set (this is just an example)"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_ipv4 = ["0.0.0.0/0"]
 }
 
 module "http_sg_disabled" {
@@ -36,5 +36,5 @@ module "http_sg_disabled" {
   description = "Security group with HTTP ports open for everybody (IPv4 CIDR), egress ports are all world open"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_ipv4 = ["0.0.0.0/0"]
 }

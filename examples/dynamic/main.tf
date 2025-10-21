@@ -28,9 +28,9 @@ module "http_sg" {
   description = "Security group with HTTP port open for everyone, and HTTPS open just for the default security group"
   vpc_id      = data.aws_vpc.default.id
 
-  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_cidr_ipv4 = ["0.0.0.0/0"]
 
-  ingress_with_source_security_group_id = [
+  ingress_with_referenced_security_group_id = [
     {
       rule                     = "https-443-tcp"
       source_security_group_id = data.aws_security_group.default.id
