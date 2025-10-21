@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.96.1
+    rev: v1.103.0
     hooks:
       - id: terraform_fmt
       - id: terraform_wrapper_module_for_each
@@ -10,7 +10,7 @@ repos:
       - id: terraform_validate
         exclude: '^modules/_templates/[^/]+$|^wrappers/.+$'
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
       - id: end-of-file-fixer
