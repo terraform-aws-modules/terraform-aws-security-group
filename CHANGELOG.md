@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.3.0...v5.3.1) (2025-10-21)
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#344](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/344)) ([5ca63e8](https://github.com/terraform-aws-modules/terraform-aws-security-group/commit/5ca63e820956015e776560f305ef08ef20826355))
+
 ## [5.3.0](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.2.0...v5.3.0) (2025-01-08)
 
 
