@@ -6,6 +6,7 @@ module "sg" {
   use_name_prefix        = var.use_name_prefix
   description            = var.description
   vpc_id                 = var.vpc_id
+  region                 = var.region
   revoke_rules_on_delete = var.revoke_rules_on_delete
   tags                   = var.tags
 

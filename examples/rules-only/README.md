@@ -20,27 +20,27 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.29 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_rules_one"></a> [rules\_one](#module\_rules\_one) | ../../ | n/a |
 | <a name="module_rules_two"></a> [rules\_two](#module\_rules\_two) | ../../ | n/a |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_security_group.service_one](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.service_two](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
@@ -53,7 +53,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_service_one_security_group_arn"></a> [service\_one\_security\_group\_arn](#output\_service\_one\_security\_group\_arn) | The ARN of the security group for service one |
 | <a name="output_service_one_security_group_id"></a> [service\_one\_security\_group\_id](#output\_service\_one\_security\_group\_id) | The ID of the security group for service one |
 | <a name="output_service_tow_security_group_arn"></a> [service\_tow\_security\_group\_arn](#output\_service\_tow\_security\_group\_arn) | The ARN of the security group for service two |

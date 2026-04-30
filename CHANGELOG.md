@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### ⚠ BREAKING CHANGES
+
+* Raise minimum AWS provider requirement to `>= 6.0` across root module, submodules, wrappers, and examples.
+
+### Features
+
+* Add optional `region` input and pass it through root resources, generated modules, and wrappers to support AWS provider v6 enhanced region support.
+
 ## [5.3.1](https://github.com/terraform-aws-modules/terraform-aws-security-group/compare/v5.3.0...v5.3.1) (2025-10-21)
 
 ### Bug Fixes

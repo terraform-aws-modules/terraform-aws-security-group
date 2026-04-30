@@ -16,6 +16,7 @@ resource "aws_security_group" "this" {
   name                   = var.name
   description            = var.description
   vpc_id                 = var.vpc_id
+  region                 = var.region
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
@@ -40,6 +41,7 @@ resource "aws_security_group" "this_name_prefix" {
   name_prefix            = "${var.name}-"
   description            = var.description
   vpc_id                 = var.vpc_id
+  region                 = var.region
   revoke_rules_on_delete = var.revoke_rules_on_delete
 
   tags = merge(
@@ -67,6 +69,7 @@ resource "aws_security_group_rule" "ingress_rules" {
   count = local.create ? length(var.ingress_rules) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   cidr_blocks      = var.ingress_cidr_blocks
@@ -84,6 +87,7 @@ resource "aws_security_group_rule" "computed_ingress_rules" {
   count = local.create ? var.number_of_computed_ingress_rules : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   cidr_blocks      = var.ingress_cidr_blocks
@@ -104,6 +108,7 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
   count = local.create ? length(var.ingress_with_source_security_group_id) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   source_security_group_id = var.ingress_with_source_security_group_id[count.index]["source_security_group_id"]
@@ -148,6 +153,7 @@ resource "aws_security_group_rule" "computed_ingress_with_source_security_group_
   count = local.create ? var.number_of_computed_ingress_with_source_security_group_id : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   source_security_group_id = var.computed_ingress_with_source_security_group_id[count.index]["source_security_group_id"]
@@ -192,6 +198,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
   count = local.create ? length(var.ingress_with_cidr_blocks) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   cidr_blocks = compact(split(
@@ -233,6 +240,7 @@ resource "aws_security_group_rule" "computed_ingress_with_cidr_blocks" {
   count = local.create ? var.number_of_computed_ingress_with_cidr_blocks : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   cidr_blocks = compact(split(
@@ -286,6 +294,7 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
   count = local.create ? length(var.ingress_with_ipv6_cidr_blocks) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   ipv6_cidr_blocks = compact(split(
@@ -325,6 +334,7 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
   count = local.create ? var.number_of_computed_ingress_with_ipv6_cidr_blocks : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   ipv6_cidr_blocks = compact(split(
@@ -376,6 +386,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
   count = local.create ? length(var.ingress_with_self) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   self            = lookup(var.ingress_with_self[count.index], "self", true)
@@ -408,6 +419,7 @@ resource "aws_security_group_rule" "computed_ingress_with_self" {
   count = local.create ? var.number_of_computed_ingress_with_self : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   self            = lookup(var.computed_ingress_with_self[count.index], "self", true)
@@ -439,6 +451,7 @@ resource "aws_security_group_rule" "ingress_with_prefix_list_ids" {
   count = var.create ? length(var.ingress_with_prefix_list_ids) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   prefix_list_ids = compact(split(
@@ -480,6 +493,7 @@ resource "aws_security_group_rule" "computed_ingress_with_prefix_list_ids" {
   count = var.create ? var.number_of_computed_ingress_with_prefix_list_ids : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "ingress"
 
   prefix_list_ids = compact(split(
@@ -528,6 +542,7 @@ resource "aws_security_group_rule" "egress_rules" {
   count = local.create ? length(var.egress_rules) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   cidr_blocks      = var.egress_cidr_blocks
@@ -545,6 +560,7 @@ resource "aws_security_group_rule" "computed_egress_rules" {
   count = local.create ? var.number_of_computed_egress_rules : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   cidr_blocks      = var.egress_cidr_blocks
@@ -565,6 +581,7 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
   count = local.create ? length(var.egress_with_source_security_group_id) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   source_security_group_id = var.egress_with_source_security_group_id[count.index]["source_security_group_id"]
@@ -609,6 +626,7 @@ resource "aws_security_group_rule" "computed_egress_with_source_security_group_i
   count = local.create ? var.number_of_computed_egress_with_source_security_group_id : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   source_security_group_id = var.computed_egress_with_source_security_group_id[count.index]["source_security_group_id"]
@@ -653,6 +671,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
   count = local.create ? length(var.egress_with_cidr_blocks) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   cidr_blocks = compact(split(
@@ -694,6 +713,7 @@ resource "aws_security_group_rule" "computed_egress_with_cidr_blocks" {
   count = local.create ? var.number_of_computed_egress_with_cidr_blocks : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   cidr_blocks = compact(split(
@@ -747,6 +767,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
   count = local.create ? length(var.egress_with_ipv6_cidr_blocks) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   ipv6_cidr_blocks = compact(split(
@@ -786,6 +807,7 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
   count = local.create ? var.number_of_computed_egress_with_ipv6_cidr_blocks : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   ipv6_cidr_blocks = compact(split(
@@ -837,6 +859,7 @@ resource "aws_security_group_rule" "egress_with_self" {
   count = local.create ? length(var.egress_with_self) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   self            = lookup(var.egress_with_self[count.index], "self", true)
@@ -869,6 +892,7 @@ resource "aws_security_group_rule" "computed_egress_with_self" {
   count = local.create ? var.number_of_computed_egress_with_self : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   self            = lookup(var.computed_egress_with_self[count.index], "self", true)
@@ -901,6 +925,7 @@ resource "aws_security_group_rule" "egress_with_prefix_list_ids" {
   count = var.create ? length(var.egress_with_prefix_list_ids) : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   prefix_list_ids = compact(split(
@@ -954,6 +979,7 @@ resource "aws_security_group_rule" "computed_egress_with_prefix_list_ids" {
   count = var.create ? var.number_of_computed_egress_with_prefix_list_ids : 0
 
   security_group_id = local.this_sg_id
+  region            = var.region
   type              = "egress"
 
   source_security_group_id = var.computed_egress_with_prefix_list_ids[count.index]["source_security_group_id"]

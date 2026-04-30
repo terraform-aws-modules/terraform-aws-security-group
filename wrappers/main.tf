@@ -559,4 +559,5 @@ module "wrapper" {
   tags              = try(each.value.tags, var.defaults.tags, {})
   use_name_prefix   = try(each.value.use_name_prefix, var.defaults.use_name_prefix, true)
   vpc_id            = try(each.value.vpc_id, var.defaults.vpc_id, null)
+  region            = try(each.value.region, var.defaults.region, null)
 }

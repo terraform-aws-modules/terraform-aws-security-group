@@ -12,6 +12,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "region" {
+  description = "AWS region where resources will be created. If not set, the provider default region is used."
+  type        = string
+  default     = null
+}
+
 variable "name" {
   description = "Name of security group"
   type        = string

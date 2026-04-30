@@ -17,9 +17,9 @@ All automatic values **rdp module** is using are available [here](https://github
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
@@ -28,7 +28,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_sg"></a> [sg](#module\_sg) | ../../ | n/a |
 
 ## Resources
@@ -38,7 +38,7 @@ No resources.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_auto_computed_egress_rules"></a> [auto\_computed\_egress\_rules](#input\_auto\_computed\_egress\_rules) | List of computed egress rules to add automatically | `list(string)` | `[]` | no |
 | <a name="input_auto_computed_egress_with_self"></a> [auto\_computed\_egress\_with\_self](#input\_auto\_computed\_egress\_with\_self) | List of maps defining computed egress rules with self to add automatically | `list(map(string))` | `[]` | no |
 | <a name="input_auto_computed_ingress_rules"></a> [auto\_computed\_ingress\_rules](#input\_auto\_computed\_ingress\_rules) | List of ingress rules to add automatically | `list(string)` | `[]` | no |
@@ -108,6 +108,7 @@ No resources.
 | <a name="input_number_of_computed_ingress_with_prefix_list_ids"></a> [number\_of\_computed\_ingress\_with\_prefix\_list\_ids](#input\_number\_of\_computed\_ingress\_with\_prefix\_list\_ids) | Number of computed ingress rules to create where 'prefix\_list\_ids' is used | `number` | `0` | no |
 | <a name="input_number_of_computed_ingress_with_self"></a> [number\_of\_computed\_ingress\_with\_self](#input\_number\_of\_computed\_ingress\_with\_self) | Number of computed ingress rules to create where 'self' is defined | `number` | `0` | no |
 | <a name="input_number_of_computed_ingress_with_source_security_group_id"></a> [number\_of\_computed\_ingress\_with\_source\_security\_group\_id](#input\_number\_of\_computed\_ingress\_with\_source\_security\_group\_id) | Number of computed ingress rules to create where 'source\_security\_group\_id' is used | `number` | `0` | no |
+| <a name="input_region"></a> [region](#input\_region) | AWS region where resources will be created. If not set, the provider default region is used. | `string` | `null` | no |
 | <a name="input_revoke_rules_on_delete"></a> [revoke\_rules\_on\_delete](#input\_revoke\_rules\_on\_delete) | Instruct Terraform to revoke all of the Security Groups attached ingress and egress rules before deleting the rule itself. Enable for EMR. | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to security group | `map(string)` | `{}` | no |
 | <a name="input_use_name_prefix"></a> [use\_name\_prefix](#input\_use\_name\_prefix) | Whether to use name\_prefix or fixed name. Should be true to able to update security group name after initial creation | `bool` | `true` | no |
@@ -116,7 +117,7 @@ No resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_security_group_arn"></a> [security\_group\_arn](#output\_security\_group\_arn) | The ARN of the security group |
 | <a name="output_security_group_description"></a> [security\_group\_description](#output\_security\_group\_description) | The description of the security group |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The ID of the security group |
