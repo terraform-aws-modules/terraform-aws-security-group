@@ -293,7 +293,11 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
     lookup(
       var.ingress_with_ipv6_cidr_blocks[count.index],
       "ipv6_cidr_blocks",
-      join(",", var.ingress_ipv6_cidr_blocks),
+      lookup(
+        var.ingress_with_ipv6_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.ingress_ipv6_cidr_blocks),
+      ),
     ),
   ))
   prefix_list_ids = var.ingress_prefix_list_ids
@@ -332,7 +336,11 @@ resource "aws_security_group_rule" "computed_ingress_with_ipv6_cidr_blocks" {
     lookup(
       var.computed_ingress_with_ipv6_cidr_blocks[count.index],
       "ipv6_cidr_blocks",
-      join(",", var.ingress_ipv6_cidr_blocks),
+      lookup(
+        var.computed_ingress_with_ipv6_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.ingress_ipv6_cidr_blocks),
+      ),
     ),
   ))
   prefix_list_ids = var.ingress_prefix_list_ids
@@ -754,7 +762,11 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
     lookup(
       var.egress_with_ipv6_cidr_blocks[count.index],
       "ipv6_cidr_blocks",
-      join(",", var.egress_ipv6_cidr_blocks),
+      lookup(
+        var.egress_with_ipv6_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.egress_ipv6_cidr_blocks),
+      ),
     ),
   ))
   prefix_list_ids = var.egress_prefix_list_ids
@@ -793,7 +805,11 @@ resource "aws_security_group_rule" "computed_egress_with_ipv6_cidr_blocks" {
     lookup(
       var.computed_egress_with_ipv6_cidr_blocks[count.index],
       "ipv6_cidr_blocks",
-      join(",", var.egress_ipv6_cidr_blocks),
+      lookup(
+        var.computed_egress_with_ipv6_cidr_blocks[count.index],
+        "cidr_blocks",
+        join(",", var.egress_ipv6_cidr_blocks),
+      ),
     ),
   ))
   prefix_list_ids = var.egress_prefix_list_ids
