@@ -1,0 +1,35 @@
+# AWS ${display_name} Security Group Terraform Module
+
+Terraform module which creates a pre-configured AWS security group for ${display_name}.
+
+## Usage
+
+```hcl
+module "${replace(name, "-", "_")}_security_group" {
+  source  = "terraform-aws-modules/security-group/aws//modules/${name}"
+  version = "~> 6.0"
+
+  name        = "${name}"
+  description = "Security group for ${name}"
+  vpc_id      = "vpc-xxxxxxxx"
+
+  ingress_cidr_ipv4 = {
+    vpc = "10.0.0.0/16"
+  }
+}
+```
+
+## Preset ingress rules
+
+| Rule | From port | To port | Protocol | Description |
+| ---- | --------- | ------- | -------- | ----------- |
+%{ for k, v in ingress_rules ~}
+| `${k}` | ${v.from_port} | ${v.to_port} | `${v.ip_protocol}` | ${v.description} |
+%{ endfor ~}
+
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
+
+## License
+
+Apache 2 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/LICENSE) for full details.

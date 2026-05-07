@@ -1,477 +1,232 @@
 provider "aws" {
-  region = "eu-west-1"
-
-  skip_credentials_validation = true
-  skip_requesting_account_id  = true
-  skip_metadata_api_check     = true
-  skip_region_validation      = true
+  region = local.region
 }
 
-#############################################################
-# Data sources to get VPC and default security group details
-#############################################################
-data "aws_vpc" "default" {
-  default = true
+data "aws_availability_zones" "available" {
+  filter {
+    name   = "opt-in-status"
+    values = ["opt-in-not-required"]
+  }
 }
 
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = data.aws_vpc.default.id
-}
-
-##################################################
-# VPC which is used as an argument in complete-sg
-##################################################
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
-
-  name = "complete-sg-demo-vpc"
-  cidr = "10.20.0.0/20"
-}
-
-#############################################################
-# Security group which is used as an argument in complete-sg
-#############################################################
-module "main_sg" {
-  source = "../../"
-
-  name        = "main-sg"
-  description = "Security group which is used as an argument in complete-sg"
-  vpc_id      = data.aws_vpc.default.id
-
-  ingress_cidr_blocks = ["10.10.0.0/16"]
-  ingress_rules       = ["https-443-tcp"]
-}
-
-################################################
-# Security group with complete set of arguments
-################################################
-module "complete_sg" {
-  source = "../../"
-
-  name        = "complete-sg"
-  description = "Security group with all available arguments set (this is just an example)"
-  vpc_id      = data.aws_vpc.default.id
+locals {
+  region   = "eu-west-1"
+  name     = "ex-${basename(path.cwd)}"
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
-    Cash       = "king"
-    Department = "kingdom"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-security-group"
   }
-
-  # Default CIDR blocks, which will be used for all ingress rules in this module. Typically these are CIDR blocks of the VPC.
-  # If this is not specified then no CIDR blocks will be used.
-  ingress_cidr_blocks = ["10.10.0.0/16"]
-
-  ingress_ipv6_cidr_blocks = ["2001:db8::/64"]
-
-  # Prefix list ids to use in all ingress rules in this module.
-  # ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
-
-  # Open for all CIDRs defined in ingress_cidr_blocks
-  ingress_rules = ["https-443-tcp"]
-
-  # Use computed value here (eg, `${module...}`). Plain string is not a real use-case for this argument.
-  computed_ingress_rules           = ["ssh-tcp"]
-  number_of_computed_ingress_rules = 1
-
-  # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
-  ingress_with_cidr_blocks = [
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "0.0.0.0/0,2.2.2.2/32"
-    },
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "30.30.30.30/32"
-    },
-    {
-      from_port   = 10
-      to_port     = 20
-      protocol    = 6
-      description = "Service name"
-      cidr_blocks = "10.10.0.0/20"
-    },
-  ]
-
-  computed_ingress_with_cidr_blocks = [
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "3.3.3.3/32,${module.vpc.vpc_cidr_block}"
-    },
-    {
-      from_port   = 15
-      to_port     = 25
-      protocol    = 6
-      description = "Service name with vpc cidr"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_ingress_with_cidr_blocks = 2
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 300
-      to_port          = 400
-      protocol         = "tcp"
-      description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  computed_ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 350
-      to_port          = 450
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID = ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_ingress_with_ipv6_cidr_blocks = 1
-
-  # Open for security group id (rule or from_port+to_port+protocol+description)
-  ingress_with_source_security_group_id = [
-    {
-      rule                     = "mysql-tcp"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-    {
-      from_port                = 10
-      to_port                  = 10
-      protocol                 = 6
-      description              = "Service name"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-  ]
-
-  computed_ingress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-    {
-      from_port                = 23
-      to_port                  = 23
-      protocol                 = 6
-      description              = "Service name"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_ingress_with_source_security_group_id = 2
-
-  # Open for self (rule or from_port+to_port+protocol+description)
-  ingress_with_self = [
-    {
-      rule = "all-all"
-    },
-    {
-      from_port   = 30
-      to_port     = 40
-      protocol    = 6
-      description = "Service name"
-      self        = true
-    },
-    {
-      from_port = 41
-      to_port   = 51
-      protocol  = 6
-      self      = true
-    },
-  ]
-
-  computed_ingress_with_self = [
-    {
-      from_port   = 32
-      to_port     = 43
-      protocol    = 6
-      description = "Service name. VPC ID: ${module.vpc.vpc_id}"
-      self        = true
-    },
-  ]
-
-  number_of_computed_ingress_with_self = 1
-
-  # Default CIDR blocks, which will be used for all egress rules in this module. Typically these are CIDR blocks of the VPC.
-  # If this is not specified then no CIDR blocks will be used.
-  egress_cidr_blocks = ["10.10.0.0/16"]
-
-  egress_ipv6_cidr_blocks = ["2001:db8::/64"]
-
-  # Prefix list ids to use in all egress rules in this module.
-  # egress_prefix_list_ids = ["pl-123456"]
-  # Open for all CIDRs defined in egress_cidr_blocks
-  egress_rules = ["http-80-tcp"]
-
-  computed_egress_rules           = ["ssh-tcp"]
-  number_of_computed_egress_rules = 1
-
-  # Open to CIDRs blocks (rule or from_port+to_port+protocol+description)
-  egress_with_cidr_blocks = [
-    {
-      rule        = "postgresql-tcp"
-      cidr_blocks = "0.0.0.0/0,2.2.2.2/32"
-    },
-    {
-      rule        = "https-443-tcp"
-      cidr_blocks = "30.30.30.30/32"
-    },
-    {
-      from_port   = 10
-      to_port     = 20
-      protocol    = 6
-      description = "Service name"
-      cidr_blocks = "10.10.0.0/20"
-    },
-  ]
-
-  computed_egress_with_cidr_blocks = [
-    {
-      rule        = "https-443-tcp"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  number_of_computed_egress_with_cidr_blocks = 1
-
-  # Open to IPV6 CIDR blocks (rule or from_port+to_port+protocol+description)
-  egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 300
-      to_port          = 400
-      protocol         = "tcp"
-      description      = "Service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  computed_egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 55
-      to_port          = 66
-      protocol         = "tcp"
-      description      = "Service ports (ipv6). VPC ID: ${module.vpc.vpc_id}"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  number_of_computed_egress_with_ipv6_cidr_blocks = 1
-
-  # Open for security group id (rule or from_port+to_port+protocol+description)
-  egress_with_source_security_group_id = [
-    {
-      rule                     = "mysql-tcp"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-    {
-      from_port                = 10
-      to_port                  = 10
-      protocol                 = 6
-      description              = "Service name"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-  ]
-
-  computed_egress_with_source_security_group_id = [
-    {
-      rule                     = "postgresql-tcp"
-      source_security_group_id = module.main_sg.security_group_id
-    },
-  ]
-
-  number_of_computed_egress_with_source_security_group_id = 1
-
-  # Open for self (rule or from_port+to_port+protocol+description)
-  egress_with_self = [
-    {
-      rule = "all-all"
-    },
-    {
-      from_port   = 30
-      to_port     = 40
-      protocol    = "tcp"
-      description = "Service name"
-      self        = true
-    },
-    {
-      from_port = 41
-      to_port   = 51
-      protocol  = 6
-      self      = true
-    },
-  ]
-
-  computed_egress_with_self = [
-    {
-      rule = "https-443-tcp"
-    },
-  ]
-
-  number_of_computed_egress_with_self = 1
-
-  create_timeout = "15m"
-  delete_timeout = "45m"
 }
 
-######################################################
-# Security group with IPv4 and IPv6 sets of arguments
-######################################################
-module "ipv4_ipv6_example" {
+################################################################################
+# Security Group
+################################################################################
+
+module "security_group" {
   source = "../../"
 
-  name        = "ipv4-ipv6-example"
-  description = "IPv4 and IPv6 example"
-  vpc_id      = data.aws_vpc.default.id
+  name        = local.name
+  description = "Complete security group example"
+  vpc_id      = module.vpc.vpc_id
 
-  ingress_with_cidr_blocks = [
-    {
+  ingress_rules = {
+    https-from-vpc = {
+      from_port   = 443
+      to_port     = 443
+      ip_protocol = "tcp"
+      cidr_ipv4   = local.vpc_cidr
+      description = "HTTPS from VPC"
+    }
+
+    http-from-ipv6 = {
+      from_port   = 80
+      to_port     = 80
+      ip_protocol = "tcp"
+      cidr_ipv6   = "2001:db8::/64"
+      description = "HTTP from IPv6"
+    }
+
+    all-from-self = {
+      ip_protocol                  = "-1"
+      referenced_security_group_id = "self"
+      description                  = "All protocols from self"
+    }
+
+    mysql-from-app = {
+      from_port                    = 3306
+      to_port                      = 3306
+      ip_protocol                  = "tcp"
+      referenced_security_group_id = aws_security_group.app.id
+      description                  = "MySQL from app"
+    }
+
+    dns-from-prefix-list = {
+      from_port      = 53
+      to_port        = 53
+      ip_protocol    = "udp"
+      prefix_list_id = aws_ec2_managed_prefix_list.dns.id
+      description    = "DNS from prefix list"
+    }
+
+    single-port-coalesce = {
       from_port   = 8080
-      to_port     = 8090
-      protocol    = "tcp"
-      description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
+      ip_protocol = "tcp"
+      cidr_ipv4   = local.vpc_cidr
+      description = "Single-port shorthand — to_port defaults to from_port"
+    }
 
-  ingress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 8080
-      to_port          = 8090
-      protocol         = "tcp"
-      description      = "User-service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-
-  egress_with_cidr_blocks = [
-    {
-      from_port   = 8090
-      to_port     = 8100
-      protocol    = "tcp"
-      description = "User-service ports (ipv4)"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
-
-  egress_with_ipv6_cidr_blocks = [
-    {
-      from_port        = 8090
-      to_port          = 8100
-      protocol         = "tcp"
-      description      = "User-service ports (ipv6)"
-      ipv6_cidr_blocks = "2001:db8::/64"
-    },
-  ]
-}
-
-#################################
-# Security group with fixed name
-#################################
-module "fixed_name_sg" {
-  source = "../../"
-
-  name        = "fixed-name-sg"
-  description = "Security group with fixed name"
-  vpc_id      = data.aws_vpc.default.id
-
-  use_name_prefix = false
-
-  ingress_cidr_blocks = ["10.10.0.0/16"]
-  ingress_rules       = ["https-443-tcp"]
-}
-
-############################
-# Only security group rules
-############################
-module "only_rules" {
-  source = "../../"
-
-  create_sg         = false
-  security_group_id = module.complete_sg.security_group_id
-  ingress_with_source_security_group_id = [
-    {
-      description              = "http from service one"
-      rule                     = "http-80-tcp"
-      source_security_group_id = data.aws_security_group.default.id
-    },
-  ]
-}
-
-###################################
-# Security group with prefix lists
-###################################
-
-data "aws_prefix_list" "s3" {
-  filter {
-    name   = "prefix-list-name"
-    values = ["com.amazonaws.eu-west-1.s3"]
+    ephemeral-from-vpc = {
+      from_port   = 32768
+      to_port     = 60999
+      ip_protocol = "tcp"
+      cidr_ipv4   = local.vpc_cidr
+      description = "Ephemeral port range"
+      tags = {
+        Tier = "private"
+      }
+    }
   }
-}
 
-data "aws_prefix_list" "dynamodb" {
-  filter {
-    name   = "prefix-list-name"
-    values = ["com.amazonaws.eu-west-1.dynamodb"]
+  egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      description = "All outbound"
+    }
   }
+
+  vpc_associations = {
+    secondary = {
+      vpc_id = module.vpc_secondary.vpc_id
+    }
+  }
+
+  timeouts = {
+    create = "5m"
+    delete = "10m"
+  }
+
+  tags = local.tags
 }
 
-module "prefix_list" {
+################################################################################
+# PostgreSQL preset submodule (single-protocol)
+################################################################################
+
+module "postgresql" {
+  source = "../../modules/postgresql"
+
+  name        = "${local.name}-postgresql"
+  description = "PostgreSQL access from primary VPC and peer VPC"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress_cidr_ipv4 = {
+    primary = local.vpc_cidr
+    peer    = "192.168.0.0/16"
+  }
+
+  egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
+
+  tags = local.tags
+}
+
+################################################################################
+# Consul preset submodule (multi-protocol; sourced from peer SG)
+################################################################################
+
+module "consul" {
+  source = "../../modules/consul"
+
+  name        = "${local.name}-consul"
+  description = "Consul access from peer SG and primary VPC"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress_cidr_ipv4 = {
+    primary = local.vpc_cidr
+  }
+
+  ingress_referenced_security_group_id = {
+    app = aws_security_group.app.id
+  }
+
+  tags = local.tags
+}
+
+################################################################################
+# Disabled
+################################################################################
+
+module "disabled_security_group" {
   source = "../../"
 
-  name        = "pl-sg"
-  description = "Security group with prefix list"
-  vpc_id      = data.aws_vpc.default.id
+  create = false
 
-  ingress_prefix_list_ids = [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id]
-  ingress_with_prefix_list_ids = [
-    {
-      from_port       = 9100
-      to_port         = 9100
-      protocol        = 6 # "tcp"
-      description     = "Arbitrary TCP port"
-      prefix_list_ids = join(",", [data.aws_prefix_list.s3.id, data.aws_prefix_list.dynamodb.id])
-    },
-  ]
+  name = "${local.name}-disabled"
 }
 
-#################################
-# Security group using prefix list
-#################################
-resource "aws_ec2_managed_prefix_list" "prefix_list_sg_example" {
+module "disabled_submodule" {
+  source = "../../modules/http-80"
+
+  create = false
+
+  name = "${local.name}-disabled-http"
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 6.0"
+
+  name = local.name
+  cidr = local.vpc_cidr
+
+  azs             = local.azs
+  private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
+
+  tags = local.tags
+}
+
+module "vpc_secondary" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 6.0"
+
+  name = "${local.name}-secondary"
+  cidr = "10.1.0.0/16"
+
+  azs             = local.azs
+  private_subnets = [for k, v in local.azs : cidrsubnet("10.1.0.0/16", 4, k)]
+
+  tags = local.tags
+}
+
+resource "aws_security_group" "app" {
+  name        = "${local.name}-app"
+  description = "Stand-in application SG used as a referenced source"
+  vpc_id      = module.vpc.vpc_id
+  tags        = local.tags
+}
+
+resource "aws_ec2_managed_prefix_list" "dns" {
+  name           = "${local.name}-dns"
   address_family = "IPv4"
   max_entries    = 1
-  name           = "prefix-list-sg-example"
 
   entry {
-    cidr        = module.vpc.vpc_cidr_block
+    cidr        = local.vpc_cidr
     description = "VPC CIDR"
   }
-}
 
-module "prefix_list_sg" {
-  source = "../../"
-
-  name        = "prefix-list-sg"
-  description = "Security group using prefix list and custom ingress rules"
-  vpc_id      = data.aws_vpc.default.id
-
-  use_name_prefix = false
-
-  ingress_prefix_list_ids = [aws_ec2_managed_prefix_list.prefix_list_sg_example.id]
-  ingress_with_prefix_list_ids = [
-    {
-      from_port = 80
-      to_port   = 80
-      protocol  = "tcp"
-    },
-    {
-      from_port = 443
-      to_port   = 443
-      protocol  = "tcp"
-    },
-  ]
+  tags = local.tags
 }

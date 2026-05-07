@@ -1,0 +1,41 @@
+name: Generate Modules
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - '**/*.tf'
+      - '**/*.tftpl'
+      - '.github/workflows/generate-modules.yml'
+
+jobs:
+  drift:
+    name: Generator drift check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ~1.10.0
+          terraform_wrapper: false
+
+      - name: Run generator
+        working-directory: generate
+        run: |
+          terraform init -input=false
+          terraform apply -auto-approve -input=false
+
+      - name: Check for drift
+        run: |
+          if ! git diff --exit-code -- 'modules/**/*.tf'; then
+            echo
+            echo "::error::Generated submodules are out of sync with generate/catalog.tf."
+            echo "Run the following locally and commit the result:"
+            echo "  cd generate && terraform apply -auto-approve"
+            exit 1
+          fi

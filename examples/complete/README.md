@@ -20,38 +20,35 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Requirements
 
 | Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.29 |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.29 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.29 |
+| ---- | ------- |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.29 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
-| <a name="module_complete_sg"></a> [complete\_sg](#module\_complete\_sg) | ../../ | n/a |
-| <a name="module_fixed_name_sg"></a> [fixed\_name\_sg](#module\_fixed\_name\_sg) | ../../ | n/a |
-| <a name="module_ipv4_ipv6_example"></a> [ipv4\_ipv6\_example](#module\_ipv4\_ipv6\_example) | ../../ | n/a |
-| <a name="module_main_sg"></a> [main\_sg](#module\_main\_sg) | ../../ | n/a |
-| <a name="module_only_rules"></a> [only\_rules](#module\_only\_rules) | ../../ | n/a |
-| <a name="module_prefix_list"></a> [prefix\_list](#module\_prefix\_list) | ../../ | n/a |
-| <a name="module_prefix_list_sg"></a> [prefix\_list\_sg](#module\_prefix\_list\_sg) | ../../ | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
+| ---- | ------ | ------- |
+| <a name="module_consul"></a> [consul](#module\_consul) | ../../modules/consul | n/a |
+| <a name="module_disabled_security_group"></a> [disabled\_security\_group](#module\_disabled\_security\_group) | ../../ | n/a |
+| <a name="module_disabled_submodule"></a> [disabled\_submodule](#module\_disabled\_submodule) | ../../modules/http-80 | n/a |
+| <a name="module_postgresql"></a> [postgresql](#module\_postgresql) | ../../modules/postgresql | n/a |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | ../../ | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 6.0 |
+| <a name="module_vpc_secondary"></a> [vpc\_secondary](#module\_vpc\_secondary) | terraform-aws-modules/vpc/aws | ~> 6.0 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
-| [aws_ec2_managed_prefix_list.prefix_list_sg_example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
-| [aws_prefix_list.dynamodb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
-| [aws_prefix_list.s3](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/prefix_list) | data source |
-| [aws_security_group.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
-| [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
+| ---- | ---- |
+| [aws_ec2_managed_prefix_list.dns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_managed_prefix_list) | resource |
+| [aws_security_group.app](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
 
@@ -60,11 +57,20 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
+| <a name="output_consul_security_group_arn"></a> [consul\_security\_group\_arn](#output\_consul\_security\_group\_arn) | The ARN of the consul security group |
+| <a name="output_consul_security_group_id"></a> [consul\_security\_group\_id](#output\_consul\_security\_group\_id) | The ID of the consul security group |
+| <a name="output_consul_security_group_name"></a> [consul\_security\_group\_name](#output\_consul\_security\_group\_name) | The name of the consul security group |
+| <a name="output_consul_security_group_owner_id"></a> [consul\_security\_group\_owner\_id](#output\_consul\_security\_group\_owner\_id) | The owner ID of the consul security group |
+| <a name="output_consul_security_group_vpc_id"></a> [consul\_security\_group\_vpc\_id](#output\_consul\_security\_group\_vpc\_id) | The VPC ID of the consul security group |
+| <a name="output_postgresql_security_group_arn"></a> [postgresql\_security\_group\_arn](#output\_postgresql\_security\_group\_arn) | The ARN of the postgresql security group |
+| <a name="output_postgresql_security_group_id"></a> [postgresql\_security\_group\_id](#output\_postgresql\_security\_group\_id) | The ID of the postgresql security group |
+| <a name="output_postgresql_security_group_name"></a> [postgresql\_security\_group\_name](#output\_postgresql\_security\_group\_name) | The name of the postgresql security group |
+| <a name="output_postgresql_security_group_owner_id"></a> [postgresql\_security\_group\_owner\_id](#output\_postgresql\_security\_group\_owner\_id) | The owner ID of the postgresql security group |
+| <a name="output_postgresql_security_group_vpc_id"></a> [postgresql\_security\_group\_vpc\_id](#output\_postgresql\_security\_group\_vpc\_id) | The VPC ID of the postgresql security group |
 | <a name="output_security_group_arn"></a> [security\_group\_arn](#output\_security\_group\_arn) | The ARN of the security group |
-| <a name="output_security_group_description"></a> [security\_group\_description](#output\_security\_group\_description) | The description of the security group |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The ID of the security group |
 | <a name="output_security_group_name"></a> [security\_group\_name](#output\_security\_group\_name) | The name of the security group |
-| <a name="output_security_group_owner_id"></a> [security\_group\_owner\_id](#output\_security\_group\_owner\_id) | The owner ID |
-| <a name="output_security_group_vpc_id"></a> [security\_group\_vpc\_id](#output\_security\_group\_vpc\_id) | The VPC ID |
+| <a name="output_security_group_owner_id"></a> [security\_group\_owner\_id](#output\_security\_group\_owner\_id) | The owner ID of the security group |
+| <a name="output_security_group_vpc_id"></a> [security\_group\_vpc\_id](#output\_security\_group\_vpc\_id) | The VPC ID of the security group |
 <!-- END_TF_DOCS -->
