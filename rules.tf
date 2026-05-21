@@ -238,7 +238,7 @@ variable "auto_groups" {
       egress_rules      = ["all-all"]
     }
     carbon-relay-ng = {
-      ingress_rules     = ["carbon-line-in-tcp", "carbon-line-in-udp", "carbon-pickle-tcp", "carbon-pickle-udp", "carbon-gui-udp"]
+      ingress_rules     = ["carbon-line-in-tcp", "carbon-line-in-udp", "carbon-pickle-tcp", "carbon-pickle-udp", "carbon-gui-tcp"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
