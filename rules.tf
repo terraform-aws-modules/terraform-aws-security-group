@@ -20,7 +20,7 @@ variable "rules" {
     carbon-pickle-tcp  = [2013, 2013, "tcp", "Carbon pickle"]
     carbon-pickle-udp  = [2013, 2013, "udp", "Carbon pickle"]
     carbon-admin-tcp   = [2004, 2004, "tcp", "Carbon admin"]
-    carbon-gui-udp     = [8081, 8081, "tcp", "Carbon GUI"]
+    carbon-gui-tcp     = [8081, 8081, "tcp", "Carbon GUI"]
     # Cassandra
     cassandra-clients-tcp        = [9042, 9042, "tcp", "Cassandra clients"]
     cassandra-thrift-clients-tcp = [9160, 9160, "tcp", "Cassandra Thrift clients"]
