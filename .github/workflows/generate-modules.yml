@@ -1,6 +1,14 @@
 name: Generate Modules
 
 on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '**/*.tf'
+      - '**/*.tftpl'
+      - '.github/workflows/generate-modules.yml'
   pull_request:
     branches:
       - main

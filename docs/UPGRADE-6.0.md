@@ -25,6 +25,7 @@ If you previously mixed preset names with explicit rules in a single root-module
 - The implicit self-allow ingress rule (v5 default) has been removed. Add an explicit rule with `referenced_security_group_id = "self"` to restore the behavior; the sentinel is rewritten to the security group's own id at apply time
 - `enable_exclusive_rules` is `true` by default. Out-of-band rules added via the AWS console or other Terraform configurations will be reverted on the next apply. Set to `false` to opt out
 - `from_port` and `to_port` are typed as `number` (were `string` in v5). When only one of `from_port` / `to_port` is supplied, the other now defaults to it via a symmetric `coalesce`
+- The security group no longer receives an implicit `Name` tag set to `var.name`. v5 merged `{ Name = var.name }` into `tags` automatically; v6 passes `var.tags` through unchanged. Set `tags = { Name = "..." }` explicitly if you want to keep the prior behavior
 
 - Submodules:
     - `dax-cluster` has been renamed to `dynamodb-dax`

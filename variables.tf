@@ -79,6 +79,14 @@ variable "ingress_rules" {
     to_port                      = optional(number)
   }))
   default = {}
+
+  validation {
+    condition = alltrue([
+      for k, v in var.ingress_rules :
+      length(compact([v.cidr_ipv4, v.cidr_ipv6, v.prefix_list_id, v.referenced_security_group_id])) == 1
+    ])
+    error_message = "Each ingress rule must set exactly one of cidr_ipv4, cidr_ipv6, prefix_list_id, or referenced_security_group_id."
+  }
 }
 
 ################################################################################
@@ -101,6 +109,14 @@ variable "egress_rules" {
     to_port                      = optional(number)
   }))
   default = {}
+
+  validation {
+    condition = alltrue([
+      for k, v in var.egress_rules :
+      length(compact([v.cidr_ipv4, v.cidr_ipv6, v.prefix_list_id, v.referenced_security_group_id])) == 1
+    ])
+    error_message = "Each egress rule must set exactly one of cidr_ipv4, cidr_ipv6, prefix_list_id, or referenced_security_group_id."
+  }
 }
 
 ################################################################################

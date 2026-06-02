@@ -66,6 +66,29 @@ module "postgresql_security_group" {
 
 - [Complete](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) - Comprehensive example demonstrating the full module surface
 
+## Notes
+
+### Referencing the security group itself
+
+To allow traffic between members of the security group created by this module, set `referenced_security_group_id = "self"` on the rule. The sentinel is rewritten to the security group's own id at apply time:
+
+```hcl
+ingress_rules = {
+  self-all = {
+    ip_protocol                  = "-1"
+    referenced_security_group_id = "self"
+    description                  = "All traffic from members of this SG"
+  }
+}
+```
+
+### `use_name_prefix` and the create-before-destroy lifecycle
+
+The security group resource sets `lifecycle { create_before_destroy = true }` so replacements happen without dropping traffic. When `use_name_prefix = false` (i.e. you pin a static `name`), any change that forces replacement will fail because AWS cannot create a second security group with the same name in the same VPC. Either:
+
+- keep `use_name_prefix = true` (default), or
+- change `name` along with the replacement.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

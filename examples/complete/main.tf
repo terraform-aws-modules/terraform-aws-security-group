@@ -76,7 +76,7 @@ module "security_group" {
       from_port   = 8080
       ip_protocol = "tcp"
       cidr_ipv4   = local.vpc_cidr
-      description = "Single-port shorthand — to_port defaults to from_port"
+      description = "Single-port shorthand - to_port defaults to from_port"
     }
 
     ephemeral-from-vpc = {

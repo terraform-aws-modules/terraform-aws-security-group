@@ -3,7 +3,7 @@
 locals {
   ingress_with_cidr_ipv4 = {
     for pair in setproduct(keys(var.preset_ingress_rules), keys(var.ingress_cidr_ipv4)) :
-    "${pair[0]}-${pair[1]}" => merge(
+    "${pair[0]}/${pair[1]}" => merge(
       var.preset_ingress_rules[pair[0]],
       { cidr_ipv4 = var.ingress_cidr_ipv4[pair[1]] }
     )
@@ -11,7 +11,7 @@ locals {
 
   ingress_with_cidr_ipv6 = {
     for pair in setproduct(keys(var.preset_ingress_rules), keys(var.ingress_cidr_ipv6)) :
-    "${pair[0]}-${pair[1]}" => merge(
+    "${pair[0]}/${pair[1]}" => merge(
       var.preset_ingress_rules[pair[0]],
       { cidr_ipv6 = var.ingress_cidr_ipv6[pair[1]] }
     )
@@ -19,7 +19,7 @@ locals {
 
   ingress_with_prefix_list_id = {
     for pair in setproduct(keys(var.preset_ingress_rules), keys(var.ingress_prefix_list_id)) :
-    "${pair[0]}-${pair[1]}" => merge(
+    "${pair[0]}/${pair[1]}" => merge(
       var.preset_ingress_rules[pair[0]],
       { prefix_list_id = var.ingress_prefix_list_id[pair[1]] }
     )
@@ -27,7 +27,7 @@ locals {
 
   ingress_with_referenced_security_group_id = {
     for pair in setproduct(keys(var.preset_ingress_rules), keys(var.ingress_referenced_security_group_id)) :
-    "${pair[0]}-${pair[1]}" => merge(
+    "${pair[0]}/${pair[1]}" => merge(
       var.preset_ingress_rules[pair[0]],
       { referenced_security_group_id = var.ingress_referenced_security_group_id[pair[1]] }
     )
