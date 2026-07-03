@@ -89,6 +89,34 @@ The security group resource sets `lifecycle { create_before_destroy = true }` so
 - keep `use_name_prefix = true` (default), or
 - change `name` along with the replacement.
 
+### ICMP rules: `from_port` and `to_port` semantics
+
+When `ip_protocol` is `icmp` or `icmpv6`, `from_port` and `to_port` are **not** a port range. They carry the ICMP type and code instead:
+
+- `from_port` is the ICMP **type** (or `-1` for all types)
+- `to_port` is the ICMP **code** (or `-1` for all codes)
+
+Use `-1` to match all ICMP traffic. If `from_port` is `-1` (all types), then `to_port` must also be `-1` (all codes). A numeric range such as `0`-`255` is not valid for ICMP; pass a single type/code pair or `-1`.
+
+```hcl
+ingress_rules = {
+  # All ICMP types and codes
+  icmp-all = {
+    ip_protocol = "icmp"
+    from_port   = -1
+    to_port     = -1
+    cidr_ipv4   = "10.0.0.0/16"
+  }
+  # A single type/code: echo request (type 8, code 0)
+  icmp-echo = {
+    ip_protocol = "icmp"
+    from_port   = 8
+    to_port     = 0
+    cidr_ipv4   = "10.0.0.0/16"
+  }
+}
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
