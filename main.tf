@@ -18,8 +18,8 @@ resource "aws_security_group" "this" {
   vpc_id                 = var.vpc_id
 
   tags = merge(
-    var.tags,
-    var.name != "" ? { "Name" = var.name } : {}
+    var.name != "" ? { "Name" = var.name } : {},
+    var.tags
   )
 
   dynamic "timeouts" {
