@@ -8,7 +8,7 @@ on:
 
 env:
   TERRAFORM_DOCS_VERSION: v0.24.0
-  TFLINT_VERSION: v0.62.0
+  TFLINT_VERSION: v0.64.0
 
 jobs:
   collectInputs:
@@ -18,7 +18,7 @@ jobs:
       directories: ${{ steps.dirs.outputs.directories }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Get root directories
         id: dirs
@@ -33,7 +33,7 @@ jobs:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       - name: Install rmz
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        uses: jaxxstorm/action-install-gh-release@v3.0.0
         with:
           repo: SUPERCILEX/fuc
           asset-name: x86_64-unknown-linux-gnu-rmz
@@ -63,11 +63,11 @@ jobs:
           echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v2.1.0
+        uses: clowdhaus/terraform-min-max@v3.0.1
         with:
           directory: ${{ matrix.directory }}
 
@@ -95,7 +95,7 @@ jobs:
     needs: collectInputs
     steps:
       - name: Install rmz
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        uses: jaxxstorm/action-install-gh-release@v3.0.0
         with:
           repo: SUPERCILEX/fuc
           asset-name: x86_64-unknown-linux-gnu-rmz
@@ -149,14 +149,14 @@ jobs:
           echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
 
       - name: Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v2.1.0
+        uses: clowdhaus/terraform-min-max@v3.0.1
 
       - name: Hide template dir
         # Special to this repo, we don't want to check this dir
