@@ -17,7 +17,10 @@ resource "aws_security_group" "this" {
   revoke_rules_on_delete = var.revoke_rules_on_delete
   vpc_id                 = var.vpc_id
 
-  tags = var.tags
+  tags = merge(
+    var.name != "" ? { "Name" = var.name } : {},
+    var.tags
+  )
 
   dynamic "timeouts" {
     for_each = var.timeouts != null ? [var.timeouts] : []
